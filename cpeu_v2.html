@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPEU Training Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0f1f3d;--navy-light:#1a3260;--gold:#d4a847;--gold-light:#f0c060;--slate:#2c3e50;--mist:#ecf0f4;--white:#fff;--text:#1a1a2e;--text-muted:#5a6a7a;--correct:#1a7a4a;--correct-bg:#e8f5ee;--wrong:#b03030;--wrong-bg:#fdecea;--warn-bg:#fff8e8;--warn-border:#d4a847;--warn-text:#5a3a00;--danger-bg:#fff0f0;--danger-border:#d08080;--danger-text:#6a1010;--info-bg:#f0f6ff;--info-border:#6090d0;--info-text:#1a3060;--radius:12px;--shadow:0 4px 24px rgba(15,31,61,.10);--shadow-lg:0 8px 40px rgba(15,31,61,.16)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--mist);color:var(--text);min-height:100vh}
+
+/* GATE */
+#gate{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;padding:2rem}
+.gate-logo{font-family:'DM Serif Display',serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.8}
+.gate-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;text-align:center;line-height:1.2;max-width:560px}
+.gate-sub{color:rgba(255,255,255,.55);font-size:15px;text-align:center;max-width:420px;line-height:1.7}
+.gate-form{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px}
+.gate-input{padding:14px 18px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;letter-spacing:.12em;outline:none;transition:border-color .2s}
+.gate-input:focus{border-color:var(--gold)}
+.gate-input::placeholder{color:rgba(255,255,255,.3)}
+.btn-primary{padding:14px 24px;border-radius:var(--radius);border:none;background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.btn-primary:hover{background:var(--gold-light)}
+.gate-error{color:#ff7b72;font-size:13px;text-align:center;min-height:18px}
+
+/* APP */
+#app{display:none}
+.topnav{background:var(--navy);padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.nav-brand{font-family:'DM Serif Display',serif;color:#fff;font-size:17px}
+.nav-brand span{color:var(--gold)}
+.nav-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+.screen{display:none;min-height:calc(100vh - 58px)}
+.screen.active{display:block}
+
+/* DASHBOARD */
+#screen-dashboard{padding:3rem 2rem;max-width:900px;margin:0 auto}
+.dash-welcome{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:var(--navy);margin-bottom:8px}
+.dash-sub{color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:2.5rem}
+.section-heading{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem}
+.themes-list{display:flex;flex-direction:column;gap:14px}
+.theme-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .15s;border:1.5px solid transparent}
+.theme-card:hover:not(.locked){box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--navy)}
+.theme-card.locked{opacity:.5;cursor:default}
+.theme-inner{display:flex;align-items:center;gap:18px;padding:20px 24px}
+.theme-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ti-a{background:#e8f0fc}.ti-b{background:#f0eaff}.ti-c{background:#e8fcf0}.ti-d{background:#fef3e8}.ti-e{background:#fce8e8}.ti-lock{background:#f0f0f0}
+.theme-info{flex:1}
+.theme-name{font-weight:600;font-size:16px;color:var(--navy);margin-bottom:3px}
+.theme-desc{font-size:13px;color:var(--text-muted)}
+.theme-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.progress-ring-wrap{position:relative;width:44px;height:44px}
+.progress-ring-wrap svg{transform:rotate(-90deg)}
+.progress-ring-bg{fill:none;stroke:#e8ecf0;stroke-width:3.5}
+.progress-ring-fill{fill:none;stroke:var(--gold);stroke-width:3.5;stroke-linecap:round;transition:stroke-dashoffset .5s}
+.progress-ring-fill.done{stroke:var(--correct)}
+.ring-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--navy)}
+.coming-soon-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0f0f0;color:var(--text-muted);font-weight:500}
+.theme-sections{border-top:1px solid #f0f2f5;padding:8px 24px 12px;display:flex;flex-wrap:wrap;gap:6px}
+.spill{font-size:12px;padding:4px 12px;border-radius:20px;border:1px solid #e0e4ea;color:var(--text-muted);background:#fafbfc;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
+.spill:hover{border-color:var(--navy);color:var(--navy)}
+.spill.done{background:var(--correct-bg);border-color:var(--correct);color:var(--correct)}
+.spill.inprog{background:var(--warn-bg);border-color:var(--warn-border);color:#7a5500}
+
+/* PLAYER SHELL */
+#screen-player{padding:0}
+
+/* SUMMARY VIEW */
+#sumview{max-width:800px;margin:0 auto;padding:2rem 1.5rem 5rem;display:none}
+#sumview.show{display:block}
+.sv-back{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:14px;cursor:pointer;margin-bottom:1.5rem;width:fit-content;transition:color .15s}
+.sv-back:hover{color:var(--navy)}
+.sv-hero{background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:16px;padding:36px;color:#fff;margin-bottom:28px}
+.sv-purpose{background:rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;font-size:13px;line-height:1.65;color:rgba(255,255,255,.8);margin-bottom:16px;font-style:italic}
+.sv-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sv-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:12px;line-height:1.2}
+.sv-score{font-size:15px;color:rgba(255,255,255,.7)}
+.sv-score strong{color:#fff;font-size:17px}
+.sv-body{display:flex;flex-direction:column;gap:22px}
+.sv-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+.sv-card h3{font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #eef0f4}
+.sv-principle{background:#f5f7ff;border-left:4px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 18px;font-size:15px;font-weight:500;color:var(--navy);line-height:1.65;font-style:italic;margin-bottom:14px}
+.sv-cq{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:8px;padding:14px 16px;font-size:14px;line-height:1.65;color:var(--warn-text);font-weight:500;margin-bottom:14px}
+.sv-text{font-size:14px;line-height:1.8;color:var(--slate);margin-bottom:12px;white-space:pre-line}
+.sv-text:last-child{margin-bottom:0}
+.sv-sub{font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.sv-table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+.sv-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-weight:500;font-size:12px}
+.sv-table td{padding:10px 14px;border-bottom:1px solid #eef0f4;vertical-align:top;line-height:1.55;color:var(--slate)}
+.sv-table tr:last-child td{border-bottom:none}
+.sv-table tr:nth-child(even) td{background:#fafbfc}
+.sv-blist{list-style:none;margin:8px 0}
+.sv-blist li{padding:4px 0 4px 20px;position:relative;font-size:14px;line-height:1.65;color:var(--slate)}
+.sv-blist li::before{content:'—';position:absolute;left:0;color:var(--gold);font-weight:600}
+.box-warn{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.65;color:var(--warn-text);margin:10px 0}
+.box-warn strong{color:#3a2000;display:block;margin-bottom:4px}
+.box-danger{background:var(--danger-bg);border:1px solid var(--danger-border);border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.65;color:var(--danger-text);margin:10px 0}
+.box-danger strong{color:#4a0000;display:block;margin-bottom:4px}
+.box-info{background:var(--info-bg);border:1px solid var(--info-border);border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.65;color:var(--info-text);margin:10px 0}
+.box-info strong{color:#0a1a40;display:block;margin-bottom:4px}
+.mech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0}
+.mech-cell{background:#f5f7ff;border-radius:8px;padding:14px 16px}
+.mech-label{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.mech-text{font-size:13px;line-height:1.55;color:var(--slate)}
+.dp-block{margin:10px 0}
+.dp-label-red{font-weight:600;color:#c00;font-size:13px;margin-bottom:4px}
+.dp-label-amber{font-weight:600;color:#b06000;font-size:13px;margin-bottom:4px}
+.dp-label-green{font-weight:600;color:var(--correct);font-size:13px;margin-bottom:4px}
+.sv-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn-secondary{padding:13px 24px;border-radius:var(--radius);border:1.5px solid var(--navy);background:transparent;color:var(--navy);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-secondary:hover{background:var(--navy);color:#fff}
+.sv-proceed{background:var(--gold);color:var(--navy);border:none;padding:13px 24px;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.sv-proceed:hover{background:var(--gold-light)}
+.transition-box{background:#f0f4fa;border-left:4px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 16px;font-size:13px;line-height:1.65;color:var(--slate);margin-top:12px;font-style:italic}
+
+/* MCQ VIEW */
+#mcqview{max-width:760px;margin:0 auto;padding:2rem 1.5rem 4rem;display:none}
+#mcqview.show{display:block}
+.mv-back{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:14px;cursor:pointer;margin-bottom:1.5rem;width:fit-content;transition:color .15s}
+.mv-back:hover{color:var(--navy)}
+.mv-tag{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.mv-title{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,3.5vw,1.9rem);color:var(--navy);margin-bottom:10px}
+.mv-pbar{height:4px;background:#dde2ea;border-radius:4px;overflow:hidden;margin-bottom:6px}
+.mv-pfill{height:100%;background:var(--gold);border-radius:4px;transition:width .4s}
+.mv-plabel{font-size:12px;color:var(--text-muted);margin-bottom:20px}
+.mcq-card{background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:1.5rem}
+.mcq-hdr{background:#f0f4fa;padding:14px 20px;border-bottom:1px solid #e0e8f0}
+.mcq-hdr-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.mcq-lobj{font-size:12px;color:var(--text-muted);font-style:italic;line-height:1.5}
+.mcq-vignette{background:#f8f9fb;border-left:4px solid var(--navy);padding:18px 22px;font-size:14px;line-height:1.8;color:var(--slate);white-space:pre-line}
+.mcq-body{padding:22px}
+.mcq-question{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:18px;line-height:1.5}
+.options-list{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:10px;border:1.5px solid #dde2ea;background:#fafbfc;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:var(--text);transition:all .15s;width:100%}
+.opt:hover:not(:disabled){border-color:var(--navy);background:#f2f5fc}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--navy);background:#eef2fc}
+.opt.correct{border-color:var(--correct);background:var(--correct-bg);color:var(--correct)}
+.opt.wrong{border-color:var(--wrong);background:var(--wrong-bg);color:var(--wrong)}
+.opt.show-correct{border-color:var(--correct);background:var(--correct-bg);color:var(--correct)}
+.opt-label{width:26px;height:26px;border-radius:50%;background:#e8ecf2;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;margin-top:1px;transition:all .15s}
+.opt.correct .opt-label{background:var(--correct);color:#fff}
+.opt.wrong .opt-label{background:var(--wrong);color:#fff}
+.opt.show-correct .opt-label{background:var(--correct);color:#fff}
+.mcq-submit{margin-top:18px;padding:13px 28px;border-radius:var(--radius);border:none;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.mcq-submit:hover{background:var(--navy-light)}
+.mcq-submit:disabled{opacity:.4;cursor:default}
+.expl{display:none;margin-top:20px;border-top:1px solid #e8ecf2;padding-top:18px}
+.expl.show{display:block}
+.expl-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.result-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:600}
+.rb-correct{background:var(--correct-bg);color:var(--correct)}
+.rb-wrong{background:var(--wrong-bg);color:var(--wrong)}
+.correct-label{font-size:13px;color:var(--text-muted)}
+.correct-label strong{color:var(--correct)}
+.expl-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.etab{padding:5px 12px;border-radius:20px;border:1px solid #dde2ea;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:#fafbfc;color:var(--text-muted)}
+.etab.act{background:var(--navy);color:#fff;border-color:var(--navy)}
+.etab.ctab{border-color:var(--correct)}
+.etab.wtab{border-color:#e8a0a0}
+.epane{display:none}
+.epane.show{display:block}
+.ep-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.ep-correct{color:var(--correct)}
+.ep-wrong{color:var(--wrong)}
+.ep-text{font-size:14px;line-height:1.8;color:var(--slate)}
+.notebox{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.65;color:var(--warn-text);margin-top:16px}
+.notebox strong{color:#3a2000;display:block;margin-bottom:4px}
+.btn-next{margin-top:20px;padding:13px 28px;border-radius:var(--radius);border:none;background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-next:hover{background:var(--gold-light)}
+
+/* NO MCQ notice */
+.no-mcq-notice{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;text-align:center;color:var(--text-muted);font-size:15px;line-height:1.7}
+
+@media(max-width:600px){
+#screen-dashboard{padding:1.5rem 1rem}
+.theme-inner{padding:16px;gap:12px}
+#mcqview,#sumview{padding:1.2rem 1rem 3rem}
+.mcq-body{padding:16px}
+.mcq-vignette{padding:14px 16px}
+.sv-hero{padding:24px 20px}
+.sv-card{padding:20px}
+.mech-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-logo">Chest Pain Evaluation Unit</div>
+  <h1 class="gate-title">Clinical Training Platform</h1>
+  <p class="gate-sub">A structured learning environment for junior medical staff. Enter the access code to continue.</p>
+  <div class="gate-form">
+    <input class="gate-input" type="password" id="pw-input" placeholder="Enter access code" autocomplete="off">
+    <button class="btn-primary" onclick="checkPW()">Access Platform</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="topnav">
+    <div class="nav-brand">CPEU <span>Training</span></div>
+    <div><button class="nav-btn" onclick="goHome()">Dashboard</button></div>
+  </nav>
+
+  <!-- DASHBOARD -->
+  <div class="screen active" id="screen-dashboard">
+    <div>
+      <h1 class="dash-welcome">Good morning, Doctor.</h1>
+      <p class="dash-sub">Each section opens with the executive summary, followed by clinical MCQs. Work through both to build consultant-level reasoning.</p>
+      <div class="section-heading">Theme 1 · Clinical Assessment of Chest Pain</div>
+      <div class="themes-list" id="themes-list"></div>
+    </div>
+  </div>
+
+  <!-- PLAYER -->
+  <div class="screen" id="screen-player">
+    <!-- SUMMARY VIEW -->
+    <div id="sumview">
+      <div id="sv-content"></div>
+    </div>
+    <!-- MCQ VIEW -->
+    <div id="mcqview">
+      <div class="mv-back" onclick="goSummary()">← Back to Summary</div>
+      <div class="mv-tag" id="mv-tag"></div>
+      <h2 class="mv-title" id="mv-title"></h2>
+      <div class="mv-pbar"><div class="mv-pfill" id="mv-pfill"></div></div>
+      <div class="mv-plabel" id="mv-plabel"></div>
+      <div id="mcq-container"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var PW='CPEU2025';
+var SECTIONS=[{"id": "A", "title": "Contextualising the Acute Presentation", "subtitle": "Establishing baseline, prior IHD & risk factor burden", "summaryFirst": true, "summary": {"purposeBox": "This is a rapid-reference reasoning guide, not a knowledge resource. It distils how contextualisation should drive clinical decision-making before the acute presentation is assessed. Read the full section for detail.", "principle": "Contextualisation is not background-gathering. It is the first act of diagnosis.\n\nBefore interpreting the acute pain, the clinician must establish three things: what the patient's cardiovascular baseline is, what prior disease and investigations tell us, and what the risk factor burden implies about pre-test probability. These three elements together define the diagnostic landscape — they determine how much clinical work is needed to confirm or exclude ischaemia, and they set the reference point against which the acute episode is measured.", "centralQuestion": "The central question is not 'describe your pain.' It is: 'what has changed from this patient's normal, and why now?'", "blocks": [{"heading": "A-I · Features of Stable Angina & CCS Grading", "reasoningTask": "Establish whether a stable angina pattern exists at baseline — and whether today's presentation is consistent with or different from that pattern. The clinical value of this step is not to diagnose angina, but to create a reference point. 'Different from my usual' is the red flag, not the pain features alone.", "howToUse": "How to use the history:", "table": {"headers": ["Assess", "Reasoning — what this tells you"], "rows": [["Exertional provocation", "Reliable exertion-triggered pain = demand-driven ischaemia on fixed disease. Unpredictable or rest onset = the stable pattern has broken down."], ["Consistency of threshold", "Has the threshold changed? Less exertion provoking symptoms now than before signals crescendo pattern — reclassify as possible ACS regardless of pain character."], ["Duration and GTN response", "Relief within 3–5 min of rest or GTN supports stable angina. Incomplete relief, multiple doses required, or prolonged duration falls outside the stable pattern."], ["Autonomic accompaniments", "Diaphoresis, nausea, or pallor are not typical of stable angina. Their presence in a patient reporting 'my usual angina' is a red flag demanding reclassification."]]}, "ccsText": "CCS grading — how to use it clinically:\n\nDo not ask patients to grade themselves. Ask about specific activities: flat walking, stairs, dressing, rest. The CCS class serves two purposes in this workflow:\n\n• Establishes documented baseline — against which future deterioration is measurable\n\n• Exposes silent deterioration — a patient who was CCS II six months ago now presenting with CCS III symptoms has had a progression event, even if today's acute episode resolves", "callout": {"type": "warning", "text": "CCS III or IV in an acute presentation warrants urgent cardiology review independent of ECG and troponin result. The functional severity is itself a high-risk marker."}}, {"heading": "A-II · Prior IHD History & Cardiac Investigations", "reasoningTask": "Established IHD is not background. It shifts pre-test probability immediately and changes what a 'normal' investigation result means. The goal here is to understand the extent of known disease, what has been done about it, and what residual substrate remains — because that substrate defines the ischaemic risk today.", "threeQuestions": ["Which vessels are diseased, and are they fully revascularised? Residual untreated disease is the active risk. A patient with known three-vessel disease and incomplete revascularisation has a very different risk profile from one rendered disease-free after PCI.", "What did prior investigations show? A recent normal CTCA or negative stress test modifies probability downward. Inducible ischaemia on perfusion imaging in a patient now presenting acutely is confirmatory context, not historical curiosity.", "What does the drug history tell you? DAPT implies recent ACS or PCI. Regular nitrate use and frequency of PRN use are functional severity markers. Anticoagulation has immediate management implications."], "callout": {"type": "warning", "text": "In patients post-CABG: denervation renders many patients pain-free despite significant ischaemia. Atypical or absent symptoms in this group should lower — not raise — the threshold for investigation."}}, {"heading": "A-III · Risk Factor Burden & Pre-Test Probability", "reasoningTask": "Risk factor assessment is probability calibration. It determines how much clinical work is required to confirm or exclude ischaemia — and it must be done before you interpret the acute history, not after. An atypical history in a high-risk patient demands the same investigative rigour as a typical history. A typical history in a genuinely low-risk patient may appropriately support a low-risk pathway.", "table": {"headers": ["Pre-Test Probability", "What it demands of the clinical approach"], "rows": [["High", "Multiple major risk factors + prior IHD + typical history. A normal initial ECG and first troponin do not exclude ACS. Serial troponin, continuous monitoring, and structured risk stratification are mandatory."], ["Intermediate", "The highest-stakes group. Ambiguous history or moderate risk burden. This is where history quality and structured tools (e.g. HEART score) have the greatest impact. Resist defaulting to either reassurance or admission without explicit reasoning."], ["Low", "Young patient, minimal risk factors, compelling alternative diagnosis. A low-risk pathway is appropriate only if the alternative diagnosis is genuinely convincing — not simply because the demographics are reassuring."]]}, "callout": {"type": "danger", "text": "Low pre-test probability is not no risk. ACS in young patients without conventional risk factors occurs via cocaine use, spontaneous coronary artery dissection (SCAD — particularly in young women), and Prinzmetal angina. These must remain active differentials when the presentation does not fit a clear alternative diagnosis."}}, {"heading": "Cardiovascular Risk Calculators: A Brief Orientation", "intro": "Multiple validated tools exist for estimating cardiovascular risk. Each was derived from a specific population cohort and operationalises a defined set of variables — understanding what a tool was built for is as important as knowing how to use it.", "table": {"headers": ["Tool", "What it calculates", "Key distinguishing feature", "Generalisability"], "rows": [["Australian CVD Risk Calculator", "10-year risk of a first cardiovascular event (MI, stroke, or cardiovascular death) in patients without established CVD.", "Incorporates the Australian absolute risk framework; designed for primary prevention decision-making in Australian general practice.", "Derived from specific national or regional cohorts — applicability diminishes when applied to populations with different ethnic, dietary, or healthcare backgrounds."], ["European SCORE2", "10-year risk of fatal and non-fatal cardiovascular events, calibrated for use across European risk regions.", "Stratifies Europe into four cardiovascular risk regions (low, moderate, high, very high) to account for geographic variation in baseline risk.", "Derived from specific national or regional cohorts — applicability diminishes when applied to populations with different ethnic, dietary, or healthcare backgrounds."], ["AHA PREVENT Equations", "10-year and 30-year risk of total cardiovascular events including heart failure, in addition to atherosclerotic CVD.", "Explicitly incorporates kidney function (eGFR) and metabolic risk beyond traditional factors; includes heart failure as an outcome — the first major U.S. risk equation to do so.", "Derived from specific national or regional cohorts — applicability diminishes when applied to populations with different ethnic, dietary, or healthcare backgrounds."]]}, "principles": ["A number is not a diagnosis. A calculated risk score quantifies probability within a model's assumptions. It does not capture the full clinical picture and must always be interpreted alongside factors the tool cannot see.", "Low risk is not no risk. A low score in a patient with uncaptured risk factors — obesity, ethnicity, socioeconomic deprivation, inflammatory disease — may systematically underestimate true risk. The score is a floor, not a ceiling.", "Risk is dynamic. A score calculated today reflects today's risk factor profile. Any material change — new diagnosis of diabetes, significant weight gain, deteriorating blood pressure control — should prompt formal re-evaluation rather than reliance on a prior result."], "callout": {"type": "warning", "text": "On ethnicity and risk tools: Most widely used cardiovascular risk calculators were derived from predominantly white European or North American cohorts. Evidence is accumulating that South Asian, Arabic, and other non-European populations experience cardiovascular events at lower absolute risk thresholds than these models predict — meaning standard tools may systematically underestimate risk in these groups. Clinical judgement must supplement the calculated output."}}], "synthesis": "Sections A-I through A-III together establish the patient's cardiovascular baseline. The clinician now holds three reference points:\n\n• What does this patient's normal look like — and at what functional level?\n\n• What does their disease history and investigation record tell us about substrate and residual risk?\n\n• What does their risk factor burden tell us about pre-test probability?\n\nThe delta — the gap between that established baseline and today's presentation — is the central diagnostic question that opens Section B. It reframes the clerking from 'describe your pain' to a far more precise clinical enquiry.", "transition": "Transition to Section B: With the patient's baseline established, the assessment now moves to the acute presentation. The key question is not simply whether the pain is ischaemic — it is whether this episode represents a departure from the known pattern, and if so, what has destabilised the disease."}, "questions": [{"title": "Cardiovascular Risk Assessment & Pre-Test Probability", "vignette": "Mrs H is a 50-year-old woman of Arabic ethnicity who attends the hypertension clinic for her annual review. She has never smoked, has no personal history of diabetes, atrial fibrillation, prior myocardial infarction, or established cardiovascular disease.\n\nHer current medications include ramipril. On examination today her systolic blood pressure is 140 mmHg. Fasting bloods show a total cholesterol of 5.0 mmol/L and HDL of 1.0 mmol/L. HbA1c is 5.5%. Her BMI is 42 kg/m².\n\nHer 10-year cardiovascular risk is calculated using the Australian cardiovascular disease risk calculator and returns a result of 2%. There is no chest pain at today's review. She asks whether she needs to worry about her heart.", "learningObjectives": ["Interpret a calculated cardiovascular risk score in clinical context — beyond the numerical value.", "Recognise risk factors not captured by standard risk calculators that materially modify true cardiovascular risk.", "Understand that low calculated risk does not mean no risk, and that risk tools derived from one population may not be directly applicable to another."], "question": "Which of the following most accurately reflects how this calculated risk should inform the clinical assessment of Mrs H?", "options": ["The 2% result should be interpreted cautiously. The Australian calculator was not derived from an Arabic population, and cardiovascular risk tools consistently overestimate risk in non-European groups — her true risk is likely lower than 2%.", "The 2% result is a reasonable estimate in the context of her overall risk factor profile. Her most actionable priority is optimising blood pressure control, which is the dominant modifiable variable captured by the calculator.", "The 2% result is a useful starting point but likely underestimates her true risk. The calculator does not incorporate morbid obesity or ethnicity, and its derivation cohort may not adequately represent her background.", "The 2% result should be interpreted in the context of her age. At 50, a low calculated risk is expected and reassuring — formal risk reassessment is not indicated until she reaches the higher-risk decade of 60 to 70 years.", "The 2% result is valid for clinical decision-making. Since the Australian calculator is geographically appropriate and her variables have been correctly entered, the output reliably reflects her individualised risk regardless of factors not included in the model."], "correct": 2, "correctLabel": "C — The 2% result is a useful starting point but likely underestimates her true risk. The calculator does not incorporate morbid obesity or ethnicity, and its derivation cohort may not adequately represent her background.", "explanations": ["This answer correctly identifies that standard risk tools have limited generalisability across ethnic populations — but draws the wrong conclusion from that observation. The evidence for ethnic variation in cardiovascular risk does not support a systematic pattern of overestimation in Arabic populations. On the contrary, emerging data suggest that Middle Eastern and South Asian populations may experience cardiovascular events at lower absolute risk thresholds than Western models predict, implying the calculator is more likely to underestimate than overestimate risk in this group. This option is a plausible-sounding distractor because it acknowledges a genuine limitation of risk tools — ethnicity-specific calibration — while inverting the direction of the error. Recognising the limitation is necessary but not sufficient; the direction of the bias must also be reasoned through.", "This answer is partially correct — hypertension is a major modifiable risk factor and blood pressure optimisation is clinically important in this patient. However, framing the 2% result as 'a reasonable estimate' and then pivoting to BP as the primary task accepts the calculated output without adequately interrogating its limitations. The more fundamental clinical issue is that the 2% figure does not capture morbid obesity, does not account for ethnicity, and was not derived from a population that includes her demographic. A clinician who accepts the number and moves to management has skipped the critical reasoning step of qualifying what the number can and cannot tell them. This option is designed to be attractive because it sounds appropriately action-oriented — but the action is premature relative to the reasoning.", "This is correct. Three distinct limitations converge in this case. First, morbid obesity — BMI 42 — is not a direct input variable in the Australian calculator. Its cardiovascular consequences, including adverse lipid dynamics, insulin resistance, sleep-disordered breathing, and prothrombotic states, are therefore invisible to the model. The 2% figure does not reflect their contribution. Second, the calculator was derived from predominantly Anglo-Celtic Australian cohorts. Arabic populations carry a cardiovascular risk profile that standard Western models may not accurately represent, with evidence suggesting higher rates of metabolic syndrome and premature coronary disease relative to model predictions. Third, this is not a static assessment — at 50 with persistent hypertension, morbid obesity, and an ethnicity-related calibration gap, her risk trajectory warrants proactive reassessment at defined intervals rather than reliance on a single calculated output.", "This answer exploits the reasonable observation that absolute cardiovascular risk increases with age to construct an unjustified management decision. While it is true that a 2% 10-year risk in a 50-year-old is lower than in older cohorts, the appropriate response is not to schedule reassessment for a decade later. Risk assessment is a dynamic process triggered by changes in the risk factor profile, not simply by the passage of time. Mrs H has active modifiable risk factors — hypertension, morbid obesity, and a background that may not be well-served by the derivation cohort — that independently justify earlier reassessment and active risk factor management. Deferral in this context reflects an anchoring on the numerical output rather than a clinical appraisal of the full picture.", "This answer confuses population-level validity with individual-level accuracy. Geographic appropriateness — using the Australian calculator for a patient in Australia — is a necessary condition for applying the tool, but it does not guarantee that the output is accurate for any given individual within that population. Risk calculators are probabilistic instruments calibrated on a derivation cohort. Their accuracy is greatest for patients who resemble that cohort and degrades for those who do not. Correctly entering the available variables simply means the model has been used as intended — it does not mean the model's assumptions match the patient. The claim that the output 'reliably reflects individualised risk regardless of factors not included' is a category error: a model cannot account for what it was not designed to measure, regardless of how correctly it is applied."]}]}, {"id": "B", "title": "Recognising Patterns of Chest Pain Presentation", "subtitle": "Stable angina, ACS progression, Type 1 vs Type 2 MI, and the precipitant framework", "summaryFirst": true, "summary": {"purposeBox": "Rapid-reference reasoning guide for the acute assessment. Covers how to distinguish ACS from stable angina, how to use the precipitant framework to identify mechanism and subtype, and how to apply the delta concept to drive clinical decision-making.", "principle": "Section A established the baseline. Section B asks: what has changed, and what drove that change?\n\nThese are two separate clinical questions that must both be answered. The first — what has changed — determines whether this is ACS. The second — what drove the change — determines the pathophysiological mechanism, the ACS subtype, and therefore the management approach.", "centralQuestion": "The precipitant is not just context — it is diagnosis. Identifying demand ischaemia as the mechanism (Type 2 MI) versus spontaneous plaque disruption (Type 1 MI) changes what you treat first and how you apply antithrombotic therapy. The history is what makes that distinction.", "blocks": [{"heading": "ACS vs Stable Angina — Rapid Discriminator", "intro": "Use this table to frame the initial history. The discriminating work is in the pattern, not the pain character.", "table": {"headers": ["Feature", "Stable Angina", "ACS"], "rows": [["Onset", "Exertional; predictable", "Rest, nocturnal, or lower threshold than baseline"], ["Duration", "2–10 min; resolves with rest", ">20 min; may be unrelenting"], ["GTN response", "Rapid, reliable within 3–5 min", "Partial, delayed, or absent"], ["Pattern", "Unchanged over weeks to months", "New, crescendo, or qualitatively different"], ["Autonomic", "Absent or minimal", "Diaphoresis, nausea, pallor — sympathetic activation"], ["Rest pain", "Absent — defines the stable pattern", "Present — ACS until proven otherwise"]]}, "callout": {"type": "warning", "text": "Two rules that override all others: (1) Rest pain = ACS until the investigations prove otherwise. (2) A pattern change from the established baseline — lower threshold, rest onset, attenuated GTN — overrides a reassuring pain character. The syndrome is defined by pattern, not by how the pain feels."}}, {"heading": "The Precipitant Framework — Reasoning Tool", "intro": "Once ACS is suspected, the next question is: why now? The answer defines the mechanism — and the mechanism defines the management.\n\nType 1 MI: Plaque rupture or erosion with intracoronary thrombus. A precipitant acts on a vulnerable lesion.\n\nType 2 MI: Supply-demand mismatch on fixed coronary disease. A physiological stressor drives ischaemia without plaque disruption.\n\nNo precipitant: Spontaneous plaque disruption at rest. Absence of trigger is a finding — not a gap in the history.", "callout": {"type": "warning", "text": "Type 2 MI management principle: Treat the precipitating condition first. Antithrombotic therapy requires explicit individualised risk-benefit assessment — the haemorrhagic risk in sepsis, gastrointestinal bleeding, or trauma may outweigh the standard ACS protocol."}}, {"heading": "Applying the Delta", "intro": "The delta integrates Sections A and B into a single clinical judgement. It is the explicit articulation of what has changed from the patient's baseline — and why it matters.\n\nFour dimensions of the delta:\n\n• Pattern change: nature, threshold, or character different from established baseline?\n\n• Precipitant context: demand ischaemia on known disease, or plaque disruption?\n\n• Temporal acuity: single acute event, or crescendo over days to weeks?\n\n• Investigation context: does a recent normal stress test or angiogram modify the weight of the delta?", "deltaTable": {"headers": ["Clinical Context", "What constitutes the delta", "Clinical implication"], "rows": [["Known stable angina, now rest pain", "Rest onset, prolonged duration, attenuated GTN — all three depart from the established pattern", "ACS until proven otherwise — the delta is unambiguous"], ["No prior cardiac history, new chest pain", "The entire presentation is the delta — no baseline exists; risk factor burden and precipitant do the discriminating work", "Pre-test probability from Section A drives investigative urgency"], ["Post-CABG, new exertional symptoms", "Asymptomatic post-revascularisation; new exertional symptoms = new ischaemia — graft or native vessel", "High-risk regardless of ECG — prior revascularisation does not confer immunity"], ["Troponin rise during acute illness", "Biochemical delta — no chest pain; demand ischaemia in the context of sepsis or tachyarrhythmia on known CAD", "Type 2 MI — treat the precipitant; individualise antithrombotic decisions"]]}, "callout": {"type": "info", "text": "The delta as an escalation language: 'This patient's pain departs from their baseline in three specific ways' is more clinically precise — and more actionable — than 'I'm worried about this patient.' Articulating the delta explicitly is how a junior doctor communicates like a senior one."}}], "transition": "Transition to Section C: With the acute presentation characterised and the precipitant mechanism identified, the assessment moves to the granular discriminating features — onset, duration, GTN response, pattern over time, and autonomic accompaniments — and how each is weighted within the delta framework."}, "questions": [{"title": "Q1 — Identifying Stable Angina", "vignette": "Mr A is a 65-year-old man with hypertension and type 2 diabetes. He attends his GP after his wife noticed he had been slowing down on their evening walks. He reports that for the past eight months he has developed a tight, pressure-like sensation across his chest when walking briskly or climbing the stairs at home. The discomfort comes on predictably after about five minutes of moderate effort and settles completely within three to four minutes of stopping. It has never come on at rest, has never woken him from sleep, and its character and threshold have not changed over the eight months. He has not tried GTN. There is no breathlessness, nausea, or sweating during the episodes.", "question": "Which of the following best describes Mr A's presentation?", "options": ["Stable angina — predictable exertional chest pain on a background of fixed coronary artery disease, with no change in pattern or threshold.", "Stable angina progressing to ACS — a recognised pattern of exertional angina that has now destabilised, with symptoms occurring at rest, at a lower exertional threshold, or with a reduced or absent response to GTN.", "First presentation of ACS precipitated by intense physical exertion — no prior history of angina, with the acute event occurring in direct temporal relationship to unaccustomed or strenuous activity.", "First presentation of ACS without an identifiable precipitant — no prior history of angina, with spontaneous onset at rest and no exertional, physiological, or emotional trigger identified.", "Type 2 MI from demand ischaemia — myocardial injury arising from supply-demand mismatch driven by an acute physiological stressor, in the context of underlying coronary artery disease."], "correct": 0, "correctLabel": "A — Stable angina.", "explanations": ["All defining features of stable angina are present: predictable onset with a consistent exertional threshold, pressure-type retrosternal discomfort, reliable resolution within minutes of stopping, and an unchanged pattern over eight months. There is no rest pain, no nocturnal symptoms, and no pattern change. This is fixed obstructive coronary disease producing demand-limited ischaemia that is entirely supply-demand dependent. The absence of GTN use does not alter the diagnosis — the rest-relief pattern alone is sufficient.", "For B to be correct, there would need to be a demonstrable departure from the established pattern — symptoms at rest, a lower exertional threshold than previously, or an attenuated GTN response. None of these features are present. The threshold has been consistent for eight months. There is no crescendo. This is a stable presentation.", "For C to be correct, the presentation would need to be the first acute ischaemic event, precipitated by a discrete episode of intense or unaccustomed exertion. Mr A's symptoms have been present and stable for eight months, and each episode is brief and exertional — not an acute event. There is no ACS here.", "For D to be correct, there would need to be a new, spontaneous ischaemic event at rest without prior exertional symptoms. Mr A's presentation is the opposite — eight months of exertional symptoms with a stable, predictable threshold and no rest component.", "For E to be correct, there would need to be a discrete physiological stressor — sepsis, arrhythmia, anaemia, severe hypertension — driving supply-demand mismatch on fixed coronary disease. There is no acute precipitant here. Mr A's symptoms are exertional and chronic, not driven by an acute systemic stressor."]}, {"title": "Q2 — Stable Angina Progressing to ACS", "vignette": "Mr A is a 65-year-old man with hypertension and type 2 diabetes. He has a two-year history of exertional chest tightness, previously occurring only when climbing two or more flights of stairs or walking uphill at pace. This had been stable and managed with a PRN GTN spray, which consistently relieved his symptoms within four minutes.\n\nOver the past ten days, however, he has noticed that the same chest tightness is now coming on when walking on the flat for more than a few minutes. On three occasions in the past week it has occurred while he was sitting watching television. Last night he was woken from sleep by the discomfort, which lasted approximately 25 minutes and required two GTN sprays before partially settling. He presents to the cardiology unit this morning.", "question": "Which of the following best describes Mr A's current presentation?", "options": ["Stable angina — predictable exertional chest pain on a background of fixed coronary artery disease, with no change in pattern or threshold.", "Stable angina progressing to ACS — a recognised pattern of exertional angina that has now destabilised, with symptoms occurring at rest, at a lower exertional threshold, or with a reduced or absent response to GTN.", "First presentation of ACS precipitated by intense physical exertion — no prior history of angina, with the acute event occurring in direct temporal relationship to unaccustomed or strenuous activity.", "First presentation of ACS without an identifiable precipitant — no prior history of angina, with spontaneous onset at rest and no exertional, physiological, or emotional trigger identified.", "Type 2 MI from demand ischaemia — myocardial injury arising from supply-demand mismatch driven by an acute physiological stressor, in the context of underlying coronary artery disease."], "correct": 1, "correctLabel": "B — Stable angina progressing to ACS.", "explanations": ["For A to be correct, the exertional pattern would need to be unchanged — consistent threshold, predictable onset, reliable GTN response, no rest symptoms. Mr A's presentation has departed from all of these in the past ten days. The threshold has fallen dramatically, rest pain has appeared, nocturnal symptoms have occurred, and GTN response is now partial. This is no longer a stable pattern.", "This is the classic crescendo pattern that defines the transition from stable angina to unstable angina as part of ACS. Three features together make this unambiguous: the established prior history of stable exertional angina with a known threshold, the progressive lowering of that threshold over ten days, and the emergence of rest pain and nocturnal symptoms with attenuated GTN response. Each of these individually would prompt concern; together they constitute an ACS presentation until the investigations prove otherwise. The delta between his two-year baseline and the past ten days is the clinical diagnosis.", "For C to be correct, this would need to be a first ischaemic event without prior anginal history, triggered by a discrete episode of intense activity. Mr A has a two-year history of stable exertional angina — this is not a first presentation. The current episode represents destabilisation of known disease, not a de novo event.", "For D to be correct, there would need to be no prior anginal history and a spontaneous first event at rest. Mr A has an established two-year anginal history. The rest pain in this case is not a spontaneous first event — it is the endpoint of a crescendo progression from a known stable pattern.", "For E to be correct, there would need to be an identifiable acute physiological stressor — infection, arrhythmia, anaemia, severe hypertension — driving supply-demand mismatch. The history contains no such precipitant. The progression is intrinsic — driven by plaque instability, not an external demand trigger."]}, {"title": "Q3 — First ACS Presentation — Exertional Trigger", "vignette": "Mr A is a 65-year-old man with hypertension and type 2 diabetes. He has no prior history of chest pain, has never been investigated for cardiac disease, and takes no cardiac medications. He has been largely sedentary for several years.\n\nThis morning he helped his son move furniture into a new apartment — carrying heavy boxes up three flights of stairs over approximately two hours. He is not accustomed to this level of exertion. Towards the end of the move, he developed severe central chest pressure radiating to his left jaw, accompanied by profuse sweating and nausea. He sat down but the pain did not ease. Forty minutes later, with the pain persisting and now associated with breathlessness, his son called an ambulance. He has had no similar episodes previously.", "question": "Which of the following best describes Mr A's presentation?", "options": ["Stable angina — predictable exertional chest pain on a background of fixed coronary artery disease, with no change in pattern or threshold.", "Stable angina progressing to ACS — a recognised pattern of exertional angina that has now destabilised, with symptoms occurring at rest, at a lower exertional threshold, or with a reduced or absent response to GTN.", "First presentation of ACS precipitated by intense physical exertion — no prior history of angina, with the acute event occurring in direct temporal relationship to unaccustomed or strenuous activity.", "First presentation of ACS without an identifiable precipitant — no prior history of angina, with spontaneous onset at rest and no exertional, physiological, or emotional trigger identified.", "Type 2 MI from demand ischaemia — myocardial injury arising from supply-demand mismatch driven by an acute physiological stressor, in the context of underlying coronary artery disease."], "correct": 2, "correctLabel": "C — First presentation of ACS precipitated by intense physical exertion.", "explanations": ["For A to be correct, the presentation would need to be chronic, predictable, and self-limiting — brief exertional discomfort that resolves with rest. This presentation is the opposite: a first-ever episode, severe, unrelenting at 40 minutes, with prominent autonomic features. Stable angina does not present with sustained rest pain, diaphoresis, nausea, and breathlessness.", "For B to be correct, there would need to be an established prior pattern of stable exertional angina that has now destabilised. Mr A has no prior chest pain history. There is no baseline to depart from — this is a first event, not a progression.", "Three features define this as C: no prior anginal history, an acute first ischaemic event, and a clear temporal relationship to unaccustomed strenuous exertion. The mechanism is Type 1 MI — the haemodynamic surge from heavy lifting drove shear stress across a vulnerable atherosclerotic plaque, precipitating rupture and intracoronary thrombus formation. The sustained duration (40 minutes), severe intensity, prominent autonomic activation, and failure to resolve with rest are all consistent with an acute MI rather than a self-limiting episode of demand ischaemia. This presentation pattern is more common in the habitually sedentary — Mr A's years of inactivity are directly relevant context.", "For D to be correct, the onset would need to be spontaneous — at rest, without a discrete exertional or physiological trigger. Mr A's pain began during sustained heavy exertion and has a clear precipitant. The precipitant is integral to the clinical picture here, not absent.", "For E to be correct, there would need to be an acute systemic physiological stressor — sepsis, arrhythmia, haemorrhage, thyrotoxicosis — driving supply-demand mismatch on fixed coronary disease. Physical exertion is not a Type 2 MI mechanism. Exertion triggers plaque disruption (Type 1) via haemodynamic shear stress, not supply-demand mismatch from a systemic stressor."]}, {"title": "Q4 — First ACS Presentation — No Identifiable Precipitant", "vignette": "Mr A is a 65-year-old man with hypertension and type 2 diabetes. He has no prior history of chest pain and has never been investigated for cardiac disease. He takes antihypertensive medication and metformin.\n\nHe woke at 3 am with a heavy pressure sensation across his chest, radiating to his left arm. He had gone to bed at his usual time and had been sleeping soundly. There was no preceding exertion, emotional upset, or identifiable stressor. He lay still hoping it would pass. After 30 minutes without improvement, his wife called an ambulance. He describes the pain as the worst he has ever experienced. He is diaphoretic and pale on arrival. He denies any prior episodes of exertional chest discomfort, breathlessness on exertion, or symptoms suggestive of prior angina.", "question": "Which of the following best describes Mr A's presentation?", "options": ["Stable angina — predictable exertional chest pain on a background of fixed coronary artery disease, with no change in pattern or threshold.", "Stable angina progressing to ACS — a recognised pattern of exertional angina that has now destabilised, with symptoms occurring at rest, at a lower exertional threshold, or with a reduced or absent response to GTN.", "First presentation of ACS precipitated by intense physical exertion — no prior history of angina, with the acute event occurring in direct temporal relationship to unaccustomed or strenuous activity.", "First presentation of ACS without an identifiable precipitant — no prior history of angina, with spontaneous onset at rest and no exertional, physiological, or emotional trigger identified.", "Type 2 MI from demand ischaemia — myocardial injury arising from supply-demand mismatch driven by an acute physiological stressor, in the context of underlying coronary artery disease."], "correct": 3, "correctLabel": "D — First presentation of ACS without an identifiable precipitant.", "explanations": ["Stable angina does not wake patients from sleep, does not produce the worst pain of a patient's life, and does not cause diaphoresis and pallor. It is exertional, brief, and self-limiting. This presentation has none of those features.", "For B to be correct, there would need to be an established prior pattern of stable exertional angina. Mr A explicitly denies any prior chest discomfort on exertion. There is no baseline pattern to have destabilised. This is a first event, not a progression.", "For C to be correct, there would need to be a clear temporal relationship between strenuous or unaccustomed exertion and the onset of symptoms. Mr A was asleep. There is no exertional precipitant.", "This is the classical presentation of spontaneous plaque rupture without an external trigger. The defining features are: no prior anginal history, onset at rest during sleep, no exertional or emotional precipitant, severe and sustained pain with prominent autonomic activation. The nocturnal onset reflects the circadian cortisol and sympathetic surge of waking — even without a discrete stressor, this is sufficient to precipitate rupture of a vulnerable plaque. The absence of a precipitant is not a gap in the history — it is a positive finding that points to intrinsic plaque instability as the mechanism. This presentation demands the same urgency as any other ACS.", "For E to be correct, there would need to be an acute physiological stressor creating supply-demand mismatch — infection, arrhythmia, anaemia, or similar. Mr A was sleeping with no identifiable systemic precipitant. Spontaneous nocturnal plaque rupture is the mechanism here, not demand ischaemia driven by an external stressor."]}, {"title": "Q5 — Type 2 MI — Demand Ischaemia", "vignette": "Mr A is a 65-year-old man with hypertension and type 2 diabetes. He has a known history of stable exertional angina — CCS Class II — that has been managed with a beta-blocker and PRN GTN for the past three years. His angina has been well-controlled and his last cardiology review six months ago noted no change in his symptoms.\n\nHe is admitted to the medical assessment unit with a three-day history of productive cough, fever, and rigors. His temperature is 38.9°C and his heart rate on arrival is 118 bpm. Blood cultures are taken and a chest X-ray confirms right lower lobe consolidation. Eight hours into the admission, the nursing staff alert the team that Mr A has developed central chest tightness. He describes it as similar in character to his usual angina but present at rest. His heart rate remains 112 bpm. An ECG shows sinus tachycardia with no new ST changes. Initial high-sensitivity troponin returns elevated.", "question": "Which of the following best describes the mechanism of Mr A's chest pain and troponin rise?", "options": ["Stable angina — predictable exertional chest pain on a background of fixed coronary artery disease, with no change in pattern or threshold.", "Stable angina progressing to ACS — a recognised pattern of exertional angina that has now destabilised, with symptoms occurring at rest, at a lower exertional threshold, or with a reduced or absent response to GTN.", "First presentation of ACS precipitated by intense physical exertion — no prior history of angina, with the acute event occurring in direct temporal relationship to unaccustomed or strenuous activity.", "First presentation of ACS without an identifiable precipitant — no prior history of angina, with spontaneous onset at rest and no exertional, physiological, or emotional trigger identified.", "Type 2 MI from demand ischaemia — myocardial injury arising from supply-demand mismatch driven by an acute physiological stressor, in the context of underlying coronary artery disease."], "correct": 4, "correctLabel": "E — Type 2 MI from demand ischaemia.", "noteBox": "A note on Type 2 MI and the ACS pathway: Type 2 MI will trigger the same investigation pathway as Type 1 — ECG, serial troponins, and monitoring. The distinction becomes clinically critical at the management decision point. Invasive coronary angiography and antithrombotic therapy that are standard in Type 1 MI require individualised risk-benefit assessment in Type 2 MI. The history — specifically the identification of the precipitating physiological stressor — is what enables that distinction to be made.", "explanations": ["Mr A's stable angina is exertional and controlled. The current chest pain has arisen at rest during an acute febrile illness with sustained tachycardia — the clinical context has changed completely. This is not his usual exertional threshold being reached; this is ischaemia being driven by a systemic stressor.", "B would apply if the anginal pattern itself had destabilised — lower exertional threshold, new rest pain in the absence of a physiological precipitant, attenuated GTN response as a primary change. Here the rest pain has a clear external driver: sepsis-related tachycardia increasing myocardial oxygen demand beyond what the diseased coronary vessels can supply. The angina has not destabilised intrinsically; it has been overridden by a physiological stressor.", "Mr A has a three-year history of stable angina — this is not a first ischaemic event. The precipitant is also not physical exertion but a systemic infectious illness. C requires both a first event and an exertional trigger.", "D requires no prior anginal history and no identifiable precipitant. Mr A has established coronary disease with a known anginal history, and there is an unambiguous precipitant — community-acquired pneumonia with a sustained tachycardia of 112–118 bpm. The precipitant is not absent; it is the dominant clinical feature.", "All defining elements of Type 2 MI are present. The substrate is known fixed coronary disease — three years of stable CCS Class II angina. The precipitant is an acute physiological stressor — community-acquired pneumonia producing sustained tachycardia. The mechanism is supply-demand mismatch: tachycardia shortens diastolic filling time, reducing coronary perfusion, while simultaneously increasing myocardial oxygen demand. The diseased coronary vessels cannot compensate. The troponin rise reflects myocardial injury from this mismatch, not from plaque rupture. The management implication is critical: the first priority is treating the pneumonia and controlling the heart rate. Full antiplatelet and anticoagulation loading requires explicit risk-benefit consideration — standard ACS protocol is not automatically appropriate in the context of acute infection with potential bacteraemia."]}]}, {"id": "C", "title": "Discriminating Clinical Features", "subtitle": "Onset, duration, GTN response, pattern over time, and autonomic symptoms", "summaryFirst": true, "summary": {"purposeBox": "Rapid-reference reasoning guide for the five discriminating features — onset, duration, GTN response, pattern over time, and autonomic symptoms. The focus is on how to weight each feature, where each misleads, and how the combination drives the clinical decision.", "principle": "No single feature is diagnostic. Each shifts probability. The clinical task is to weight an imperfect combination of signals in the context of the delta from Section A and the precipitant from Section B.", "centralQuestion": "The hierarchy matters: pattern over time is the most sensitive and most commonly missed feature. Onset is the strongest individual acute signal. Duration and GTN response are most valuable as comparative findings against the patient's own baseline. Autonomic symptoms amplify urgency but do not define the diagnosis.", "blocks": [{"heading": "Five Features at a Glance", "intro": "Use this table as the primary reference. The 'Where It Misleads' column is the consultant-level content — the standard signals are already known.", "table": {"headers": ["Feature", "Weight", "Stable Angina Signal", "ACS Signal", "Where It Misleads"], "rows": [["Pattern over time", "Highest", "Unchanged threshold over weeks to months", "New, crescendo, or rest pain emerging from a prior exertional pattern", "Patients normalise progression. Activity avoidance masks deterioration. Always ask: 'Are you doing less to avoid bringing it on?'"], ["Onset", "High", "Exertional; predictable; gradual build with effort", "Rest onset, nocturnal, or exertional at a lower threshold than baseline", "Patients minimise activity at onset. 'Just sitting' may mean slow walking. 'Sudden during exertion' requires clarification — was the exertion unaccustomed?"], ["Duration", "High", "2–10 min; resolves reliably with rest", ">20 min at rest; or longer than the patient's established baseline", "GTN use confounds duration — ask duration before GTN, not after. Short episodes at rest are not reassuring. Stuttering short episodes are high-risk."], ["GTN response", "Moderate", "Rapid, complete, consistent — single dose sufficient", "Partial, delayed, multiple doses needed, or absent in a patient with prior reliable response", "GTN response does not confirm ischaemia — oesophageal spasm also responds. Nitrate tolerance blunts response in regular users. Absence of GTN data is neutral, not reassuring."], ["Autonomic symptoms", "Amplifier", "Absent; mild exertional dyspnoea only", "Diaphoresis, nausea, pallor, vomiting, sense of impending doom", "Absence does not exclude ACS. Nausea attributed to anxiety. 'I thought I was dying' is not anxiety — it is sympathetic activation. Dyspnoea alone may be the ACS presentation."]]}}, {"heading": "High-Yield Reasoning Traps", "intro": "These are the specific bedside moments where the reasoning most commonly goes wrong. Each is framed around what the patient says — because that is the actual clinical encounter.", "trapsTable": {"headers": ["What the patient says", "The trap", "The correct reasoning"], "rows": [["'It's just my usual angina'", "Accepting the patient's own characterisation without probing the trajectory", "Ask specifically: 'Is it coming on more often? With less effort? Is the GTN working as well?' The patient's label does not establish the pattern — your questions do."], ["'It went with the GTN spray'", "Treating GTN response as diagnostic of stable angina", "Ask: how long before the GTN, and was the relief complete? Partial relief, delayed response, or multiple doses needed in a patient with a previously reliable single-dose response is an ACS signal."], ["'I was just sitting down'", "Accepting rest onset at face value without probing activity", "Ask what they were doing in the five minutes before onset. 'Just sitting' sometimes means slow ambulation, carrying shopping, or post-exertional rest. Clarify precisely."], ["'I don't get sweating or nausea'", "Using absence of autonomic symptoms to reduce urgency", "Autonomic symptoms are absent in many ACSs. Their absence does not modify a suspicious presentation. The rest of the history carries full weight regardless."], ["'I've had a stent — this must be the same thing'", "Prior revascularisation framing a new event as familiar and lower risk", "Post-revascularisation new symptoms represent a new ischaemic event — restenosis, graft failure, or new vessel disease. The prior revascularisation defines the baseline; the new symptoms are the delta."], ["'It only lasted five minutes'", "Short duration used as reassurance", "Duration is only reassuring in context. Five minutes at rest in a patient whose baseline is exertional-only is a departure from pattern — which is the ACS signal, not the absolute duration."], ["'I've been doing less to avoid the pain'", "Apparent symptom stability accepted without recognising activity avoidance", "Progressive activity limitation to stay below the anginal threshold is silent disease progression. Always ask: 'Have you changed what you do because of these symptoms?' Behavioural adaptation is a clinical finding."], ["'I thought I was going to die'", "Attributed to anxiety rather than recognised as sympathetic activation", "The sense of impending doom is a documented feature of large-territory myocardial ischaemia. It is not anxiety. Treat it as a severity marker and escalate accordingly."]]}}, {"heading": "How the Features Combine — Decision Points", "decisionPoints": [{"type": "red", "label": "Demand immediate action:", "items": ["Rest pain + pattern change from baseline + autonomic features. Any two of these three in a patient with cardiovascular risk factors = ACS until proven otherwise."]}, {"type": "amber", "label": "Demand active exclusion — not reassurance:", "items": ["Equivocal character + no autonomic features + normal initial ECG. This is the presentation where ACS is most commonly missed. The history must be placed against the full risk context and pattern before a low-risk pathway is considered.", "Short duration at rest. Not reassuring. A five-minute rest pain episode in a patient with risk factors requires the same investigative rigour as a 30-minute episode.", "Crescendo exertional pattern without yet having rest pain. This is unstable angina. It does not require rest pain to be ACS. The pattern is the diagnosis."]}, {"type": "green", "label": "Supports stable angina — if all present:", "items": ["Unchanged exertional threshold over months + predictable onset + complete GTN response + no rest component + no autonomic features + no pattern change.", "Important: All five elements must be consistent. One departure from this picture reopens the ACS question."]}]}], "transition": "Transition to Section D: These five features apply to patients who describe their symptoms clearly. Section D addresses the patients who cannot — or in whom the classical features are absent, attenuated, or actively misleading: the atypical presentations where ACS is most frequently missed."}, "questions": [{"title": "Q1 — No Single Feature Rules ACS In or Out", "learningObjective": "Recognise that pain character alone — however non-cardiac it sounds — cannot exclude ACS. The clinical interpretation is always a function of the full history: onset context, duration, pattern, and risk factor burden. A single reassuring feature does not override a concerning combination.", "vignette": "Mr K is a 55-year-old man with hypertension, type 2 diabetes, and a 30 pack-year smoking history (stopped 3 years ago). He has no prior history of chest pain or cardiac disease.\n\nHe presents at 11 pm with chest discomfort that began two hours ago while watching television. He describes it as a sharp, catching sensation on the left side of his chest — 'like a stitch.' It does not radiate. He rates it 5 out of 10. The pain has been constant since onset and has not changed in intensity.\n\nOn direct questioning, the pain is not affected by movement, deep breathing, or change of position. He is not sweaty, has not vomited, and does not feel short of breath. He has no cough, fever, or recent illness. He has not tried GTN. He took two paracetamol an hour ago without any effect.", "question": "Based on the history alone, which of the following most accurately describes the clinical interpretation of this presentation?", "options": ["The sharp, left-sided, non-radiating character is the most informative feature in this history. It argues against an ischaemic origin and towards a musculoskeletal or pleuritic cause, which should be the working diagnosis.", "The pain character is atypical for ischaemia and reduces the pre-test probability of ACS. Combined with the absence of autonomic features and no prior cardiac history, the history as a whole supports a non-cardiac working diagnosis.", "The pain character is atypical for ischaemia, but character is one of several features in this history. The combination of rest onset, two-hour unresolved duration, three major cardiovascular risk factors, and no positively identified alternative cause means the history does not support a non-cardiac working diagnosis.", "The history contains features that point in both directions. The atypical character and absence of autonomic features argue against ischaemia; the rest onset and duration argue for it. In this degree of uncertainty, the pain character should be weighted most heavily as it is the most directly observable feature.", "No single feature in this history excludes ACS. However, the atypical character, absence of radiation, and absence of autonomic features are each independently reassuring. Their combined weight tips the history towards a non-cardiac working diagnosis."], "correct": 2, "correctLabel": "C — Pain character is atypical for ischaemia but is one feature among several. Rest onset, two-hour unresolved duration, three major cardiovascular risk factors, and no positively identified alternative together mean the history does not support a non-cardiac working diagnosis.", "explanations": ["This answer treats pain character as the primary and most informative feature in the history — which inverts the correct reasoning hierarchy. Character modifies probability; it does not determine diagnosis. More importantly, the positive identification of a musculoskeletal or pleuritic cause requires specific supporting features: localised tenderness reproducible on palpation for musculoskeletal, or a pleuritic quality worsened by inspiration and coughing for pleuritic disease. Neither is present here. The pain is not affected by movement, breathing, or position — which, if anything, argues against both of those non-cardiac labels. A non-cardiac working diagnosis requires positive evidence, not just an atypical pain descriptor.", "This answer correctly identifies the atypical character as a probability-reducing feature, then adds two further probability-reducing observations — absent autonomic features and no prior cardiac history — and concludes that their combination supports a non-cardiac working diagnosis. The error is selective feature aggregation: the two highest-weight contextual features in this history — rest onset and two-hour unresolved duration — are absent from the argument. Absent autonomic features are common in NSTEMI. No prior cardiac history is expected in a first ACS presentation. Neither meaningfully modifies the significance of rest onset with prolonged unresolved pain in a patient with three major cardiovascular risk factors. Three probability-reducing features do not outweigh two high-weight probability-increasing ones.", "This is correct because it applies the reasoning hierarchy without selectively excluding the features that challenge the reassuring conclusion. Pain character is acknowledged as atypical — reducing ischaemic probability to some degree — but immediately positioned as one of several features that must be interpreted together. The features with more discriminating weight are then applied in sequence: rest onset in a patient with no prior exertional threshold to compare against, two-hour unresolved duration with no spontaneous relief, three major cardiovascular risk factors, and critically, the absence of any positively identified alternative diagnosis. The last of these matters: the atypical character does not establish an alternative cause — it only reduces ischaemic probability. Without a positive non-cardiac explanation, the history does not support closure on a non-cardiac working diagnosis.", "This answer correctly identifies the bidirectional tension in the history — atypical character and absent autonomic features against ischaemia; rest onset and duration for it — but resolves the uncertainty by weighting pain character most heavily on the basis that it is 'most directly observable.' This is not a valid weighting principle. Observability is not the same as discriminating power. Rest onset and unresolved two-hour duration are equally observable — the patient reported both clearly — and carry more discriminating weight than character in the clinical reasoning hierarchy. When features point in different directions, the resolution is to apply the established hierarchy of discriminating power, not to select the most tangible-seeming finding.", "This answer explicitly acknowledges the parent principle — no single feature excludes ACS — then immediately constructs a multi-feature argument that reaches the same conclusion a single-feature argument would have produced. Naming three probability-reducing features and describing them as 'independently reassuring' does not escape the reasoning error; it replicates it with more steps. The critical question is not how many probability-reducing features are present, but whether the probability-increasing features — rest onset and duration — have been given their correct weight in the same calculation. They have not. The conclusion tips non-cardiac despite two unaddressed high-weight features pointing the other way. Combining reassuring findings while excluding concerning ones is the definition of selective reasoning."]}, {"title": "Q2 — The GTN Response Trap", "learningObjective": "Recognise that GTN response is a contextual feature that must be interpreted alongside the clinical picture — not a standalone diagnostic test. Relief with GTN neither confirms ischaemia nor excludes ACS progression. Its discriminating value lies in the comparison with the patient's established GTN response pattern.", "vignette": "Mrs P is a 62-year-old woman with known stable angina, hypertension, and hyperlipidaemia. She has been managed with a beta-blocker, a statin, and PRN sublingual GTN for the past four years. Her angina has been well-characterised: exertional chest tightness on climbing two or more flights of stairs, reliably settling within three minutes of a single GTN spray. She has never had rest pain.\n\nShe presents to the chest pain unit at 9 am after an episode of central chest tightness that woke her from sleep at 3 am. The pain lasted approximately 25 minutes. She took one GTN spray; the pain 'eased off' over about 15 minutes but did not completely resolve before eventually settling. She went back to sleep and presents now, six hours later, because her husband insisted.\n\nOn arrival she is pain-free and haemodynamically stable. Her resting ECG shows no acute changes. She says: 'I think it was just my angina — the GTN worked.'", "question": "Which of the following most accurately reflects how Mrs P's GTN response should be interpreted in this clinical assessment?", "options": ["The GTN response confirms that the episode was ischaemic in origin and consistent with her established angina pattern. The episode can be assessed within the standard low-risk chest pain pathway.", "The GTN response is noted, but the episode occurred at rest, lasted 25 minutes, and was only partially relieved — representing a qualitative departure from her established response pattern. These features together classify this as an ACS presentation that requires full assessment regardless of current symptom resolution.", "The delayed and partial GTN response suggests nitrate tolerance from chronic use rather than a change in the nature of the ischaemic episode. Reviewing her nitrate regimen is the priority before further cardiac investigation.", "Rest pain in a patient with known stable angina warrants assessment, but the GTN response and spontaneous symptom resolution make an ACS presentation less likely. A repeat ECG and a single troponin measurement at presentation are appropriate next steps.", "The normal arrival ECG and current symptom-free state, in the context of a GTN response, support a stable angina exacerbation rather than ACS. Serial troponin should be performed but the clinical urgency is lower than in a patient with ongoing chest pain."], "correct": 1, "correctLabel": "B — Rest onset, 25-minute duration, and partial GTN response — each a departure from her established pattern — together classify this as ACS regardless of current resolution.", "explanations": ["This answer makes two errors simultaneously. The first is treating GTN response as confirmatory of a diagnosis — GTN relieves ischaemia, but it also relieves oesophageal spasm and other non-cardiac causes. More importantly, it does not distinguish between stable angina and ACS: both can respond to GTN, partially or completely. The second error is ignoring the comparison with Mrs P's established pattern. Her usual angina resolves in three minutes with a single spray. This episode took 15 minutes and did not resolve completely — a qualitative departure that carries diagnostic significance independent of the absolute response time. Using GTN response as the anchor for a low-risk pathway classification is precisely the reasoning error this question is designed to expose.", "This is correct because it applies the delta concept at the level of individual clinical features. Each of the three features — rest onset, duration exceeding 20 minutes, and partial rather than complete GTN response — represents a departure from Mrs P's well-characterised stable baseline. Individually, each is significant. Together they are unambiguous: this presentation falls outside the stable angina pattern in three dimensions simultaneously. The most important reasoning move here is the explicit comparison with her established GTN response — not asking 'did GTN work?' but 'did it work the way it always has?' The answer is no. Current symptom resolution and a normal arrival ECG do not modify this classification — NSTEMI frequently presents with both.", "This answer identifies a real pharmacological phenomenon — nitrate tolerance does occur with chronic use, particularly with continuous nitrate regimens such as patches — and uses it to explain away a clinically significant change in GTN response. The error is in the application: Mrs P is on PRN sublingual GTN, which she uses intermittently. Nitrate tolerance is primarily a concern with continuous nitrate exposure, where the nitrate-free interval is absent. Intermittent PRN use carries minimal tolerance risk. More fundamentally, even if tolerance were a valid consideration, it does not explain the rest onset or the 25-minute duration — two features that are independent of the GTN response and that on their own constitute a significant departure from the stable angina pattern.", "This answer acknowledges the rest pain appropriately but then uses GTN response and symptom resolution to downgrade clinical urgency — and reduces the investigation to a single troponin at presentation. Both moves are errors. As established, the GTN response here is not the usual response — it was delayed and partial. Symptom resolution at the time of assessment is not a reassuring feature in ACS: NSTEMI and unstable angina are by definition intermittent, and a pain-free state on arrival is entirely consistent with an ACS that has temporarily stabilised. A single troponin without serial measurement cannot capture the rise-and-fall kinetic that defines myocardial injury from an episode that occurred six hours ago.", "This answer introduces a subtle but important error: it creates a new category — 'stable angina exacerbation' — that sits between stable angina and ACS, and assigns it a lower urgency than overt ACS. This category does not exist clinically in a way that changes the investigation or monitoring requirement. A rest pain episode with partial GTN response and 25-minute duration in a patient with known CAD is an ACS presentation. The appropriate response is full serial troponin assessment, continuous monitoring, and cardiology review — not a modified protocol based on the absence of current symptoms. The normal ECG on arrival reduces the likelihood of STEMI; it does not reduce the urgency of ACS exclusion in this context."]}]}, {"id": "D", "title": "Atypical Chest Pain", "subtitle": "Presentations where classical features are absent, attenuated, or substituted", "summaryFirst": true, "summary": {"purposeBox": "Rapid-reference reasoning guide for presentations where classical chest pain features are absent, attenuated, or substituted. The focus is on which patients to apply a lower investigative threshold, how to modify the history, and when investigations carry more diagnostic weight than the history alone.", "principle": "'Atypical' is defined relative to a reference standard derived predominantly from studies of middle-aged men. In women, elderly patients, diabetics, and post-CABG patients, what is labelled atypical is often their expected presentation.", "centralQuestion": "The reasoning shift: In a high-risk atypical group, the absence of classical features does not reduce pre-test probability — it reflects the expected mode of presentation. The threshold for investigation is lower, not because the presentation is concerning, but because the population makes ACS probable despite an uncharacteristic history.", "blocks": [{"heading": "Why Atypical Presentations Occur — Three Mechanisms", "mechanismsTable": {"cols": [{"label": "1. Altered pain perception", "text": "Autonomic neuropathy (diabetes, age) abolishes afferent pain signalling. The ischaemia is real; the chest pain is not."}, {"label": "2. Referred pain via atypical pathways", "text": "Inferior MI activates vagal afferents — epigastric pain and nausea dominate. Jaw, arm, or back pain without any chest component."}, {"label": "3. Haemodynamic consequence", "text": "Large-territory ischaemia produces acute LV dysfunction before pain is perceived — dyspnoea, syncope, or collapse as the presenting feature."}]}}, {"heading": "High-Risk Groups — At a Glance", "intro": "Identify the group before taking the history. This sets the investigative threshold before a single question is asked.", "table": {"headers": ["Group", "Why atypical", "Expect to see", "Clinical rule"], "rows": [["Women", "Microvascular ischaemia; oestrogen loss at menopause; different pain fibre distribution", "Fatigue, dyspnoea, jaw/back pain, nausea — often without chest tightness", "Do not require classical chest tightness to initiate cardiac investigation. Prodromal fatigue in the days before MI is a recognised pattern."], ["Elderly (>75)", "Reduced pain sensitivity with age; comorbid neuropathy; competing symptom narratives; cognitive impairment", "Acute confusion, falls, functional decline, or worsening breathlessness without chest pain", "Unexplained acute deterioration + cardiovascular risk factors = ECG and troponin mandatory before alternative diagnosis accepted."], ["Diabetics", "Autonomic neuropathy abolishes or attenuates afferent pain signalling — proportional to duration and severity of diabetes", "Silent MI; epigastric pain; nausea; unexplained dyspnoea as sole presentation", "Unexplained nausea, dyspnoea, or haemodynamic instability in a diabetic = ACS excluded first. ECG and troponin are not optional."], ["Post-CABG", "Surgical cardiac denervation abolishes ischaemic pain — may be permanent", "Painless ischaemia; new exertional dyspnoea or fatigue as only symptom of graft failure", "New symptoms post-CABG = new ischaemia until proven otherwise. Absence of pain is the expected pattern — not a reassuring one."], ["Young women (<50)", "SCAD — non-atherosclerotic intramural haematoma; associated with fibromuscular dysplasia, peripartum state, extreme stress", "Classical ACS features but in a patient with no conventional cardiovascular risk factors", "No risk factors in a young woman with ACS features = SCAD until angiography proves otherwise. Standard risk calculators do not apply."], ["Chronic pain / high analgesic use", "Pre-existing pain tolerance; opioid or NSAID use attenuates or masks ischaemic symptom perception", "New discomfort attributed to background pain syndrome; delayed or absent presentation", "Ask specifically: 'Is this different from your usual pain?' Chronic pain is never sufficient explanation for an unexplained new symptom."], ["Psychiatric comorbidity", "Anxiety mimics ACS; antipsychotics blunt symptom perception; symptom attribution bias runs in both directions", "Chest pain indistinguishable from panic on history; or ischaemia attributed to known anxiety disorder", "Psychiatric diagnosis never lowers the threshold for ECG and troponin. Anxiety does not exclude ACS."]]}, "callout": {"type": "warning", "text": "SCAD — the specific rule: Young woman + ACS features + no conventional risk factors = SCAD until angiography proves otherwise. Standard risk calculators do not apply. Thrombolysis is contraindicated. Management diverges from atherosclerotic ACS."}}, {"heading": "Modifying the History for Atypical Presentations", "intro": "Standard chest pain questions fail in atypical presentations because they assume chest pain is the presenting complaint. These substitutions open the diagnostic space in patients who may not spontaneously report cardiac symptoms.", "table": {"headers": ["Instead of asking:", "Ask instead:", "Why it matters"], "rows": [["'Did you have chest pain?'", "'Did you have any tightness, pressure, or heaviness — anywhere in your chest, jaw, arm, or back?'", "Opens the diagnostic space. Patients with atypical radiation or altered perception may report discomfort they would not label as pain."], ["'What brought it on?'", "'When the breathlessness / fatigue / nausea came on, were you doing anything physical at the time?'", "Establishes the exertional relationship for non-pain presenting complaints — the same discriminating question applied to a different symptom."], ["'Any other symptoms?'", "'Did you notice any sweating, nausea, or a sense that something was seriously wrong?'", "Autonomic features may be present even when chest pain is absent. Direct inquiry is required — they are not volunteered."], ["'Has this happened before?'", "'Have you had anything like this before, even briefly — even something you put down to indigestion or tiredness?'", "Prodromal symptoms are common in ACS and frequently dismissed by patients. Framing the question around familiar attributions invites recall."]]}}, {"heading": "When Investigations Carry More Weight Than the History", "intro": "In atypical presentations, the history may be genuinely inconclusive. This is not a reason to defer investigation — it is a reason to let the ECG and troponin do the discriminating work.\n\nLower the investigative threshold when:\n• Patient belongs to a high-risk atypical group — woman, elderly, diabetic, post-CABG, high analgesic use, psychiatric comorbidity\n• Presenting complaint is unexplained — dyspnoea, syncope, fatigue, or epigastric pain without a clearly established non-cardiac cause\n• Risk factor burden is significant — even without chest pain, high cardiovascular risk demands cardiac exclusion\n• Patient or family reports 'something is wrong' — in a high-risk group, this signal is not dismissed", "callouts": [{"type": "warning", "text": "The investigative rule: In a high-risk patient with an atypical or absent chest pain history, ECG and high-sensitivity troponin are ordered because the risk profile makes ACS possible — not because the history has confirmed it. An initially normal troponin is the first data point in a serial measurement strategy, not a discharge decision."}, {"type": "danger", "text": "The most dangerous atypical presentation: High cardiovascular risk + unexplained dyspnoea, syncope, epigastric pain, or acute functional decline + no chest pain. This patient leaves without ECG and troponin only if a clearly established non-cardiac diagnosis has been made — not simply because chest pain was absent."}]}], "transition": "Transition to Section E: Having established which presentations may still be ACS despite atypical features, the assessment moves to non-cardiac chest pain — diagnoses identified by positive characterisation, not by exclusion of ischaemia alone."}, "questions": [{"title": "Q3 — Atypical Presentation — Adjusted Threshold in a High-Risk Group", "learningObjective": "Recognise that in specific high-risk groups — diabetics, women, the elderly, post-CABG patients — the absence of classical chest pain features does not reduce pre-test probability. The investigative threshold is adjusted to the patient, not to the symptom profile. ACS must be actively excluded before an alternative diagnosis is accepted.", "vignette": "Mrs L is a 71-year-old woman with a 20-year history of type 2 diabetes, hypertension, and chronic kidney disease stage 3. She is brought to the emergency department by her daughter, who noticed she had been 'off' for the past two days — unusually fatigued, eating poorly, and moving slowly around the house.\n\nMrs L herself reports feeling 'not right' and 'very tired.' On direct questioning she denies chest pain. She describes mild nausea over the past day, which she attributes to 'something she ate.' Her daughter reports that her mother has seemed breathless climbing the stairs at home over the past 48 hours, though Mrs L dismisses this as 'just my age.'\n\nOn examination she is afebrile, heart rate 92 bpm, blood pressure 148/88 mmHg, oxygen saturation 94% on room air. There is mild bibasal crackles on auscultation. Her abdomen is soft. There is no focal neurological deficit. Her ECG shows sinus rhythm with a left bundle branch block that her daughter believes may be new, though there is no prior ECG available for comparison.", "question": "Which of the following most accurately reflects the clinical approach to Mrs L's presentation?", "options": ["The absence of chest pain makes ACS unlikely as the primary diagnosis. The presentation is consistent with a non-cardiac cause — most likely a respiratory or infective process given the bibasal crackles, reduced saturations, and systemic symptoms. A focused respiratory workup is the priority.", "The combination of new or possibly new LBBB, unexplained dyspnoea, nausea, fatigue, reduced saturations, and bibasal crackles in a diabetic woman with cardiovascular risk factors constitutes an ACS presentation until proven otherwise — even in the complete absence of chest pain. Immediate high-sensitivity troponin, serial ECG assessment, and cardiology review are required.", "The possibility of ACS should be considered given her risk factors, but the absence of chest pain and the non-specific nature of her symptoms mean it is one of several diagnoses requiring simultaneous investigation. ACS investigation can proceed in parallel with respiratory and metabolic workup without escalating clinical urgency.", "The presentation is best explained by acute decompensated heart failure given the bibasal crackles and dyspnoea. ACS as a precipitant should be considered once the heart failure has been stabilised and the patient is more comfortable.", "New LBBB in the context of an acute presentation with cardiovascular risk factors should be treated as a STEMI equivalent. Immediate activation of the cardiac catheterisation pathway is indicated regardless of symptoms or troponin result."], "correct": 1, "correctLabel": "B — Multiple contextual features — new LBBB, unexplained dyspnoea, nausea, fatigue, reduced saturations, and a high-risk demographic — constitute an ACS presentation requiring immediate assessment despite the complete absence of chest pain.", "explanations": ["This answer uses the absence of chest pain as the primary argument against ACS — which is precisely the reasoning failure Section D is designed to correct. Mrs L is a 71-year-old diabetic woman. Autonomic neuropathy from 20 years of diabetes, combined with reduced pain sensitivity with advancing age, produces exactly the clinical picture described here: genuine myocardial ischaemia without reported chest pain. Dyspnoea from ischaemia-induced LV dysfunction, nausea from vagal activation, and profound fatigue as a prodromal or presenting feature are all well-documented ACS presentations in this demographic. The bibasal crackles and reduced saturations are more consistent with acute pulmonary oedema from LV dysfunction than with primary respiratory disease. In this patient, the absence of chest pain is the expected presentation — not a reassuring one.", "This is correct because it applies the adjusted threshold principle explicitly: in a 71-year-old diabetic woman, the absence of chest pain does not reduce pre-test probability — it reflects the expected mode of presentation for this demographic. The reasoning then integrates the available features correctly. New or possibly new LBBB in an acute presentation is a high-risk ECG finding that demands urgent investigation regardless of symptoms. The combination of unexplained exertional dyspnoea over 48 hours, nausea, profound fatigue, bibasal crackles, and reduced saturations in a patient with this risk profile is more consistent with ACS producing acute LV dysfunction than with any primary respiratory or metabolic process. The correct clinical response is immediate troponin, serial ECG comparison if prior tracings can be obtained, continuous monitoring, and cardiology involvement — not a tiered parallel workup that defers the cardiac assessment.", "This answer correctly recognises ACS as a possibility but misframes it as equivalent in urgency to the other diagnoses under consideration. The error is in treating ACS as one hypothesis among several rather than as the primary hypothesis that must be excluded first — particularly given the ECG finding and the demographic. New LBBB in an acute presentation is not a background finding to be addressed in parallel with other workup. It is a high-risk ECG change that demands immediate investigation. The phrase 'without escalating clinical urgency' is the specific point of failure: in this patient, the clinical urgency is already elevated by the combination of risk profile, ECG finding, and presentation pattern. Parallel investigation at standard urgency is not the appropriate response.", "This answer makes a clinically important sequencing error: deferring the search for an ischaemic precipitant until after the heart failure has been treated. In practice, if ACS is precipitating acute pulmonary oedema, treating the pulmonary oedema without addressing the underlying ischaemia does not stabilise the patient — it manages one consequence while leaving the cause untreated. Acute LV dysfunction from ACS and primary decompensated heart failure require different management approaches, and the distinction must be made simultaneously, not sequentially. The troponin, serial ECGs, and cardiology assessment are not deferred for stabilisation — they are part of the stabilisation process. Identifying ACS as the precipitant changes the management immediately.", "This answer applies the Sgarbossa-era principle that new LBBB in the context of acute symptoms should be treated as a STEMI equivalent — a guideline position that has been substantially revised. Current evidence and contemporary guidelines recognise that new LBBB alone, in the absence of high clinical suspicion based on the full picture, does not automatically mandate primary PCI activation. The Sgarbossa criteria and their modifications (modified Sgarbossa criteria) exist to identify ischaemic changes within LBBB morphology — the LBBB alone is insufficient. Furthermore, the prior ECG is unavailable, meaning the LBBB may not be new. The appropriate first step is high-sensitivity troponin, serial ECG comparison if prior tracings can be obtained, and urgent cardiology review — not immediate catheterisation lab activation on the basis of an ECG finding whose acuity has not been confirmed."]}]}, {"id": "E", "title": "Non-Cardiac Chest Pain", "subtitle": "Positive identification, life-threatening mimics, and the standard for diagnostic closure", "summaryFirst": true, "summary": {"purposeBox": "Rapid-reference reasoning guide for non-cardiac chest pain. The focus is on the standard of evidence required to make a positive non-cardiac diagnosis, the life-threatening mimics that run as concurrent hypotheses throughout every chest pain assessment, and the specific traps that prevent safe diagnostic closure for each common cause.", "principle": "Non-cardiac chest pain is not reached by excluding ischaemia. It is a positive diagnosis made when the history provides a more compelling explanation for the presentation than the ischaemic hypothesis — and the life-threatening alternatives have been actively considered.", "centralQuestion": "The standard for a defensible non-cardiac diagnosis — all three must be met: (1) Positive features of an alternative diagnosis are present in the history — not merely the absence of ischaemic features. (2) The patient's cardiovascular risk profile has been explicitly assessed and the pre-test probability of ACS has been weighed. (3) Life-threatening alternatives — dissection and PE — have been held as active parallel hypotheses and either excluded or referred for imaging.", "blocks": [{"heading": "What does NOT constitute a non-cardiac diagnosis", "callout": {"type": "danger", "text": "What does not constitute a non-cardiac diagnosis: A normal ECG. A normal initial troponin. A young patient. A sharp or pleuritic pain quality. These reduce ischaemic probability — they do not establish an alternative cause. In a high cardiovascular risk patient without a positive non-cardiac diagnosis, a normal initial investigation triggers serial troponin — not discharge."}}, {"heading": "Life-Threatening Mimics — Concurrent Hypotheses, Not Fallback Positions", "intro": "These four diagnoses run in parallel with the ACS hypothesis from the first moment of the history. They are not considered after ACS is excluded. The reason is management: each conflicts directly and fatally with standard ACS treatment.", "table": {"headers": ["Diagnosis", "Positive identifying features", "The management conflict with ACS", "Non-negotiable clinical action"], "rows": [["Aortic dissection", "Tearing pain maximal at onset; interscapular radiation; BP differential between arms; hypertension; connective tissue background", "Anticoagulation and thrombolysis given for misdiagnosed STEMI will kill the patient", "Bilateral arm BPs in every atypical chest pain. CT aortogram before anticoagulation if suspicion exists."], ["Pulmonary embolism", "Pleuritic pain; dyspnoea disproportionate to findings; haemoptysis; recent immobility, surgery, or VTE; tachycardia; hypoxia", "Massive PE can elevate troponin and produce ST changes — biochemically and electrically mimics ACS", "Wells score + CTPA. Anticoagulate promptly. Thrombolysis in haemodynamic compromise."], ["Pericarditis", "Sharp pleuritic pain; worse supine, relieved sitting forward; recent viral illness; saddle ST elevation; PR depression; pericardial rub", "Myopericarditis elevates troponin — young patient with 'ACS' features may have myocardial inflammation", "Echo to exclude effusion. NSAIDs + colchicine. Avoid anticoagulation without clear indication."], ["Tension pneumothorax", "Sudden unilateral pain + dyspnoea; absent breath sounds; tracheal deviation; hypotension; young patient or post-procedure", "Haemodynamic compromise is immediate — CXR not needed before decompression if unstable", "Needle decompression immediately if haemodynamically compromised. Do not wait for imaging."]]}, "callout": {"type": "danger", "text": "The dissection rule that applies to every chest pain history: Bilateral arm blood pressures are mandatory in any presentation where dissection is a concurrent hypothesis. A differential >20 mmHg is a dissection feature until imaging proves otherwise. This measurement takes 90 seconds and can prevent a fatal management error."}}, {"heading": "Common Non-Cardiac Diagnoses — Positive Identification and Traps", "intro": "The right column — 'The trap' — is the consultant-level content. The positive features are already known. The traps are where diagnostic closure fails.", "table": {"headers": ["Diagnosis", "What clinches the positive diagnosis", "The trap — what prevents safe diagnostic closure"], "rows": [["Musculoskeletal", "Localised pain the patient can point to with one finger. Reproducible on palpation — same quality and location as spontaneous pain. Clear relationship to movement, posture, or recent physical exertion of the thorax.", "Chest wall tenderness does not exclude ACS — approximately 15% of confirmed ACS has reproducible tenderness. Tenderness is corroborating evidence, not a diagnostic test."], ["GORD / reflux", "Burning retrosternal quality. Clear relationship to meals, lying flat, or fatty food. Relief with antacids. Associated waterbrash or regurgitation. Longstanding heartburn history.", "GORD and ACS coexist. Relief with antacid does not exclude ischaemia. A patient with known reflux can have an ACS on the same presentation."], ["Oesophageal spasm", "Triggered by swallowing — hot or cold drinks, or a large meal. Associated dysphagia. No exertional component across multiple episodes. Responds to GTN — but so does ischaemia.", "GTN relief does not confirm oesophageal origin. The discriminator is the swallowing trigger and absence of any exertional relationship — not the GTN response."], ["Peptic ulcer / gastritis", "Epigastric localisation with clear food relationship (relief with eating in duodenal ulcer; worsening in gastric ulcer). NSAID or aspirin use. Prior ulcer history.", "Epigastric pain + nausea in a cardiovascular risk patient = inferior MI until ECG proves otherwise. GI diagnosis is the second hypothesis, not the first."], ["Pleuritis / pneumonia", "Pleuritic quality — sharply worsened by deep inspiration and coughing. Unilateral. Associated fever, productive cough, or systemic infection. Pleural rub on examination.", "Pleuritic pain does not exclude PE. If the history includes risk factors for PE (immobility, malignancy, prior VTE), Wells scoring and imaging are required regardless of the pleuritic quality."], ["Spontaneous pneumothorax", "Young tall male, sudden unilateral pain and dyspnoea, no exertional relationship, no autonomic features. Prior pneumothorax is a strong recurrence risk factor.", "Tension physiology can develop — haemodynamic status must be reassessed. CXR confirms but clinical diagnosis precedes imaging if the patient deteriorates."], ["Panic disorder", "Multiple simultaneous physical symptoms with prominent psychological fear. Discrete episodes peaking within minutes and resolving completely. Background anxiety history and prior identical episodes.", "Diaphoresis + chest tightness + sense of impending doom = ACS excluded first, regardless of psychiatric history. Panic is a diagnosis after investigation — not before."], ["Herpes zoster", "Unilateral dermatomal band distribution. Allodynia — skin hypersensitive to light touch. Prodromal malaise. Vesicular rash confirms — but rash may lag pain by 48–72 hours.", "In the pre-eruptive phase, zoster cannot be positively confirmed. The ACS investigation pathway continues until ischaemia is excluded. Antiviral treatment is time-sensitive once rash appears."]]}}, {"heading": "Two Traps That Cause the Most Missed Diagnoses", "callouts": [{"type": "warning", "text": "The GTN trap — oesophageal spasm: GTN relieves oesophageal spasm via smooth muscle relaxation. A patient reporting GTN relief has not described a response that confirms ischaemia. The discriminating question is not whether GTN works — it is whether there is an exertional component, a changing pattern, or autonomic accompaniment. GTN response is a supportive feature of ischaemia only when the rest of the clinical picture is consistent."}, {"type": "danger", "text": "The epigastric pain trap — inferior MI: Epigastric pain with nausea in a cardiovascular risk patient is inferior MI until the ECG of leads II, III, and aVF proves otherwise. The GI diagnosis is the second hypothesis. The order matters — in the wrong sequence, the ECG is never obtained. Inferior MI via vagal afferents produces a presentation that patients and clinicians both attribute to gastroenteritis. The consequence of that attribution is a missed STEMI."}]}], "completingFramework": "Sections A through E together constitute a complete consultant-level approach to chest pain history-taking. They are not sequential steps — they are concurrent reasoning streams:\n\n• Section A: Establish the baseline — risk factors, prior IHD, stable angina pattern, pre-test probability.\n• Section B: Define the acute episode — what has changed, what drove the change, Type 1 vs Type 2 MI mechanism.\n• Section C: Weight the discriminating features — onset, duration, GTN response, pattern over time, autonomic symptoms.\n• Section D: Recognise atypical presentations — lower the investigative threshold in high-risk groups before the history is taken.\n• Section E: Apply the positive diagnosis standard — concurrent life-threatening hypotheses, specific non-cardiac causes by positive identification.", "finalCallout": {"type": "warning", "text": "The unifying principle across all five sections: The history does not diagnose — it shifts probability. The clinical task is to weight multiple imperfect signals together, in the context of the patient's baseline and risk profile, and to arrive at a probability-informed decision about investigation and management. A confident, reasoned clinical assessment — explicit about what it knows, what it does not know, and what the investigations are designed to resolve — is the standard this framework is designed to produce."}}, "questions": []}];
+
+var progress={};
+var curSecId=null;
+var curQIdx=0;
+var selOpt=null;
+var answered=false;
+var score=0;
+var curTab=0;
+
+function loadProg(){try{var s=localStorage.getItem('cpeu2_prog');if(s)progress=JSON.parse(s);}catch(e){}}
+function saveProg(){try{localStorage.setItem('cpeu2_prog',JSON.stringify(progress));}catch(e){}}
+function getSP(sid){return progress[sid]||{answered:[],score:0,summaryRead:false,complete:false};}
+
+function checkPW(){
+  var v=document.getElementById('pw-input').value.trim();
+  if(v.toUpperCase()===PW){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('app').style.display='block';
+    loadProg();renderDash();
+  }else{
+    document.getElementById('gate-error').textContent='Incorrect access code. Please try again.';
+    document.getElementById('pw-input').value='';
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPW();});
+
+function showScreen(n){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('screen-'+n).classList.add('active');
+  window.scrollTo(0,0);
+}
+function goHome(){showScreen('dashboard');renderDash();}
+
+/* ── DASHBOARD ── */
+var ICONS={A:'🏥',B:'📋',C:'🔬',D:'🧩',E:'🩺'};
+var TICLR={A:'ti-a',B:'ti-b',C:'ti-c',D:'ti-d',E:'ti-e'};
+
+function renderDash(){
+  var list=document.getElementById('themes-list');list.innerHTML='';
+  SECTIONS.forEach(function(sec){
+    var sp=getSP(sec.id);
+    var total=sec.questions.length;
+    var done=sp.answered.length;
+    var pct=total>0?Math.round((done/total)*100):0;
+    var complete=sp.complete;
+    var summaryRead=sp.summaryRead;
+    var circ=2*Math.PI*18;
+    var offset=circ-(pct/100)*circ;
+    var card=document.createElement('div');
+    card.className='theme-card';
+    var noMCQ=(total===0);
+    var statusIcon=complete?'✓':done>0?'◐':'○';
+    var statusClass=complete?'done':done>0?'inprog':'';
+    var pillText=noMCQ?'No MCQs — summary only':(done+'/'+total+' questions'+(complete?' · Complete':''));
+    card.innerHTML='<div class="theme-inner" onclick="openSection(\''+sec.id+'\')">'
+      +'<div class="theme-icon '+TICLR[sec.id]+'">'+ICONS[sec.id]+'</div>'
+      +'<div class="theme-info"><div class="theme-name">Section '+sec.id+' · '+sec.title+'</div><div class="theme-desc">'+sec.subtitle+'</div></div>'
+      +'<div class="theme-meta">'+(noMCQ
+        ? '<div class="coming-soon-badge">'+(summaryRead?'Read':'Summary')+'</div>'
+        : '<div class="progress-ring-wrap"><svg width="44" height="44" viewBox="0 0 44 44"><circle class="progress-ring-bg" cx="22" cy="22" r="18"/><circle class="progress-ring-fill'+(complete?' done':'')+'" cx="22" cy="22" r="18" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'"/></svg><div class="ring-label">'+(complete?'✓':pct+'%')+'</div></div>')
+      +'</div></div>'
+      +'<div class="theme-sections">'
+      +'<div class="spill '+statusClass+'" onclick="event.stopPropagation();openSection(\''+sec.id+'\')">'
+      +'<span>'+statusIcon+'</span> '+pillText+'</div>'
+      +(summaryRead||complete?'<div class="spill done" onclick="event.stopPropagation();openSummary(\''+sec.id+'\')">📋 Executive Summary</div>':'')
+      +'</div>';
+    list.appendChild(card);
+  });
+  // Coming soon
+  [{id:'T2',name:'Theme 2 · Troponin Interpretation',desc:'Bayesian framework, ESC 0h/1h/2h algorithms, confounders'},
+   {id:'T3',name:'Theme 3 · ECG Interpretation',desc:'STEMI equivalents, Wellens, de Winter, LBBB criteria'},
+   {id:'T4',name:'Theme 4 · PE & Aortic Dissection',desc:'Wells score, D-dimer, ADD-RS, CT decision rules'}].forEach(function(t){
+    var c=document.createElement('div');c.className='theme-card locked';
+    c.innerHTML='<div class="theme-inner"><div class="theme-icon ti-lock">🔒</div><div class="theme-info"><div class="theme-name" style="color:#999">'+t.name+'</div><div class="theme-desc">'+t.desc+'</div></div><div class="theme-meta"><div class="coming-soon-badge">Coming soon</div></div></div>';
+    list.appendChild(c);
+  });
+}
+
+/* ── OPEN SECTION: always start with summary ── */
+function openSection(sid){
+  curSecId=sid;
+  showScreen('player');
+  document.getElementById('sumview').classList.remove('show');
+  document.getElementById('mcqview').classList.remove('show');
+  openSummary(sid);
+}
+
+function openSummary(sid){
+  curSecId=sid;
+  var sec=SECTIONS.find(function(s){return s.id===sid;});
+  var sp=getSP(sid);
+  sp.summaryRead=true;
+  progress[sid]=sp;saveProg();
+  showScreen('player');
+  document.getElementById('mcqview').classList.remove('show');
+  var sv=document.getElementById('sumview');
+  sv.classList.add('show');
+  sv.innerHTML=buildSummaryHTML(sec,sp);
+  window.scrollTo(0,0);
+}
+
+function proceedToMCQ(sid){
+  var sec=SECTIONS.find(function(s){return s.id===sid;});
+  if(!sec||sec.questions.length===0){
+    // No MCQs — go back to dashboard
+    goHome();return;
+  }
+  var sp=getSP(sid);
+  curSecId=sid;
+  // Find first unanswered
+  curQIdx=0;
+  for(var i=0;i<sec.questions.length;i++){if(!sp.answered.includes(i)){curQIdx=i;break;}}
+  if(sp.answered.length===sec.questions.length&&!sp.complete){
+    // All done already - show completion
+    showCompletion(sid);return;
+  }
+  selOpt=null;answered=false;score=sp.score||0;
+  document.getElementById('sumview').classList.remove('show');
+  var mv=document.getElementById('mcqview');
+  mv.classList.add('show');
+  updateMCQHeader();
+  renderQ();
+  window.scrollTo(0,0);
+}
+
+function goSummary(){
+  document.getElementById('mcqview').classList.remove('show');
+  openSummary(curSecId);
+}
+
+/* ── MCQ HEADER ── */
+function updateMCQHeader(){
+  var sec=SECTIONS.find(function(s){return s.id===curSecId;});
+  var sp=getSP(curSecId);
+  var total=sec.questions.length;
+  var done=sp.answered.length;
+  var pct=Math.round((done/total)*100);
+  document.getElementById('mv-tag').textContent='Theme 1 · Clinical Assessment of Chest Pain';
+  document.getElementById('mv-title').textContent='Section '+sec.id+' · '+sec.title;
+  document.getElementById('mv-pfill').style.width=pct+'%';
+  document.getElementById('mv-plabel').textContent='Question '+(done+1)+' of '+total;
+}
+
+/* ── RENDER QUESTION ── */
+function renderQ(){
+  var sec=SECTIONS.find(function(s){return s.id===curSecId;});
+  var q=sec.questions[curQIdx];
+  selOpt=null;answered=false;
+  var hdr='';
+  if(q.title||q.learningObjective){
+    hdr='<div class="mcq-hdr">'+(q.title?'<div class="mcq-hdr-title">'+q.title+'</div>':'')+
+      (q.learningObjective?'<div class="mcq-lobj">Learning objective: '+q.learningObjective+'</div>':'')+
+      (q.learningObjectives?'<div class="mcq-lobj">Learning objectives: '+q.learningObjectives.join(' · ')+'</div>':'')+
+      '</div>';
+  }
+  var html='<div class="mcq-card">'+hdr
+    +'<div class="mcq-vignette">'+q.vignette+'</div>'
+    +'<div class="mcq-body"><div class="mcq-question">'+q.question+'</div>'
+    +'<div class="options-list">'
+    +q.options.map(function(opt,i){return '<button class="opt" id="opt-'+i+'" onclick="selOption('+i+')"><div class="opt-label">'+String.fromCharCode(65+i)+'</div><span>'+opt+'</span></button>';}).join('')
+    +'</div><button class="mcq-submit" id="submit-btn" onclick="submitAns()" disabled>Submit Answer</button>'
+    +'<div class="expl" id="expl"></div>'
+    +(q.noteBox?'<div class="notebox" id="notebox" style="display:none"><strong>Note</strong>'+q.noteBox+'</div>':'')
+    +'</div></div>';
+  document.getElementById('mcq-container').innerHTML=html;
+}
+
+function selOption(idx){
+  if(answered)return;
+  selOpt=idx;
+  document.querySelectorAll('.opt').forEach(function(b,i){b.classList.toggle('sel',i===idx);});
+  document.getElementById('submit-btn').disabled=false;
+}
+
+function submitAns(){
+  if(selOpt===null||answered)return;
+  answered=true;
+  var sec=SECTIONS.find(function(s){return s.id===curSecId;});
+  var q=sec.questions[curQIdx];
+  var isCorrect=selOpt===q.correct;
+  if(isCorrect)score++;
+  var sp=getSP(curSecId);
+  if(!sp.answered.includes(curQIdx)){sp.answered.push(curQIdx);sp.score=score;}
+  progress[curSecId]=sp;saveProg();
+  document.querySelectorAll('.opt').forEach(function(b,i){
+    b.disabled=true;
+    if(i===q.correct)b.classList.add(selOpt===i?'correct':'show-correct');
+    else if(i===selOpt&&!isCorrect)b.classList.add('wrong');
+  });
+  document.getElementById('submit-btn').style.display='none';
+  // Show note box for Q5 if exists
+  var nb=document.getElementById('notebox');if(nb)nb.style.display='block';
+  showExpl(q,isCorrect);
+  updateMCQHeader();
+}
+
+function showExpl(q,isCorrect){
+  curTab=q.correct;
+  var sp=getSP(curSecId);
+  var sec=SECTIONS.find(function(s){return s.id===curSecId;});
+  var allDone=sp.answered.length===sec.questions.length;
+  var tabs=q.options.map(function(_,i){
+    var isC=i===q.correct;
+    return '<button class="etab '+(isC?'ctab':'wtab')+(i===curTab?' act':'')+'" onclick="switchTab('+i+')">'+String.fromCharCode(65+i)+' '+(isC?'✓':'✗')+'</button>';
+  }).join('');
+  var panes=q.options.map(function(_,i){
+    var isC=i===q.correct;
+    return '<div class="epane'+(i===curTab?' show':'')+'" id="epane-'+i+'">'
+      +'<div class="ep-label '+(isC?'ep-correct':'ep-wrong')+'">'+(isC?'✓ Correct answer':'✗ Incorrect')+' — Option '+String.fromCharCode(65+i)+'</div>'
+      +'<div class="ep-text">'+q.explanations[i]+'</div></div>';
+  }).join('');
+  var expl=document.getElementById('expl');
+  expl.innerHTML='<div class="expl-hdr">'
+    +'<div class="result-badge '+(isCorrect?'rb-correct':'rb-wrong')+'">'+(isCorrect?'✓ Correct':'✗ Incorrect')+'</div>'
+    +(!isCorrect?'<div class="correct-label">Correct: <strong>'+q.correctLabel+'</strong></div>':'')
+    +'</div>'
+    +'<div class="expl-tabs">'+tabs+'</div>'
+    +'<div id="epanes">'+panes+'</div>'
+    +'<button class="btn-next" onclick="'+(allDone?'showCompletion(\''+curSecId+'\')':'nextQ()')+'">'+
+    (allDone?'Section Complete — View Score →':'Next Question →')+'</button>';
+  expl.classList.add('show');
+  setTimeout(function(){expl.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
+}
+
+function switchTab(idx){
+  curTab=idx;
+  document.querySelectorAll('.etab').forEach(function(t,i){t.classList.toggle('act',i===idx);});
+  document.querySelectorAll('.epane').forEach(function(p,i){p.classList.toggle('show',i===idx);});
+}
+
+function nextQ(){
+  var sec=SECTIONS.find(function(s){return s.id===curSecId;});
+  var sp=getSP(curSecId);
+  for(var i=0;i<sec.questions.length;i++){
+    if(!sp.answered.includes(i)){curQIdx=i;updateMCQHeader();renderQ();window.scrollTo(0,0);return;}
+  }
+  showCompletion(curSecId);
+}
+
+function showCompletion(sid){
+  var sec=SECTIONS.find(function(s){return s.id===sid;});
+  var sp=getSP(sid);
+  sp.complete=true;progress[sid]=sp;saveProg();
+  var total=sec.questions.length;
+  var sc=sp.score||0;
+  var pct=Math.round((sc/total)*100);
+  document.getElementById('mcq-container').innerHTML='<div class="mcq-card"><div class="mcq-body" style="text-align:center;padding:36px">'
+    +'<div style="font-size:48px;margin-bottom:16px">'+(pct>=80?'🎯':pct>=60?'👍':'📖')+'</div>'
+    +'<div style="font-family:\'DM Serif Display\',serif;font-size:22px;color:var(--navy);margin-bottom:8px">Section Complete</div>'
+    +'<div style="font-size:16px;color:var(--text-muted);margin-bottom:24px">Score: <strong style="color:var(--navy)">'+sc+'/'+total+' ('+pct+'%)</strong></div>'
+    +'<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
+    +'<button class="btn-primary" onclick="retrySection(\''+sid+'\')">Retry Questions</button>'
+    +'<button class="btn-secondary" onclick="goSummary()">Review Summary</button>'
+    +'<button class="btn-secondary" onclick="goHome()">Dashboard</button>'
+    +'</div></div></div>';
+  document.getElementById('mv-pfill').style.width='100%';
+  document.getElementById('mv-plabel').textContent='All '+total+' questions complete';
+}
+
+function retrySection(sid){
+  var sp=getSP(sid);sp.answered=[];sp.score=0;sp.complete=false;
+  progress[sid]=sp;saveProg();
+  proceedToMCQ(sid);
+}
+
+/* ── SUMMARY HTML BUILDER ── */
+function e(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function box(b){
+  if(!b)return'';
+  var cls=b.type==='danger'?'box-danger':b.type==='info'?'box-info':'box-warn';
+  return'<div class="'+cls+'">'+b.text+'</div>';
+}
+
+function svTable(t){
+  if(!t)return'';
+  return'<div style="overflow-x:auto"><table class="sv-table"><thead><tr>'+t.headers.map(function(h){return'<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>'
+    +t.rows.map(function(r){return'<tr>'+r.map(function(c){return'<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';
+}
+
+function buildSummaryHTML(sec,sp){
+  var sm=sec.summary;
+  var total=sec.questions.length;
+  var sc=sp.score||0;
+  var pct=total>0?Math.round((sc/total)*100):0;
+  var noMCQ=(total===0);
+
+  var inner='<div class="sv-back" onclick="goHome()">← Back to Dashboard</div>';
+
+  // Hero
+  inner+='<div class="sv-hero">';
+  inner+='<div class="sv-tag">Executive Summary · Section '+sec.id+'</div>';
+  inner+='<h2 class="sv-title">'+sec.title+'</h2>';
+  if(sm.purposeBox)inner+='<div class="sv-purpose">'+sm.purposeBox+'</div>';
+  if(!noMCQ&&sp.answered.length>0)inner+='<div class="sv-score">Questions: <strong>'+sc+'/'+total+' ('+pct+'%)</strong></div>';
+  inner+='</div>';
+
+  inner+='<div class="sv-body">';
+
+  // Core principle card
+  inner+='<div class="sv-card"><h3>Core Reasoning Principle</h3>';
+  if(sm.principle)inner+='<div class="sv-principle">'+sm.principle.replace(/\n/g,'<br>')+'</div>';
+  if(sm.centralQuestion)inner+='<div class="sv-cq">'+sm.centralQuestion+'</div>';
+  inner+='</div>';
+
+  // Content blocks
+  if(sm.blocks){
+    sm.blocks.forEach(function(block){
+      inner+='<div class="sv-card"><h3>'+block.heading+'</h3>';
+      if(block.intro)inner+='<div class="sv-text">'+block.intro.replace(/\n/g,'<br>')+'</div>';
+      if(block.reasoningTask)inner+='<div class="sv-text"><strong>The reasoning task:</strong><br>'+block.reasoningTask+'</div>';
+      if(block.howToUse)inner+='<div class="sv-sub">'+block.howToUse+'</div>';
+      if(block.table)inner+=svTable(block.table);
+      if(block.trapsTable)inner+=svTable(block.trapsTable);
+      if(block.deltaTable)inner+=svTable(block.deltaTable);
+      if(block.ccsText)inner+='<div class="sv-text" style="margin-top:12px">'+block.ccsText.replace(/\n/g,'<br>')+'</div>';
+      if(block.threeQuestions){
+        inner+='<div class="sv-sub">The three questions that do the most work:</div><ul class="sv-blist">';
+        block.threeQuestions.forEach(function(q){inner+='<li>'+q+'</li>';});
+        inner+='</ul>';
+      }
+      if(block.principles){
+        inner+='<div class="sv-sub">Three principles that apply to all risk calculators:</div><ul class="sv-blist">';
+        block.principles.forEach(function(p){inner+='<li>'+p+'</li>';});
+        inner+='</ul>';
+      }
+      if(block.mechanismsTable){
+        inner+='<div class="mech-grid">';
+        block.mechanismsTable.cols.forEach(function(c){
+          inner+='<div class="mech-cell"><div class="mech-label">'+c.label+'</div><div class="mech-text">'+c.text+'</div></div>';
+        });
+        inner+='</div>';
+      }
+      if(block.callout)inner+=box(block.callout);
+      if(block.callouts)block.callouts.forEach(function(c){inner+=box(c);});
+      if(block.decisionPoints){
+        block.decisionPoints.forEach(function(dp){
+          var lbl=dp.type==='red'?'dp-label-red':dp.type==='amber'?'dp-label-amber':'dp-label-green';
+          inner+='<div class="dp-block"><div class="'+lbl+'">'+dp.label+'</div><ul class="sv-blist">';
+          dp.items.forEach(function(it){inner+='<li>'+it+'</li>';});
+          inner+='</ul></div>';
+        });
+      }
+      inner+='</div>';
+    });
+  }
+
+  // Synthesis (Section A)
+  if(sm.synthesis){
+    inner+='<div class="sv-card"><h3>Synthesis: The Baseline-to-Acute Delta</h3>';
+    inner+='<div class="sv-text">'+sm.synthesis.replace(/\n/g,'<br>')+'</div>';
+    inner+='</div>';
+  }
+
+  // Completing framework (Section E)
+  if(sm.completingFramework){
+    inner+='<div class="sv-card"><h3>Completing the Framework</h3>';
+    inner+='<div class="sv-text">'+sm.completingFramework.replace(/\n/g,'<br>')+'</div>';
+    if(sm.finalCallout)inner+=box(sm.finalCallout);
+    inner+='</div>';
+  }
+
+  // Transition
+  if(sm.transition){
+    inner+='<div class="transition-box">'+sm.transition+'</div>';
+  }
+
+  inner+='</div>'; // sv-body
+
+  // Actions
+  inner+='<div class="sv-actions">';
+  if(!noMCQ){
+    var sp2=getSP(sec.id);
+    var allDone=sp2.answered.length===sec.questions.length;
+    if(allDone){
+      inner+='<button class="btn-primary" onclick="retrySection(\''+sec.id+'\')">Retry Questions</button>';
+    }else{
+      inner+='<button class="sv-proceed" onclick="proceedToMCQ(\''+sec.id+'\')">Proceed to Questions →</button>';
+    }
+  }
+  inner+='<button class="btn-secondary" onclick="goHome()">Back to Dashboard</button>';
+  inner+='</div>';
+
+  return inner;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPEU Training Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<script src="content.js"></script>
+<style>
+:root {
+  --navy: #0f1f3d;
+  --navy-light: #1a3260;
+  --gold: #d4a847;
+  --gold-light: #f0c060;
+  --slate: #2c3e50;
+  --mist: #ecf0f4;
+  --text: #1a1a2e;
+  --muted: #5a6a7a;
+  --ok: #1a7a4a;
+  --ok-bg: #e8f5ee;
+  --err: #c0392b;
+  --err-bg: #fdecea;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(15,31,61,0.10);
+  --shadow-lg: 0 8px 40px rgba(15,31,61,0.16);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--mist); color: var(--text); min-height: 100vh; }
+
+/* ── GATE ── */
+#gate { min-height: 100vh; background: var(--navy); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; padding: 2rem; }
+.gate-logo { font-family: 'DM Serif Display', serif; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+.gate-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem,5vw,3.2rem); color: #fff; text-align: center; line-height: 1.2; max-width: 560px; }
+.gate-sub { color: rgba(255,255,255,0.55); font-size: 15px; text-align: center; max-width: 420px; line-height: 1.7; }
+.gate-form { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 340px; }
+.gate-input { padding: 14px 18px; border-radius: var(--radius); border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; letter-spacing: 0.12em; outline: none; transition: border-color 0.2s; }
+.gate-input:focus { border-color: var(--gold); }
+.gate-input::placeholder { color: rgba(255,255,255,0.3); }
+.btn-gold { padding: 14px 24px; border-radius: var(--radius); border: none; background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.btn-gold:hover { background: var(--gold-light); }
+.gate-error { color: #ff7b72; font-size: 13px; text-align: center; min-height: 18px; }
+
+/* ── APP ── */
+#app { display: none; }
+.topnav { background: var(--navy); padding: 0 2rem; height: 58px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+.nav-brand { font-family: 'DM Serif Display', serif; color: #fff; font-size: 17px; }
+.nav-brand span { color: var(--gold); }
+.nav-btn { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.nav-btn:hover { border-color: var(--gold); color: var(--gold); }
+.screen { display: none; min-height: calc(100vh - 58px); }
+.screen.active { display: block; }
+
+/* ── DASHBOARD ── */
+#screen-dashboard { padding: 3rem 2rem; max-width: 900px; margin: 0 auto; }
+.dash-welcome { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem,4vw,2.4rem); color: var(--navy); margin-bottom: 8px; }
+.dash-sub { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: 2.5rem; }
+.section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+.themes-list { display: flex; flex-direction: column; gap: 14px; }
+.theme-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.15s; border: 1.5px solid transparent; }
+.theme-card:hover:not(.locked) { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--navy); }
+.theme-card.locked { opacity: 0.5; cursor: default; }
+.theme-inner { display: flex; align-items: center; gap: 18px; padding: 20px 24px; }
+.theme-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.ic-blue { background: #e8f0fc; } .ic-purple { background: #f0eaff; } .ic-teal { background: #e0f4f4; } .ic-rose { background: #fceaec; } .ic-gray { background: #f0f0f0; }
+.theme-info { flex: 1; }
+.theme-name { font-weight: 600; font-size: 16px; color: var(--navy); margin-bottom: 3px; }
+.theme-desc { font-size: 13px; color: var(--muted); }
+.ring-wrap { position: relative; width: 44px; height: 44px; }
+.ring-wrap svg { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: #e8ecf0; stroke-width: 3.5; }
+.ring-fill { fill: none; stroke: var(--gold); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 0.5s; }
+.ring-fill.done { stroke: var(--ok); }
+.ring-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--navy); }
+.coming-soon { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #f0f0f0; color: var(--muted); font-weight: 500; }
+.theme-pills { border-top: 1px solid #f0f2f5; padding: 8px 24px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 1px solid #e0e4ea; color: var(--muted); background: #fafbfc; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 5px; }
+.pill:hover { border-color: var(--navy); color: var(--navy); }
+.pill.done { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+.pill.prog { background: #fff8e8; border-color: var(--gold); color: #8a6a00; }
+.pill.none { cursor: default; color: #bbb; border-color: #e8e8e8; }
+
+/* ── PLAYER ── */
+#screen-player { padding: 0; }
+.player-wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back-link { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; cursor: pointer; margin-bottom: 1.5rem; width: fit-content; transition: color 0.15s; }
+.back-link:hover { color: var(--navy); }
+.player-theme-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.player-section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem,3.5vw,1.9rem); color: var(--navy); margin-bottom: 10px; }
+.prog-bar { height: 4px; background: #dde2ea; border-radius: 4px; overflow: hidden; margin-bottom: 6px; }
+.prog-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.4s; }
+.prog-label { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+
+/* ── SUMMARY ── */
+.sum-hero { background: linear-gradient(135deg, var(--navy), var(--navy-light)); border-radius: 16px; padding: 36px; color: #fff; margin-bottom: 24px; }
+.sum-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.sum-hero h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem,4vw,2rem); margin-bottom: 8px; line-height: 1.2; }
+.sum-hero p { font-size: 14px; color: rgba(255,255,255,0.7); }
+.sum-purpose { background: #f5f7ff; border-left: 4px solid var(--navy); border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 14px; color: var(--slate); line-height: 1.7; margin-bottom: 20px; }
+.sum-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 18px; }
+.sum-card h3 { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #eef0f4; }
+.sum-card h4 { font-size: 14px; font-weight: 600; color: var(--slate); margin: 14px 0 7px; }
+.callout-navy { background: #f0f4fa; border-left: 4px solid var(--navy); border-radius: 0 6px 6px 0; padding: 12px 16px; font-size: 13px; line-height: 1.7; color: var(--slate); margin: 10px 0; font-style: italic; }
+.callout-navy strong { font-style: normal; color: var(--navy); display: block; margin-bottom: 2px; }
+.callout-warn { background: #fff8e8; border: 1px solid var(--gold); border-radius: 8px; padding: 13px 16px; font-size: 13px; line-height: 1.7; color: #6b4f00; margin: 10px 0; }
+.callout-warn strong { color: #4a3500; display: block; margin-bottom: 3px; }
+.callout-danger { background: #fff0f0; border: 1px solid #e8b0b0; border-radius: 8px; padding: 13px 16px; font-size: 13px; line-height: 1.7; color: #7a1a1a; margin: 10px 0; }
+.callout-danger strong { color: #5a0a0a; display: block; margin-bottom: 3px; }
+.sum-text { font-size: 14px; line-height: 1.8; color: var(--slate); }
+.sum-text p { margin-bottom: 10px; }
+.sum-text p:last-child { margin-bottom: 0; }
+.sum-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+.sum-table th { background: var(--navy); color: #fff; padding: 9px 13px; text-align: left; font-weight: 500; font-size: 12px; }
+.sum-table td { padding: 9px 13px; border-bottom: 1px solid #eef0f4; vertical-align: top; line-height: 1.55; color: var(--slate); }
+.sum-table tr:last-child td { border-bottom: none; }
+.sum-table tr:nth-child(even) td { background: #fafbfc; }
+.sum-table .tbl-header td { background: var(--navy-light); color: #fff; font-weight: 600; font-size: 12px; padding: 8px 13px; }
+.bullet-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.bullet-list li { padding-left: 18px; position: relative; font-size: 14px; line-height: 1.65; color: var(--slate); }
+.bullet-list li::before { content: '\2014'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.mcq-divider { display: flex; align-items: center; gap: 14px; margin: 28px 0 22px; }
+.mcq-divider-line { flex: 1; height: 1px; background: #dde2ea; }
+.mcq-divider-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+
+/* ── MCQ ── */
+.mcq-card { background: #fff; border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 1.5rem; }
+.mcq-qnum { background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 22px; }
+.mcq-vignette { background: #f0f4fa; border-left: 4px solid var(--navy); padding: 16px 22px; font-size: 14px; line-height: 1.8; color: var(--slate); }
+.mcq-body { padding: 22px; }
+.mcq-lo { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 10px; display: block; }
+.mcq-question { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 16px; line-height: 1.5; }
+.options-list { display: flex; flex-direction: column; gap: 9px; }
+.opt-btn { display: flex; align-items: flex-start; gap: 12px; padding: 13px 15px; border-radius: 10px; border: 1.5px solid #dde2ea; background: #fafbfc; cursor: pointer; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; color: var(--text); transition: all 0.15s; width: 100%; }
+.opt-btn:hover:not(:disabled) { border-color: var(--navy); background: #f2f5fc; }
+.opt-btn:disabled { cursor: default; }
+.opt-btn.selected { border-color: var(--navy); background: #eef2fc; }
+.opt-btn.correct { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
+.opt-btn.wrong { border-color: var(--err); background: var(--err-bg); color: var(--err); }
+.opt-btn.reveal { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
+.opt-label { width: 26px; height: 26px; border-radius: 50%; background: #e8ecf2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.opt-btn.correct .opt-label { background: var(--ok); color: #fff; }
+.opt-btn.wrong .opt-label { background: var(--err); color: #fff; }
+.opt-btn.reveal .opt-label { background: var(--ok); color: #fff; }
+.submit-btn { margin-top: 16px; padding: 12px 26px; border-radius: var(--radius); border: none; background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.submit-btn:hover { background: var(--navy-light); }
+.submit-btn:disabled { opacity: 0.4; cursor: default; }
+.expl-zone { display: none; margin-top: 18px; border-top: 1px solid #e8ecf2; padding-top: 16px; }
+.expl-zone.show { display: block; }
+.result-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.result-badge { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.result-badge.correct { background: var(--ok-bg); color: var(--ok); }
+.result-badge.wrong { background: var(--err-bg); color: var(--err); }
+.correct-answer-label { font-size: 13px; color: var(--muted); }
+.correct-answer-label strong { color: var(--ok); }
+.expl-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+.expl-tab { padding: 5px 12px; border-radius: 20px; border: 1px solid #dde2ea; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; background: #fafbfc; color: var(--muted); }
+.expl-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.expl-tab.cor-tab { border-color: var(--ok); }
+.expl-tab.wrg-tab { border-color: #e8a0a0; }
+.expl-pane { display: none; }
+.expl-pane.show { display: block; }
+.expl-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 7px; }
+.expl-label.correct { color: var(--ok); }
+.expl-label.wrong { color: var(--err); }
+.expl-text { font-size: 14px; line-height: 1.8; color: var(--slate); }
+.note-box { background: #f0f4fa; border: 1px solid #c8d8f0; border-radius: 8px; padding: 14px 16px; font-size: 13px; line-height: 1.7; color: var(--slate); margin-top: 14px; }
+.note-box strong { color: var(--navy); display: block; margin-bottom: 3px; }
+.no-mcq-notice { text-align: center; padding: 30px; color: var(--muted); font-size: 14px; background: #fff; border-radius: 12px; box-shadow: var(--shadow); margin-top: 8px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  #screen-dashboard { padding: 1.5rem 1rem; }
+  .player-wrap { padding: 1.2rem 1rem 3rem; }
+  .mcq-body { padding: 16px; }
+  .mcq-vignette { padding: 13px 16px; }
+  .sum-hero { padding: 24px 20px; }
+  .sum-card { padding: 18px; }
+  .theme-inner { padding: 16px; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-logo">Chest Pain Evaluation Unit</div>
+  <h1 class="gate-title">Clinical Training Platform</h1>
+  <p class="gate-sub">A structured learning environment for junior medical staff. Enter the access code to continue.</p>
+  <div class="gate-form">
+    <input class="gate-input" type="password" id="pw-input" placeholder="Enter access code" autocomplete="off">
+    <button class="btn-gold" onclick="checkPassword()">Access Platform</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="topnav">
+    <div class="nav-brand">CPEU <span>Training</span></div>
+    <button class="nav-btn" onclick="goHome()">Dashboard</button>
+  </nav>
+
+  <!-- DASHBOARD -->
+  <div class="screen active" id="screen-dashboard">
+    <div>
+      <h1 class="dash-welcome">Good morning, Doctor.</h1>
+      <p class="dash-sub">Each section opens with the executive summary, then presents the practice questions. Select a section to begin.</p>
+      <div class="section-heading">Theme 1 &middot; Clinical Assessment of Chest Pain</div>
+      <div class="themes-list" id="themes-list"></div>
+    </div>
+  </div>
+
+  <!-- PLAYER -->
+  <div class="screen" id="screen-player">
+    <div class="player-wrap">
+      <div class="back-link" onclick="goHome()">&larr; Back to Dashboard</div>
+      <div class="player-theme-label">Theme 1 &middot; Clinical Assessment of Chest Pain</div>
+      <div class="player-section-title" id="player-title"></div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-label" id="prog-label"></div>
+      <div id="main-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PASSWORD ──────────────────────────────────────────────────────────────────
+var PASSWORD = 'CPEU2025';
+
+function checkPassword() {
+  var val = document.getElementById('pw-input').value.trim();
+  if (val.toUpperCase() === PASSWORD) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadProgress();
+    renderDashboard();
+  } else {
+    document.getElementById('gate-error').textContent = 'Incorrect access code. Please try again.';
+    document.getElementById('pw-input').value = '';
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// ── PROGRESS ──────────────────────────────────────────────────────────────────
+var progress = {};
+
+function loadProgress() {
+  try {
+    var s = localStorage.getItem('cpeu_progress');
+    if (s) progress = JSON.parse(s);
+  } catch(e) {}
+}
+
+function saveProgress() {
+  try { localStorage.setItem('cpeu_progress', JSON.stringify(progress)); } catch(e) {}
+}
+
+function getSP(id) {
+  if (!progress[id]) progress[id] = { answered: [], selectedOpts: {}, score: 0, allDone: false };
+  return progress[id];
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+var currentSection = null;
+
+function goHome() {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById('screen-dashboard').classList.add('active');
+  renderDashboard();
+  window.scrollTo(0, 0);
+}
+
+function showPlayer() {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById('screen-player').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+function renderDashboard() {
+  var list = document.getElementById('themes-list');
+  list.innerHTML = '';
+
+  SECTIONS.forEach(function(sec) {
+    var sp = getSP(sec.id);
+    var total = sec.questions.length;
+    var done = sp.answered.length;
+    var complete = sp.allDone || false;
+    var pct = total === 0 ? (sp.summaryRead ? 100 : 0) : (complete ? 100 : Math.round((done / total) * 100));
+    var circ = 2 * Math.PI * 18;
+    var offset = circ - (pct / 100) * circ;
+
+    var card = document.createElement('div');
+    card.className = 'theme-card';
+
+    var mcqPill = '';
+    if (total > 0) {
+      var mcqClass = complete ? 'done' : done > 0 ? 'prog' : '';
+      mcqPill = '<div class="pill ' + mcqClass + '" onclick="event.stopPropagation(); openSection(\'' + sec.id + '\')">'
+        + (complete ? '&#10003; ' : done > 0 ? '&#9680; ' : '&#9675; ')
+        + done + '/' + total + ' MCQs</div>';
+    } else {
+      mcqPill = '<div class="pill none">No MCQs</div>';
+    }
+
+    card.innerHTML = '<div class="theme-inner" onclick="openSection(\'' + sec.id + '\')">'
+      + '<div class="theme-icon ic-' + sec.iconClass + '">' + sec.icon + '</div>'
+      + '<div class="theme-info"><div class="theme-name">Section ' + sec.id + ' &middot; ' + sec.title + '</div>'
+      + '<div class="theme-desc">' + sec.subtitle + '</div></div>'
+      + '<div><div class="ring-wrap"><svg width="44" height="44" viewBox="0 0 44 44">'
+      + '<circle class="ring-bg" cx="22" cy="22" r="18"/>'
+      + '<circle class="ring-fill' + (complete ? ' done' : '') + '" cx="22" cy="22" r="18"'
+      + ' stroke-dasharray="' + circ.toFixed(2) + '" stroke-dashoffset="' + offset.toFixed(2) + '"/>'
+      + '</svg><div class="ring-label">' + (complete ? '&#10003;' : pct + '%') + '</div></div></div>'
+      + '</div>'
+      + '<div class="theme-pills">'
+      + '<div class="pill' + (sp.summaryRead ? ' done' : '') + '" onclick="event.stopPropagation(); openSection(\'' + sec.id + '\')">'
+      + (sp.summaryRead ? '&#10003; Summary read' : '&#9675; Read Summary') + '</div>'
+      + mcqPill
+      + '</div>';
+
+    list.appendChild(card);
+  });
+
+  // Coming soon
+  [
+    { name: 'Theme 2 &middot; Troponin Interpretation', desc: 'Bayesian framework, ESC 0h/1h/2h algorithms, confounders' },
+    { name: 'Theme 3 &middot; ECG Interpretation', desc: 'STEMI equivalents, Wellens, de Winter, LBBB criteria' }
+  ].forEach(function(t) {
+    var c = document.createElement('div');
+    c.className = 'theme-card locked';
+    c.innerHTML = '<div class="theme-inner"><div class="theme-icon ic-gray">&#128274;</div>'
+      + '<div class="theme-info"><div class="theme-name" style="color:#999">' + t.name + '</div>'
+      + '<div class="theme-desc">' + t.desc + '</div></div>'
+      + '<div><div class="coming-soon">Coming soon</div></div></div>';
+    list.appendChild(c);
+  });
+}
+
+// ── OPEN SECTION ──────────────────────────────────────────────────────────────
+function openSection(sid) {
+  currentSection = SECTIONS.find(function(s) { return s.id === sid; });
+  var sp = getSP(sid);
+  sp.summaryRead = true;
+  saveProgress();
+
+  showPlayer();
+  document.getElementById('player-title').textContent = 'Section ' + currentSection.id + ' \u00b7 ' + currentSection.title;
+  updateProgressBar();
+
+  var content = document.getElementById('main-content');
+  content.innerHTML = '';
+
+  // 1. Summary
+  var sumDiv = document.createElement('div');
+  sumDiv.innerHTML = currentSection.summary;
+  content.appendChild(sumDiv);
+
+  // 2. MCQ section
+  if (currentSection.questions.length > 0) {
+    var divider = document.createElement('div');
+    divider.className = 'mcq-divider';
+    divider.innerHTML = '<div class="mcq-divider-line"></div>'
+      + '<div class="mcq-divider-label">Section ' + currentSection.id + ' Practice Questions</div>'
+      + '<div class="mcq-divider-line"></div>';
+    content.appendChild(divider);
+
+    // Instruction box for Section B
+    if (currentSection.id === 'B') {
+      var instr = document.createElement('div');
+      instr.className = 'callout-navy';
+      instr.style.marginBottom = '20px';
+      instr.innerHTML = '<strong>How to use this series:</strong> All five questions share the same patient \u2014 Mr A, a 65-year-old man with hypertension and diabetes \u2014 and the same five answer options. The clinical context changes in each question to illustrate a different presentation pattern. The aim is pattern recognition, not discrimination under uncertainty. Read each vignette carefully before selecting your answer.';
+      content.appendChild(instr);
+    }
+
+    // Instruction box for Sections C/D
+    if (currentSection.id === 'C' || currentSection.id === 'D') {
+      var instr2 = document.createElement('div');
+      instr2.className = 'callout-navy';
+      instr2.style.marginBottom = '20px';
+      instr2.innerHTML = '<strong>How to use this series:</strong> Three questions across Sections C and D, three patients, one unifying principle: clinical reasoning in chest pain assessment is always contextual. No single feature \u2014 not pain character, not GTN response, not the presence or absence of chest pain \u2014 is sufficient to rule ACS in or out.';
+      content.appendChild(instr2);
+    }
+
+    currentSection.questions.forEach(function(q, i) {
+      content.appendChild(buildMCQCard(q, i, sid));
+    });
+
+    // Restore state for already-answered questions
+    sp.answered.forEach(function(i) {
+      restoreAnsweredState(i, sp.selectedOpts[i], currentSection.questions[i]);
+    });
+
+  } else {
+    var notice = document.createElement('div');
+    notice.className = 'no-mcq-notice';
+    notice.innerHTML = '<div style="font-size:28px;margin-bottom:10px">&#128214;</div>'
+      + '<div>This section contains the executive summary only.<br>No practice questions are included for Section E.</div>';
+    content.appendChild(notice);
+  }
+}
+
+function updateProgressBar() {
+  var sp = getSP(currentSection.id);
+  var total = currentSection.questions.length;
+  var done = sp.answered.length;
+  var pct = total === 0 ? 100 : Math.round((done / total) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = total === 0
+    ? 'Executive summary \u2014 no practice questions in this section'
+    : done + ' of ' + total + ' question' + (total === 1 ? '' : 's') + ' completed';
+}
+
+// ── MCQ CARD ──────────────────────────────────────────────────────────────────
+function buildMCQCard(q, idx, sid) {
+  var card = document.createElement('div');
+  card.className = 'mcq-card';
+  card.id = 'card-' + idx;
+
+  card.innerHTML = '<div class="mcq-qnum">' + (q.lo || ('Question ' + (idx + 1))) + '</div>'
+    + (q.vignette ? '<div class="mcq-vignette">' + q.vignette.replace(/\n/g, '<br>') + '</div>' : '')
+    + '<div class="mcq-body">'
+    + '<div class="mcq-question">' + q.question + '</div>'
+    + '<div class="options-list" id="opts-' + idx + '">'
+    + q.options.map(function(opt, i) {
+        return '<button class="opt-btn" id="opt-' + idx + '-' + i + '" onclick="selectOpt(' + idx + ',' + i + ')">'
+          + '<div class="opt-label">' + String.fromCharCode(65 + i) + '</div>'
+          + '<span>' + opt + '</span></button>';
+      }).join('')
+    + '</div>'
+    + '<button class="submit-btn" id="submit-' + idx + '" onclick="submitAnswer(' + idx + ')" disabled>Submit Answer</button>'
+    + '<div class="expl-zone" id="expl-' + idx + '"></div>'
+    + '</div>';
+
+  return card;
+}
+
+// ── RESTORE ALREADY-ANSWERED ──────────────────────────────────────────────────
+function restoreAnsweredState(idx, sel, q) {
+  if (sel === undefined || sel === null) return;
+  var isCorrect = (sel === q.correct);
+
+  for (var i = 0; i < q.options.length; i++) {
+    var btn = document.getElementById('opt-' + idx + '-' + i);
+    if (!btn) continue;
+    btn.disabled = true;
+    if (i === q.correct) btn.className = 'opt-btn ' + (sel === i ? 'correct' : 'reveal');
+    else if (i === sel && !isCorrect) btn.className = 'opt-btn wrong';
+    else btn.className = 'opt-btn';
+  }
+  var sub = document.getElementById('submit-' + idx);
+  if (sub) sub.style.display = 'none';
+
+  var ez = document.getElementById('expl-' + idx);
+  if (ez) {
+    ez.innerHTML = buildExplHTML(q, idx, sel);
+    ez.classList.add('show');
+    // Activate correct tab
+    setTimeout(function() { switchTab(idx, q.correct, q.options.length); }, 50);
+  }
+}
+
+// ── OPTION SELECTION ──────────────────────────────────────────────────────────
+var pendingSelections = {};
+
+function selectOpt(idx, optIdx) {
+  var sp = getSP(currentSection.id);
+  if (sp.answered.indexOf(idx) !== -1) return;
+  pendingSelections[idx] = optIdx;
+
+  var q = currentSection.questions[idx];
+  for (var i = 0; i < q.options.length; i++) {
+    var b = document.getElementById('opt-' + idx + '-' + i);
+    if (b) b.className = 'opt-btn' + (i === optIdx ? ' selected' : '');
+  }
+  var sub = document.getElementById('submit-' + idx);
+  if (sub) sub.disabled = false;
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────────────────
+function submitAnswer(idx) {
+  var sel = pendingSelections[idx];
+  if (sel === undefined) return;
+  var q = currentSection.questions[idx];
+  var isCorrect = (sel === q.correct);
+  var sp = getSP(currentSection.id);
+
+  if (sp.answered.indexOf(idx) === -1) {
+    sp.answered.push(idx);
+    if (isCorrect) sp.score = (sp.score || 0) + 1;
+  }
+  sp.selectedOpts[idx] = sel;
+  if (sp.answered.length === currentSection.questions.length) sp.allDone = true;
+  saveProgress();
+
+  // Style options
+  for (var i = 0; i < q.options.length; i++) {
+    var b = document.getElementById('opt-' + idx + '-' + i);
+    if (!b) continue;
+    b.disabled = true;
+    if (i === q.correct) b.className = 'opt-btn ' + (sel === i ? 'correct' : 'reveal');
+    else if (i === sel && !isCorrect) b.className = 'opt-btn wrong';
+    else b.className = 'opt-btn';
+  }
+  document.getElementById('submit-' + idx).style.display = 'none';
+
+  var ez = document.getElementById('expl-' + idx);
+  ez.innerHTML = buildExplHTML(q, idx, sel);
+  ez.classList.add('show');
+  updateProgressBar();
+
+  setTimeout(function() {
+    switchTab(idx, q.correct, q.options.length);
+    ez.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 80);
+}
+
+// ── EXPLANATION HTML ──────────────────────────────────────────────────────────
+function buildExplHTML(q, idx, sel) {
+  var isCorrect = (sel === q.correct);
+  var tabs = q.options.map(function(_, i) {
+    var isC = (i === q.correct);
+    return '<button class="expl-tab ' + (isC ? 'cor-tab' : 'wrg-tab') + '" id="etab-' + idx + '-' + i + '"'
+      + ' onclick="switchTab(' + idx + ',' + i + ',' + q.options.length + ')">'
+      + String.fromCharCode(65 + i) + ' ' + (isC ? '&#10003;' : '&#10007;') + '</button>';
+  }).join('');
+
+  var panes = q.options.map(function(_, i) {
+    var isC = (i === q.correct);
+    return '<div class="expl-pane" id="epane-' + idx + '-' + i + '">'
+      + '<div class="expl-label ' + (isC ? 'correct' : 'wrong') + '">'
+      + (isC ? '&#10003; Correct answer' : '&#10007; Incorrect') + ' \u2014 Option ' + String.fromCharCode(65 + i) + '</div>'
+      + '<div class="expl-text">' + q.explanations[i] + '</div>'
+      + '</div>';
+  }).join('');
+
+  var noteHTML = q.noteBox
+    ? '<div class="note-box"><strong>A note on Type 2 MI and the ACS pathway:</strong> ' + q.noteBox + '</div>'
+    : '';
+
+  return '<div class="result-row">'
+    + '<div class="result-badge ' + (isCorrect ? 'correct' : 'wrong') + '">' + (isCorrect ? '&#10003; Correct' : '&#10007; Incorrect') + '</div>'
+    + (!isCorrect ? '<div class="correct-answer-label">Correct answer: <strong>Option ' + String.fromCharCode(65 + q.correct) + '</strong></div>' : '')
+    + '</div>'
+    + '<div class="expl-tabs">' + tabs + '</div>'
+    + '<div>' + panes + '</div>'
+    + noteHTML;
+}
+
+function switchTab(idx, tabIdx, numOpts) {
+  for (var i = 0; i < numOpts; i++) {
+    var t = document.getElementById('etab-' + idx + '-' + i);
+    var p = document.getElementById('epane-' + idx + '-' + i);
+    if (t) t.classList.toggle('active', i === tabIdx);
+    if (p) p.classList.toggle('show', i === tabIdx);
+  }
+}
+</script>
+</body>
+</html>
