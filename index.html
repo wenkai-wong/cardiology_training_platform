@@ -2273,16 +2273,26 @@ function renderDashboard() {
     wrapper.style.cssText = 'margin: 36px 0 0;';
     var banner = document.createElement('div');
     banner.style.cssText = 'background:var(--navy);border-radius:12px 12px 0 0;padding:16px 24px;display:flex;align-items:center;gap:12px;';
-    // Split "Theme X · Label" into number and title
-    var parts = label.split(' · ');
-    var themeNum = parts[0] || '';
-    var themeTitle = parts.slice(1).join(' · ') || '';
-    banner.innerHTML = '<div style="background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap;">'
-      + themeNum + '</div>'
-      + '<div style="color:#fff;font-family:'DM Serif Display',serif;font-size:17px;line-height:1.2;">' + themeTitle + '</div>';
+    // Split on middle dot separator
+    var dotIdx = label.indexOf(' · ');
+    var themeNum = dotIdx > -1 ? label.substring(0, dotIdx) : label;
+    var themeTitle = dotIdx > -1 ? label.substring(dotIdx + 3) : '';
+    // Build pill
+    var pill = document.createElement('div');
+    pill.style.cssText = 'background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;';
+    pill.textContent = themeNum;
+    banner.appendChild(pill);
+    // Build title
+    if (themeTitle) {
+      var titleEl = document.createElement('div');
+      titleEl.style.cssText = 'color:#fff;font-family:\'DM Serif Display\',serif;font-size:17px;line-height:1.2;';
+      titleEl.textContent = themeTitle;
+      banner.appendChild(titleEl);
+    }
     wrapper.appendChild(banner);
     return wrapper;
   }
+
 
   function makeCard(sec) {
     var sp = getSP(sec.id);
