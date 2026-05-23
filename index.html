@@ -846,9 +846,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--mist); color: var(-
 
 /* ── GATE ── */
 #gate { min-height: 100vh; background: var(--navy); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; padding: 2rem; }
-.gate-logo { font-family: 'DM Serif Display', serif; font-size: clamp(2rem,5vw,3.2rem); letter-spacing: 0.04em; color: #fff; margin-bottom: 4px; }
+.gate-logo { font-family: 'DM Serif Display', serif; font-size: clamp(2.6rem,6vw,4rem); letter-spacing: 0.04em; color: #fff; font-weight: 700; margin-bottom: 6px; }
 .gate-logo-gold { color: var(--gold); }
-.gate-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem,5vw,3.2rem); color: #fff; text-align: center; line-height: 1.2; max-width: 560px; }
+.gate-title { font-family: 'DM Sans', sans-serif; font-size: clamp(1.05rem,2.5vw,1.25rem); color: #fff; font-weight: 700; text-align: center; line-height: 1.3; max-width: 560px; white-space: nowrap; margin-bottom: 2px; }
 .gate-sub { color: rgba(255,255,255,0.55); font-size: 15px; text-align: center; max-width: 420px; line-height: 1.7; }
 .gate-form { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 340px; }
 .gate-input { padding: 14px 18px; border-radius: var(--radius); border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; letter-spacing: 0.12em; outline: none; transition: border-color 0.2s; }
@@ -1005,9 +1005,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--mist); color: var(-
 <!-- GATE -->
 <div id="gate">
   <div class="gate-logo">Cardio<span class="gate-logo-gold">Scholar</span></div>
-  <h1 class="gate-title">Clinical Training Platform</h1>
-  <p class="gate-sub">A structured learning environment for medical staff.</p>
-  <p class="gate-sub" style="margin-top:20px">Enter the access code to continue.</p>
+  <h1 class="gate-title">Cardiology Clinical Training Platform</h1>
+  <p class="gate-sub">Structured Learning for Clinical Excellence</p>
+  <p class="gate-sub">Enter the Access Code</p>
   <div class="gate-form">
     <input class="gate-input" type="password" id="pw-input" placeholder="Enter access code" autocomplete="off">
     <button class="btn-gold" onclick="checkPassword()">Access Platform</button>
@@ -2210,7 +2210,7 @@ SECTIONS.push({
 
 
 // ── PASSWORD ──────────────────────────────────────────────────────────────────
-var PASSWORD = 'CPEU2026';
+var PASSWORD = 'CARDIOLOGY2026';
 
 function checkPassword() {
   var val = document.getElementById('pw-input').value.trim();
