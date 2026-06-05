@@ -851,14 +851,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--mist); color: var(-
 // THEME 2 — TROPONIN INTERPRETATION
 // ============================================================
 
+// ============================================================
+// THEME 2 — TROPONIN INTERPRETATION
+// ============================================================
+
 SECTIONS.push({
   id: '2A',
   theme: 2,
   title: 'Clinical Utility of Troponin',
   subtitle: 'When to order, what the result answers, and the over-testing trap',
-  icon: '\uD83E\uDDEA',
+  icon: '🧪',
   iconClass: 'blue',
-  summary: `<div class="sum-hero">
+  summary: `
+<div class="sum-hero">
   <div class="sum-tag">Executive Summary &middot; Theme 2 Section A</div>
   <h2>Clinical Utility of Troponin</h2>
   <p>Consultant-Level Clinical Reasoning</p>
@@ -867,6 +872,7 @@ SECTIONS.push({
   <strong>The consultant&#8217;s first question is never &#8220;what is the troponin?&#8221;</strong><br>
   It is: &#8220;Is ACS genuinely on this patient&#8217;s differential?&#8221; &#8212; The answer to that question determines whether the test should be ordered at all.
 </div>
+
 <div class="sum-card">
   <h3>Step 1 &#8212; Gate: Does this patient have ischaemic symptoms?</h3>
   <div class="sum-text"><p>Troponin has a defined indication. Its published NPV, PPV, and algorithm performance all derive from cohorts where ACS was clinically suspected. Outside that cohort, those numbers do not apply.</p></div>
@@ -877,13 +883,14 @@ SECTIONS.push({
       <tr><td>Typical chest pressure / tightness</td><td>Pleuritic (inspiratory) pain</td></tr>
       <tr><td>Jaw, arm, or shoulder radiation</td><td>Positional or palpation-reproducible pain</td></tr>
       <tr><td>Diaphoresis, nausea with chest discomfort</td><td>Pain fully explained by non-cardiac diagnosis</td></tr>
-      <tr><td>Unexplained dyspnoea on exertion</td><td>Troponin ordered &#8220;to see if heart is involved&#8221;</td></tr>
+      <tr><td>Unexplained dyspnoea (at rest or on exertion)</td><td>Troponin ordered &#8220;to see if heart is involved&#8221;</td></tr>
       <tr><td>Pre-syncope or syncope without clear cause</td><td>Incidental / routine ordering without ACS suspicion</td></tr>
     </tbody>
   </table>
   </div>
-  <div class="callout-warn"><strong>Atypical presentations carry equal weight as an indication.</strong> Women, elderly patients, and diabetics are more likely to present without classic chest pain. The threshold to order should be the same &#8212; not higher.</div>
+  <div class="callout-navy"><strong>Atypical presentations carry equal weight as an indication.</strong> In patients &#8805;75 years with acute MI, 44% do not report chest pain as their primary symptom (including 40% with STEMI). The threshold to order should be the same &#8212; not higher.</div>
 </div>
+
 <div class="sum-card">
   <h3>Step 2 &#8212; What does a troponin result actually answer?</h3>
   <div style="overflow-x:auto;margin-top:8px">
@@ -895,86 +902,124 @@ SECTIONS.push({
     </tbody>
   </table>
   </div>
-  <div class="callout-danger"><strong>What serial negative troponin does NOT exclude:</strong><ul class="bullet-list" style="margin-top:8px"><li>Unstable angina &#8212; by definition, UA produces no troponin rise. A negative result in a high-risk patient does not exclude significant obstructive CAD.</li><li>Future events &#8212; NPV applies to the index presentation only.</li></ul>A negative result is not a clean bill of cardiac health. It is a statement about myocardial injury at this moment.</div>
+  <div class="callout-warn"><strong>What serial negative troponin does NOT exclude:</strong> Unstable angina (by definition, UA produces no troponin rise). Significant obstructive CAD. Future events &#8212; NPV applies to the index presentation only. <em>A negative result is not a clean bill of cardiac health. It is a statement about myocardial injury at this moment.</em></div>
 </div>
+
 <div class="sum-card">
   <h3>Step 3 &#8212; Recognising and avoiding the over-testing trap</h3>
   <div class="sum-text"><p>An elevated troponin in a patient without ischaemic symptoms is common and expected &#8212; PE, sepsis, renal impairment, and post-operative states all cause genuine myocardial injury. The result is real; the problem is the clinical question was wrong.</p></div>
-</div>
-<div class="sum-card">
-  <h3>Quick-Reference Decision Aid</h3>
   <div style="overflow-x:auto;margin-top:8px">
   <table class="sum-table">
-    <thead><tr><th>Clinical scenario</th><th>Consultant response</th></tr></thead>
+    <thead><tr><th>Trap</th><th>Example</th></tr></thead>
     <tbody>
-      <tr><td>Atypical symptoms but ACS plausible</td><td>Yes &#8212; ischaemia is on the differential. Order and plan serial sampling.</td></tr>
-      <tr><td>Non-ischaemic presentation; ACS not being considered</td><td>No &#8212; reframe the clinical question before ordering.</td></tr>
-      <tr><td>Elevated troponin found incidentally (e.g. post-op, sepsis)</td><td>Interpret in context. Do not default to ACS label. Clarify whether the result changes management.</td></tr>
-      <tr><td>&#8220;Just to check the heart&#8221; without clear indication</td><td>Decline or redirect. An elevated result will require interpretation regardless of indication.</td></tr>
-      <tr><td>Known CKD / elderly with possible baseline elevation</td><td>Order if ACS is suspected, but plan to interpret delta rather than absolute value.</td></tr>
+      <tr><td><strong>Diagnostic label harm</strong></td><td>Sepsis-related troponin elevation inappropriately labelled as MI. Follows patient in records for years.</td></tr>
+      <tr><td><strong>Investigation cascade</strong></td><td>Confirmed PE with elevated troponin triggers unnecessary coronary angiography when presentation does not suggest concomitant ACS.</td></tr>
+      <tr><td><strong>Chronic elevation confusion</strong></td><td>CKD patient admitted for falls. Reflex troponin ordering triggers cardiology consult for a stable baseline elevation.</td></tr>
     </tbody>
   </table>
   </div>
-  <div class="callout-navy"><strong>Troponin is a confirmatory tool, not a diagnostic trigger.</strong> Clinical history and ECG establish the question. Troponin &#8212; interpreted with kinetics and pre-test probability &#8212; answers it. The number alone answers nothing.</div>
-</div>`,
+  <div class="callout-navy"><strong>Troponin is a confirmatory tool, not a diagnostic trigger.</strong> Clinical history and ECG establish the question. Troponin &#8212; interpreted with kinetics, pre-test probability, and clinical context &#8212; answers it. Troponin elevation identifies myocardial injury but does not specify the mechanism. The diagnosis of MI requires evidence of myocardial ischaemia in addition to troponin elevation.</div>
+</div>
+  `,
+
   questions: [
     {
-      vignette: `Five patients present to the emergency department. Consider each scenario and decide whether serial troponin testing is indicated as part of the ACS investigation pathway.
+      vignette: `Five patients present to the emergency department. For each scenario, consider: (1) whether ischaemic symptoms are present — typical or atypical; (2) whether ECG changes support ischaemia; and (3) whether the result would change clinical management.\n\nScenario A: A 58-year-old man with hypertension and hyperlipidaemia presents with a 40-minute episode of central chest tightness radiating to the left arm, which partially resolved on arrival. He is now pain-free. ECG shows no acute changes. He mentions the pain felt similar to indigestion.\n\nScenario B: A 74-year-old woman with known hypertension is brought in after 2 hours of unusual fatigue and dyspnoea. She denies chest pain. On examination she is diaphoretic. ECG shows sinus rhythm, rate 95 bpm, no ST changes.\n\nScenario C: A 67-year-old man with COPD is admitted with severe pneumonia requiring high-flow oxygen. He is febrile and tachycardic at 118 bpm. His ECG shows new ST depression in leads V4-V6. He reports chest tightness, which he attributes to difficulty breathing.\n\nScenario D: An 82-year-old woman is admitted following a fall at home after an estimated 8-10 hour lie. She is confused and dehydrated. She reports no chest pain, no dyspnoea, and no ischaemic symptoms. ECG shows sinus rhythm with no acute changes.\n\nScenario E: A 55-year-old man presents with palpitations and is found to be in rapid atrial fibrillation at 148 bpm. He feels breathless and light-headed, which he says started with the palpitations. There is no chest pain or chest tightness. ECG shows AF with fast ventricular rate; no ST changes or ischaemic features.`,
 
-Scenario A: A 58-year-old man with hypertension and hyperlipidaemia presents with a 40-minute episode of central chest tightness radiating to the left arm, which partially resolved on arrival. He is now pain-free. ECG shows no acute changes. He mentions the pain felt similar to indigestion and wonders if it was a large meal.
+      lo: 'Section A MCQ — When is serial troponin testing indicated?',
 
-Scenario B: A 74-year-old woman with known hypertension is brought in by her family after they noticed she seemed unusually fatigued and short of breath over the past 2 hours. She denies chest pain. On examination she is diaphoretic. ECG shows sinus rhythm, rate 95 bpm, no ST changes.
+      question: 'Select the THREE clinical scenarios in which serial troponin testing is indicated as part of the ACS investigation pathway.',
 
-Scenario C: A 67-year-old man with COPD is admitted with severe pneumonia requiring high-flow oxygen. He is febrile and tachycardic at 118 bpm. His ECG shows new ST depression in leads V4–V6. He reports feeling tight across his chest, which he attributes to difficulty breathing.
-
-Scenario D: An 82-year-old woman is admitted following a fall at home. She was found on the floor after an estimated 8–10 hour lie. She is confused and dehydrated. She reports no chest pain, no dyspnoea, and no ischaemic symptoms. ECG shows sinus rhythm with no acute changes.
-
-Scenario E: A 55-year-old man presents with palpitations and is found to be in rapid atrial fibrillation at 148 bpm. He feels breathless and light-headed, which he says started with the palpitations. There is no chest pain or chest tightness. ECG shows AF with a fast ventricular rate; no ST changes or ischaemic features.`,
-      lo: `MCQ — When is serial troponin testing indicated? (Select the single best answer)`,
-      question: `Which of the following correctly identifies the THREE scenarios in which serial troponin testing is indicated as part of the ACS investigation pathway?`,
       options: [
-        `Scenarios A, B, and C are indicated; Scenarios D and E are not indicated.`,
-        `Scenarios A, C, and D are indicated; Scenarios B and E are not indicated.`,
-        `Scenarios A, B, and E are indicated; Scenarios C and D are not indicated.`,
-        `Scenarios B, C, and D are indicated; Scenarios A and E are not indicated.`,
-        `All five scenarios are indicated — troponin should be ordered whenever a patient presents to the emergency department with any cardiovascular symptom.`
+        'Scenarios A, B, and C — all three have ischaemic features on history, ECG, or both that place ACS credibly on the differential.',
+        'Scenarios A, B, and D — elderly patients with atypical presentations including falls should always have troponin measured to exclude MI.',
+        'Scenarios A, C, and E — central chest tightness and AF with tachycardia and ST changes both warrant troponin testing.',
+        'Scenarios B, C, and D — high-risk demographics should have reflex troponin testing regardless of symptoms.',
+        'Scenarios A, B, C, D, and E — troponin should be ordered in all emergency presentations to avoid missing an occult MI.'
       ],
+
       correct: 0,
+
       explanations: [
-        `Correct. Scenarios A, B, and C each contain ischaemic features — on history, ECG, or both — that place ACS credibly on the differential. Scenario A: The competing diagnosis (indigestion) is a classic distractor and does not remove ACS from the differential. Central chest tightness with radiation in a man with cardiovascular risk factors is ischaemic until proven otherwise. Absence of ECG changes at rest is expected in NSTEMI. Teaching point: A plausible alternative diagnosis does not lower the threshold to test. Scenario B: Dyspnoea with diaphoresis in an elderly woman constitutes ischaemic equivalent symptoms. Absence of chest pain is expected in this demographic — elderly women are among the highest-risk groups for atypical ACS presentation. The absence of ECG changes does not exclude NSTEMI. Scenario C: This is a Type 2 MI scenario — but troponin remains indicated. The patient has ischaemic symptoms (chest tightness) and new ischaemic ECG changes (ST depression), even in the context of a precipitating illness. Identifying active myocardial injury changes risk stratification and management. Scenario D (not indicated): There are no ischaemic symptoms and no ischaemic ECG changes. Troponin will likely be elevated from demand ischaemia, rhabdomyolysis, or AKI — but that elevation will not represent ACS. The principal risk is diagnostic label harm. Scenario E (not indicated): Palpitations, breathlessness, and light-headedness are entirely attributable to the tachyarrhythmia itself. Tachycardia alone is not an ischaemic symptom.`,
-        `Scenario D lacks ischaemic symptoms and ischaemic ECG changes. An 82-year-old admitted following a fall with no chest pain, no dyspnoea, and no ECG changes does not have an ACS indication for troponin. An expected elevation from rhabdomyolysis or demand ischaemia would carry significant diagnostic label harm risk. Scenario B is indicated — dyspnoea with diaphoresis in an elderly woman constitutes ischaemic equivalent symptoms. Atypical presentations carry equal weight as an indication.`,
-        `Scenario E lacks ischaemic symptoms. Palpitations, rate-related breathlessness, and light-headedness are entirely attributable to the AF itself. Tachycardia is not an independent ischaemic indication for troponin. Scenario C is indicated — the patient has both ischaemic symptoms (chest tightness) and new ischaemic ECG changes (new ST depression in V4–V6), making this a Type 2 MI scenario where troponin is clearly indicated.`,
-        `Scenario A is indicated. Central chest tightness with left arm radiation in a patient with cardiovascular risk factors is ischaemic until proven otherwise, regardless of a competing non-cardiac explanation. The plausible alternative (indigestion) does not lower the threshold to test.`,
-        `Troponin has a defined indication: clinical suspicion of ACS based on ischaemic symptoms (typical or atypical) and/or ischaemic ECG changes. Ordering troponin for every patient with any cardiovascular symptom would yield an unacceptable rate of incidental elevations from non-ischaemic mechanisms, creating diagnostic label harm and unnecessary investigation cascades.`
+        `Correct. Scenarios A, B, and C each contain ischaemic features that place ACS credibly on the differential. Scenario A: central chest tightness with radiation in a man with cardiovascular risk factors is ischaemic until proven otherwise — a plausible alternative diagnosis does not lower the threshold. Scenario B: dyspnoea with diaphoresis in an elderly woman constitutes ischaemic equivalent symptoms; absence of chest pain is expected in this demographic (SILVER-AMI: 44% of patients ≥75 with AMI did not report chest pain as primary symptom). Scenario C: chest tightness with new ST depression warrants troponin even in the context of pneumonia — the underlying cause does not remove the indication when ischaemic features are present. Scenarios D and E lack ischaemic symptoms and ischaemic ECG changes; troponin testing would yield expected elevation from non-ischaemic mechanisms, creating risk of diagnostic labelling without clinical benefit.`,
+        `Scenario D should not be included. An 82-year-old after a prolonged lie has no ischaemic symptoms and no ischaemic ECG changes. Troponin will very likely be elevated from acute myocardial injury related to immobilisation, dehydration, or rhabdomyolysis — but that elevation represents myocardial injury, not MI. Elderly age alone is not an indication for troponin testing — ischaemic features are required.`,
+        `Scenario E should not be included. Palpitations, breathlessness, and light-headedness are entirely attributable to the tachyarrhythmia itself, not to ischaemia. Troponin is frequently elevated in sustained rapid AF above approximately 125 bpm through rate-related mechanisms — that elevation does not indicate MI in the absence of ischaemic features. Symptoms attributable entirely to a tachyarrhythmia are not ischaemic equivalents.`,
+        `Scenario D should not be included. High-risk demographics do not constitute a blanket indication for troponin — ischaemic features on history or ECG are required. Reflex ordering in all elderly or high-acuity patients creates diagnostic labelling harm.`,
+        `This represents the over-testing trap. Blanket troponin ordering in all emergency presentations regardless of ischaemic features produces results that must be interpreted — and in patients without ischaemic symptoms (Scenarios D and E), elevated troponin from non-ischaemic causes risks NSTEMI labelling, unnecessary investigation cascades, and chronic diagnostic confusion.`
       ]
     }
   ]
 });
 
-
 SECTIONS.push({
   id: '2B',
   theme: 2,
   title: 'The Troponin Assay',
-  subtitle: 'Thresholds, concentration tiers, and what the number actually means',
+  subtitle: 'Thresholds, value tiers, and what the number actually means',
   icon: '\uD83D\uDCCA',
-  iconClass: 'purple',
-  summary: `<div class="sum-hero"><div class="sum-tag">Executive Summary &middot; Theme 2 Section B</div><h2>The Troponin Assay</h2><p>Consultant-Level Clinical Reasoning</p></div>
-<div class="sum-purpose"><strong>The number is not the diagnosis.</strong> It is a measure of myocardial injury at a point in time. The concentration determines how wide the differential is. Kinetics determine whether the process is acute. Clinical context determines whether it is ischaemic. All three are required before you act.</div>
-<div class="sum-card"><h3>Step 1 — Know Your Assay: Three thresholds</h3><div class="sum-text"><p>Values shown are for Abbott ARCHITECT hs-cTnI (ng/L). Always use locally validated reference ranges.</p></div><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Threshold</th><th>Value (ng/L)</th><th>What it means clinically</th></tr></thead><tbody><tr><td><strong>LoD</strong></td><td>1.3</td><td>Below this: undetectable. Strongest rule-out if ≥3h from symptom onset and low–intermediate risk.</td></tr><tr><td><strong>LoQ</strong></td><td>1.6</td><td>Below this: signal detected but CV &gt;10% — not reproducible for clinical decisions.</td></tr><tr><td><strong>URL (99th %ile)</strong></td><td>26 (sex-agnostic) / 16 (women) / 34 (men)</td><td>Above this: myocardial injury defined biochemically. Express elevation as multiples of URL, not raw values.</td></tr></tbody></table></div><div class="callout-warn"><strong>Express elevation as multiples of the URL, not raw values.</strong> A value of 100 ng/L is 4× URL on Abbott (URL 26) but 7× URL on Roche hs-cTnT (URL 14). Raw numbers without assay context cannot be compared or interpreted.</div></div>
-<div class="sum-card"><h3>Step 2 — DDx and clinical action by concentration tier</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Tier</th><th>hs-cTnI (ng/L)</th><th>Primary DDx</th><th>Key discriminator</th><th>Next step</th></tr></thead><tbody><tr><td><strong>Below LoD</strong></td><td>&lt;1.3</td><td>No acute injury detected</td><td>If ≥3h from onset + low risk: NPV &gt;99.5% for NSTEMI</td><td>Confirm timing; does not exclude UA</td></tr><tr><td><strong>Normal range</strong></td><td>1.3–26</td><td>Within reference range</td><td>24 ng/L ≠ 3 ng/L in a high-risk patient</td><td>Serial sampling if early or high risk</td></tr><tr><td><strong>Mild ↑</strong></td><td>&gt;26–100</td><td>Type 2 MI, HF, PE, sepsis, demand, early Type 1 MI</td><td>Flat serial = less likely acute MI; rising serial = concerning</td><td>Kinetics + full clinical context essential</td></tr><tr><td><strong>Moderate ↑↑</strong></td><td>100–1000</td><td>Type 1 MI, myocarditis, Takotsubo, acute HF</td><td>Myocarditis overlaps substantially with Type 1 MI at this range</td><td>ECG, echo; CMR if non-obstructive on angio</td></tr><tr><td><strong>Marked ↑↑↑</strong></td><td>&gt;1000</td><td>Large Type 1 MI, fulminant myocarditis</td><td>Differential narrow; magnitude = injury burden</td><td>Urgent: ECG, echo, angio vs CMR decision</td></tr></tbody></table></div><div class="callout-warn"><strong>Mildly elevated (&gt;26–100 ng/L):</strong> The clinician is doing most of the diagnostic work. The differential is broad. A flat serial troponin in this range points away from acute MI. A rising serial troponin demands clinical correlation. This zone cannot be managed algorithmically.</div><div class="callout-navy" style="margin-top:10px"><strong>Markedly elevated (&gt;1000 ng/L):</strong> Two entities dominate: large Type 1 MI and fulminant myocarditis. They are frequently indistinguishable without CMR. If angiography shows non-obstructive disease, myocarditis moves immediately to the top.</div></div>
-<div class="sum-card"><h3>Step 3 — Clinical Reasoning Sequence</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>#</th><th>Question</th><th>Consultant reasoning</th></tr></thead><tbody><tr><td>1</td><td>Which assay? What is the URL?</td><td>Establish the assay-specific URL before interpreting any value. Express all elevations as multiples of URL.</td></tr><tr><td>2</td><td>What is the absolute value and which tier?</td><td>Map the value to the concentration tier. This determines how wide the differential is.</td></tr><tr><td>3</td><td>Is the result dynamic or static on serial sampling?</td><td>A dynamic rise/fall pattern = acute injury process. A flat pattern = chronic, demand, or incidental elevation.</td></tr><tr><td>4</td><td>Does the pattern fit the clinical context?</td><td>Ischaemic symptoms + dynamic rise = acute ischaemic injury until proven otherwise. Never interpret the number in isolation from ECG, symptoms, and clinical story.</td></tr></tbody></table></div><div class="callout-navy"><strong>The assay answers one question:</strong> is there myocardial injury above the detection threshold? Everything else — whether it is acute or chronic, ischaemic or non-ischaemic, Type 1 or Type 2 MI — requires kinetics, clinical context, and the ECG.</div></div>`,
+  iconClass: 'teal',
+  summary: `
+<div class="sum-hero">
+  <div class="sum-tag">Executive Summary &middot; Theme 2 Section B</div>
+  <h2>The Troponin Assay</h2>
+  <p>Consultant-Level Clinical Reasoning</p>
+</div>
+<div class="sum-purpose">
+  <strong>The consultant&#8217;s relationship with the troponin number:</strong> The number is not the diagnosis. It is a measure of myocardial injury at a point in time. The concentration determines how wide the differential is. Kinetics determine whether the process is acute. Clinical context determines whether it is ischaemic. All three are required before you act.
+</div>
+<div class="sum-card">
+  <h3>Step 1 &#8212; Know Your Assay</h3>
+  <div class="callout-warn">All thresholds below are assay-specific. Values shown are for Abbott ARCHITECT hs-cTnI (ng/L). Always use locally validated reference ranges.</div>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Threshold</th><th>Value (ng/L)</th><th>What it means clinically</th></tr></thead>
+    <tbody>
+      <tr><td><strong>LoD</strong></td><td>~1.1&#8211;1.9 ng/L (use &lt;2 ng/L for rule-out)</td><td>Below this: undetectable. Strongest rule-out if &#8805;3h from symptom onset and low&#8211;intermediate risk. NPV &gt;99.5% in validated cohorts.</td></tr>
+      <tr><td><strong>LoQ</strong></td><td>~4.7&#8211;5.6 ng/L (10% CV threshold)</td><td>Below this: signal detected but CV &gt;10% &#8212; not reproducible for clinical decisions.</td></tr>
+      <tr><td><strong>URL (99th %ile)</strong></td><td>26 ng/L (sex-agnostic); 16 ng/L women; 34 ng/L men</td><td>Above this: myocardial injury defined biochemically. Express elevation as multiples of URL. Sex-specific thresholds recommended by ESC and Fourth Universal Definition.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy"><strong>Express elevation as multiples of the URL, not raw values.</strong> A value of 100 ng/L is 4&#215; URL on Abbott (URL 26) but 7&#215; URL on Roche hs-cTnT (URL 14). Raw numbers without assay context cannot be compared or interpreted.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 2 &#8212; Map the Value to the Differential</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Tier</th><th>hs-cTnI (ng/L)</th><th>Primary DDx</th><th>Key discriminator</th><th>Next step</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Below LoD</strong></td><td>&lt;2 ng/L</td><td>No acute injury detected</td><td>If &#8805;3h from onset + low risk: NPV &gt;99.5% for NSTEMI</td><td>Confirm timing; does not exclude UA</td></tr>
+      <tr><td><strong>Normal range</strong></td><td>2&#8211;26 ng/L</td><td>Within reference range</td><td>24 ng/L &#8800; 3 ng/L in a high-risk patient</td><td>Serial sampling if early or high risk</td></tr>
+      <tr><td><strong>Mild &#8593;</strong></td><td>&gt;26&#8211;100</td><td>Type 2 MI, HF, PE, sepsis, demand, early Type 1 MI</td><td>Flat serial = less likely acute MI; rising = concerning</td><td>Kinetics + full clinical context essential</td></tr>
+      <tr><td><strong>Moderate &#8593;&#8593;</strong></td><td>100&#8211;1000</td><td>Type 1 MI, myocarditis, Takotsubo, acute HF decompensation</td><td>Myocarditis overlaps substantially with Type 1 MI</td><td>ECG, echo; CMR if non-obstructive on angio</td></tr>
+      <tr><td><strong>Marked &#8593;&#8593;&#8593;</strong></td><td>&gt;1000</td><td>Large Type 1 MI, fulminant myocarditis</td><td>Differential narrow; magnitude = injury burden</td><td>Urgent: ECG, echo, angio vs CMR decision</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-warn"><strong>When the troponin is mildly elevated (&gt;26&#8211;100 ng/L):</strong> The clinician is doing most of the diagnostic work. The differential is broad. A flat serial troponin in this range points away from acute MI. A rising serial troponin demands clinical correlation. This zone cannot be managed algorithmically.</div>
+  <div class="callout-navy"><strong>When the troponin is markedly elevated (&gt;1000 ng/L):</strong> Two entities dominate: large Type 1 MI and fulminant myocarditis. They are frequently indistinguishable without CMR. If angiography shows non-obstructive disease, myocarditis moves immediately to the top.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 3 &#8212; Clinical Reasoning Sequence</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>#</th><th>Question</th><th>Consultant reasoning</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Which assay? What is the URL?</strong></td><td>Establish assay-specific URL before interpreting any value. Express all elevations as multiples of URL.</td></tr>
+      <tr><td>2</td><td><strong>What tier does the value fall in?</strong></td><td>Maps how wide the differential is and how urgently interpretation is needed.</td></tr>
+      <tr><td>3</td><td><strong>Is the result dynamic or static on serial sampling?</strong></td><td>Dynamic rise/fall = acute injury. Flat = chronic, demand, or incidental. Kinetics are as important as the absolute value.</td></tr>
+      <tr><td>4</td><td><strong>Does the pattern fit the clinical context?</strong></td><td>Ischaemic symptoms + dynamic rise = acute ischaemic injury until proven otherwise. Never interpret the number in isolation.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy">The assay answers one question: <em>is there myocardial injury above the detection threshold?</em> Everything else &#8212; whether it is acute or chronic, ischaemic or non-ischaemic, Type 1 or Type 2 MI &#8212; requires kinetics, clinical context, and the ECG. The concentration tier tells you how wide to cast the net. The clinician decides what is in it.</div>
+</div>
+  `,
   questions: [
     {
-      vignette: `A 62-year-old man with hypertension, hyperlipidaemia, and type 2 diabetes presents with a 3-hour history of central chest pressure. His hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) results are as follows:
-
-0h: 180 ng/L
-3h: 2,400 ng/L
-Following morning: 10,200 ng/L
-
-He undergoes successful revascularisation.`,
-      lo: `Question 1 of 3 — Dynamic rise: classical NSTEMI trajectory`,
-      question: `Which of the following statements most accurately describes the significance of this troponin trajectory?`,
+      vignette: `A 62-year-old man with hypertension, hyperlipidaemia, and type 2 diabetes presents with a 3-hour history of central chest pressure. His hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) results are as follows:\n\n0h (presentation): 180 ng/L\n3h: 2,400 ng/L\nFollowing morning: 10,200 ng/L\n\nHe undergoes successful revascularisation.`,
+      lo: 'Section B MCQ Q1 — Dynamic rise — classical NSTEMI trajectory',
+      question: 'Which of the following statements most accurately describes the significance of this troponin trajectory?',
       options: [
         `The rise from 180 to 2,400 ng/L over 3 hours is disproportionately rapid for a biological infarct and raises the possibility of assay interference or a haemolysed sample.`,
         `The dynamic rise from 180 to 2,400 ng/L confirms acute myocardial injury. The peak of 10,200 ng/L after revascularisation reflects washout of troponin from the reperfused myocardium, and its magnitude serves as a surrogate for infarct size.`,
@@ -984,20 +1029,17 @@ He undergoes successful revascularisation.`,
       ],
       correct: 1,
       explanations: [
-        `A rise of this magnitude and velocity is entirely consistent with a large Type 1 MI. The rate of troponin release reflects both the size of the infarct zone and the speed of cell death. Rapid kinetics are a feature of a significant ischaemic event, not a marker of assay error. Haemolysis typically causes a falsely low troponin (haem interferes with the assay signal) rather than a falsely high result. Suspecting interference here would inappropriately delay treatment.`,
-        `This answer correctly integrates all three elements of the trajectory. The dynamic rise (13-fold over 3 hours) confirms an acute, evolving process. After successful revascularisation, troponin is released in an accelerated washout pattern from reperfused but necrotic myocytes — this is a well-characterised phenomenon that shifts the peak earlier and higher than would occur without reperfusion. The peak of 10,200 ng/L (~392× URL) places this firmly in the markedly elevated tier. Peak troponin at this level serves as a validated surrogate for infarct size and carries independent prognostic significance. (Reference: Januzzi JL Jr, et al. JACC Scientific Expert Panel. J Am Coll Cardiol. 2019;73(9):1059–1077.)`,
-        `Procedural myocardial injury (Type 4a MI) is defined as a troponin rise above 5× URL from a normal pre-procedural baseline. In this case, the troponin was already markedly elevated before intervention (180 ng/L at 0h, rising to 2,400 ng/L at 3h). The post-procedural peak reflects the ongoing evolution of the index infarct with reperfusion washout superimposed — not a new procedure-related injury. Classifying this as Type 4a MI in the absence of a normal pre-procedural baseline is a definitional error.`,
-        `Serial sampling after confirmed acute MI serves several purposes beyond diagnosis: it documents the peak (prognostic information, surrogate for infarct size), characterises the fall pattern, and provides a baseline against which any secondary rise indicating re-infarction can be detected. The JACC Scientific Expert Panel recommends continued serial measurement because the peak and trajectory carry independent prognostic value beyond the initial diagnostic decision. (J Am Coll Cardiol. 2019;73(9):1059–1077.)`,
-        `A value of 180 ng/L represents approximately 7× the URL on Abbott hs-cTnI. The JACC Scientific Expert Panel classifies values in this range — above 100 ng/L and below 1,000 ng/L — as the moderate elevation tier, where Type 1 MI is the primary consideration in the appropriate clinical context. Characterising 180 ng/L as ‘mild’ conflates the tier categories and underestimates the clinical urgency. (J Am Coll Cardiol. 2019;73(9):1059–1077.)`
+        `A rise of this magnitude and velocity is entirely consistent with a large Type 1 MI. Rapid kinetics are a feature of a significant ischaemic event, not a marker of assay error. Haemolysis typically causes a falsely low troponin (haem interferes with the assay signal) rather than a falsely high result. Suspecting interference here would inappropriately delay treatment.`,
+        `This answer correctly integrates all three elements of the trajectory. The dynamic rise (13-fold over 3 hours) confirms an acute, evolving process. After successful revascularisation, troponin is released in an accelerated washout pattern from reperfused but necrotic myocytes — this shifts the peak earlier (typically 10–14 hours vs 24–48 hours in non-reperfused MI). The total infarct burden is not increased by reperfusion; the release is accelerated. The peak of 10,200 ng/L (~392× URL) is a validated surrogate for infarct size and carries independent prognostic significance (JACC Scientific Expert Panel, J Am Coll Cardiol. 2019;73(9):1059–1077).`,
+        `Procedural myocardial injury (Type 4a MI) is defined as a troponin rise above 5× URL from a normal pre-procedural baseline. In this case, the troponin was already markedly elevated before intervention (180 ng/L at 0h, rising to 2,400 ng/L at 3h). The post-procedural peak of 10,200 ng/L reflects the ongoing evolution of the index infarct with reperfusion washout — not a new procedure-related injury. Classifying this as Type 4a MI in the absence of a normal pre-procedural baseline is a definitional error.`,
+        `Serial sampling after confirmed acute MI serves purposes beyond diagnosis: it documents the peak (prognostic information, surrogate for infarct size), characterises the fall pattern (confirming resolution of acute injury), and provides a baseline against which any secondary rise indicating re-infarction can be detected. The JACC Scientific Expert Panel (2019) recommends continued serial measurement because the peak and trajectory carry independent prognostic value.`,
+        `A value of 180 ng/L represents approximately 7× the URL on Abbott hs-cTnI. The JACC Scientific Expert Panel classifies values above 100 ng/L and below 1,000 ng/L as the moderate elevation tier, where Type 1 MI is the primary consideration in the appropriate clinical context. Characterising 180 ng/L as 'mild' conflates the tier categories and underestimates the clinical urgency.`
       ]
     },
     {
-      vignette: `A 74-year-old man with a history of hypertensive heart disease, moderate left ventricular hypertrophy on a prior echocardiogram, and stage 3b chronic kidney disease is admitted with a 2-day history of worsening exertional dyspnoea and ankle oedema. He denies chest pain. His ECG shows sinus rhythm, voltage criteria for LVH, and lateral T-wave flattening — identical to an ECG performed 14 months ago. His hs-cTnI results are as follows:
-
-0h: 58 ng/L
-3h: 62 ng/L`,
-      lo: `Question 2 of 3 — Mild elevation: kinetics and the differential`,
-      question: `What is the most accurate interpretation of this troponin result in this clinical context?`,
+      vignette: `A 74-year-old man with hypertensive heart disease, moderate left ventricular hypertrophy on a prior echocardiogram, and stage 3b chronic kidney disease is admitted with a 2-day history of worsening exertional dyspnoea and ankle oedema. He denies chest pain. His ECG shows sinus rhythm, voltage criteria for LVH, and lateral T-wave flattening — identical to an ECG performed 14 months ago.\n\nhs-cTnI results:\n0h: 58 ng/L\n3h: 62 ng/L`,
+      lo: 'Section B MCQ Q2 — Mild elevation — kinetics and the differential',
+      question: 'What is the most accurate interpretation of this troponin result in this clinical context?',
       options: [
         `The troponin is above the 99th percentile on both samples and the 4 ng/L rise meets the absolute delta threshold for a significant change, confirming acute myocardial injury consistent with NSTEMI.`,
         `A delta of 4 ng/L over 3 hours is below the guideline-endorsed absolute delta threshold for acute MI on the Abbott assay, and the result can therefore be reported as stable and non-diagnostic of an acute event.`,
@@ -1007,122 +1049,265 @@ He undergoes successful revascularisation.`,
       ],
       correct: 2,
       explanations: [
-        `While the troponin exceeds the URL on both samples, meeting the biochemical criterion for myocardial injury, this alone does not establish NSTEMI. The Fourth Universal Definition requires both myocardial injury and evidence of an acute ischaemic aetiology. A delta of 4 ng/L (~7% relative change) is far below the kinetic pattern expected in acute MI at this absolute level. The JACC Scientific Expert Panel explicitly classifies the mild elevation tier as having the broadest differential, including heart failure, LVH, and CKD — all present in this patient. Labelling this as NSTEMI based on a small delta above URL represents significant over-diagnosis. (J Am Coll Cardiol. 2019;73(9):1059–1077.)`,
-        `This answer correctly identifies that the delta does not meet criteria for acute MI, but the conclusion is incomplete. Reporting the result as ‘stable and non-diagnostic’ implies the troponin can be dismissed, when in fact a chronically elevated troponin in this context carries its own clinical significance — it is a marker of ongoing myocardial injury from structural heart disease, CKD, and chronic demand. The distinction between ‘not diagnostic of acute MI’ and ‘clinically irrelevant’ is important.`,
-        `This is the correct interpretation. The clinical picture — LVH, CKD, decompensated heart failure, no ischaemic symptoms, and an unchanged ECG — is a textbook constellation for chronic myocardial injury with superimposed demand elevation. The JACC Scientific Expert Panel specifically identifies this tier as where heart failure, LVH, subclinical heart disease, and stable coronary disease predominate, with an NPV for MI of approximately 95% — meaning a small but real proportion of patients at this level will have an acute event, and the clinical assessment must account for that residual uncertainty. The correct approach is to treat the elevated troponin as a marker of background myocardial disease while actively seeking the cause of acute decompensation. (J Am Coll Cardiol. 2019;73(9):1059–1077.)`,
-        `Troponin is not cleared renally in any clinically meaningful sense. High-sensitivity troponin assays measure intact troponin protein, which is removed by hepatic degradation and reticuloendothelial clearance, not renal filtration. The reason troponin is chronically elevated in CKD is not reduced clearance but rather increased release — from subclinical ischaemia, LVH-related wall stress, uraemic myocardial toxicity, and microvascular disease. Disregarding the result in CKD patients would lead to systematic under-detection of myocardial injury in a population already at very high cardiovascular risk.`,
-        `While a prior baseline troponin is useful when available, its absence does not render the current result uninterpretable. The clinical context — the profile of the patient, the nature of the symptoms, the static ECG, and the minimal kinetics — provides sufficient information to support a working interpretation of chronic myocardial injury. Withholding all clinical interpretation pending a 6-hour sample conflates diagnostic protocol with clinical reasoning.`
+        `While the troponin exceeds the URL on both samples, this alone does not establish NSTEMI. The Fourth Universal Definition requires both myocardial injury and evidence of an acute ischaemic aetiology. A delta of 4 ng/L (~7% relative change) is far below the kinetic pattern expected in acute MI. The JACC Scientific Expert Panel (2019) explicitly classifies the mild elevation tier as having the broadest differential, including heart failure, LVH, and CKD — all present in this patient.`,
+        `This answer correctly identifies that the delta does not meet criteria for acute MI, but the reasoning is incomplete. Reporting the result as 'stable and non-diagnostic' implies the troponin can be dismissed, when in fact a chronically elevated troponin carries its own clinical significance — it is a marker of ongoing myocardial injury from structural heart disease, CKD, and chronic demand. The distinction between 'not diagnostic of acute MI' and 'clinically irrelevant' is important.`,
+        `This is the correct interpretation. The clinical picture — LVH, CKD, decompensated heart failure, no ischaemic symptoms, and an unchanged ECG — is a textbook constellation for chronic myocardial injury. The JACC Scientific Expert Panel (2019) identifies this tier as where heart failure, LVH, subclinical heart disease, and stable coronary disease predominate, with a negative predictive value for MI of approximately 95%. The correct approach is to treat the elevated troponin as a marker of background myocardial disease while actively seeking the cause of acute decompensation.`,
+        `Troponin is not cleared renally in any clinically meaningful sense. The reason troponin is chronically elevated in CKD is not reduced clearance but rather increased release — from subclinical ischaemia, LVH-related wall stress, uraemic myocardial toxicity, and microvascular disease. Disregarding the result would lead to systematic under-detection of myocardial injury in a population at very high cardiovascular risk.`,
+        `While a prior baseline troponin is useful when available, its absence does not render the current result uninterpretable. The clinical context — the patient profile, the nature of the symptoms, the static ECG, and the minimal kinetics — provides sufficient information to support a working interpretation of chronic myocardial injury.`
       ]
     },
     {
-      vignette: `A 26-year-old male with no cardiovascular risk factors and no prior cardiac history presents with a 3-day history of sharp central chest pain, worse on inspiration and relieved by leaning forward. He reports a febrile illness with sore throat and myalgia approximately 2 weeks ago. His ECG shows diffuse saddle-shaped ST elevation across multiple territories with PR depression in lead II. He is haemodynamically stable. His hs-cTnI results are as follows:
-
-0h: 580 ng/L
-3h: 740 ng/L`,
-      lo: `Question 3 of 3 — Moderate-high elevation: narrowing the differential`,
-      question: `Which of the following statements best describes the interpretation of this troponin result?`,
+      vignette: `A 26-year-old male with no cardiovascular risk factors presents with a 3-day history of sharp central chest pain, worse on inspiration and relieved by leaning forward. He reports a febrile illness with sore throat and myalgia approximately 2 weeks ago. His ECG shows diffuse saddle-shaped ST elevation across multiple territories with PR depression in lead II. He is haemodynamically stable.\n\nhs-cTnI results:\n0h: 580 ng/L\n3h: 740 ng/L`,
+      lo: 'Section B MCQ Q3 — Moderate-high elevation — narrowing the differential',
+      question: 'Which of the following statements best describes the interpretation of this troponin result?',
       options: [
         `A troponin of 580–740 ng/L with a dynamic rise represents significant acute myocardial injury. In a young patient with ischaemic-pattern ECG changes, this most likely reflects a Type 1 MI and should be managed as such.`,
         `The troponin elevation is most likely a non-specific finding related to the preceding viral illness. Values in this range commonly occur with systemic viral infections and do not necessarily indicate structural cardiac involvement.`,
         `The combination of a dynamic troponin in the moderate-to-high elevation tier, a post-viral prodrome, pleuropericarditic chest pain, and a diffuse non-territory-specific ECG pattern is most consistent with myopericarditis with significant myocardial involvement.`,
         `The troponin of 580–740 ng/L is below the 1,000 ng/L threshold at which the differential narrows significantly, and the result therefore does not help distinguish between the possible diagnoses at this stage.`,
-        `The delta of 160 ng/L over 3 hours meets criteria for a significant dynamic rise, confirming an acute event, but the magnitude is insufficient to characterise the underlying diagnosis or guide further management beyond standard ACS protocol.`
+        `The delta of 160 ng/L over 3 hours confirms an acute event, but the magnitude is insufficient to characterise the underlying diagnosis or guide further management beyond standard ACS protocol.`
       ],
       correct: 2,
       explanations: [
-        `While the troponin is dynamic and sits in the moderate-to-high tier where Type 1 MI is a primary consideration, several features argue decisively against a typical ischaemic mechanism. The ECG pattern is characteristic of pericarditis/myopericarditis — diffuse, concave (saddle-shaped) ST elevation across multiple territories with PR depression — rather than the localised, convex ST elevation of a culprit territory seen in STEMI. Type 1 MI typically produces territory-specific changes corresponding to a coronary distribution. The age, absence of risk factors, post-viral prodrome, and pleuritic/positional pain quality further undermine the Type 1 MI hypothesis. Treating this as NSTEMI/STEMI without incorporating these clinical distinctions would be a diagnostic error.`,
-        `Troponin elevation in the context of a viral illness is not a non-specific or benign finding. When troponin reaches the moderate-to-high elevation tier — 580–740 ng/L represents 22–28× the URL — it indicates substantial myocardial injury, not incidental elevation. The JACC Scientific Expert Panel identifies myocarditis as a primary consideration in the 100–1,000 ng/L tier, noting substantial overlap with Type 1 MI at this level. Attributing this magnitude of troponin elevation to non-specific viral effects would risk missing a diagnosis with important implications for activity restriction, arrhythmia surveillance, and long-term cardiac monitoring. (J Am Coll Cardiol. 2019;73(9):1059–1077.)`,
-        `This answer correctly synthesises all elements: (1) the troponin trajectory sits in the moderate-to-high tier (22–28× URL), where the JACC Scientific Expert Panel identifies myocarditis as overlapping substantially with Type 1 MI; (2) the ECG pattern is characteristic of myopericarditis, not a coronary territory; (3) the clinical phenotype — young male, post-viral prodrome, pleuropericarditic pain — is the canonical myocarditis presentation; and (4) the dynamic rise confirms active myocardial injury. The term ‘myopericarditis’ is appropriate when both pericardial and myocardial involvement are present. This has direct implications for management: physical activity restriction, anti-inflammatory therapy, and cardiac MRI for characterisation and prognostication. (J Am Coll Cardiol. 2019;73(9):1059–1077.)`,
-        `This answer misapplies the JACC concentration framework. The 1,000 ng/L threshold marks the boundary above which the differential narrows to very large MI or fulminant myocarditis as the primary considerations. Values in the 100–1,000 ng/L range do narrow the differential meaningfully compared to the mild elevation tier. The JACC (2019) framework specifically lists myocarditis, Takotsubo, and acute decompensated heart failure as the dominant entities at this level. The claim that the result provides no discriminating information below 1,000 ng/L misreads the tiered framework.`,
-        `The delta of 160 ng/L does confirm an acute dynamic process. However, the claim that the magnitude is ‘insufficient to characterise the diagnosis or guide management’ is incorrect on both counts. The concentration tier — combined with the clinical context and ECG pattern — does inform the differential (myopericarditis is strongly favoured over Type 1 MI in this setting). The JACC Scientific Expert Panel makes clear that values in this range carry specific diagnostic and prognostic implications that should directly guide investigation strategy. Managing this as a generic ACS protocol without incorporating the concentration tier and clinical context would be inappropriate.`
+        `While the troponin is dynamic and in the moderate-to-high tier, several features argue decisively against a typical ischaemic mechanism. The ECG pattern is characteristic of pericarditis/myopericarditis — diffuse, concave (saddle-shaped) ST elevation across multiple territories with PR depression — rather than the localised, convex ST elevation of a culprit territory. The age, absence of risk factors, post-viral prodrome, and pleuritic/positional pain quality further undermine the Type 1 MI hypothesis.`,
+        `Troponin elevation at this level is not a non-specific or benign finding. 580–740 ng/L represents 22–28× the URL, indicating substantial myocardial injury. The JACC Scientific Expert Panel (2019) identifies myocarditis as a primary consideration in the 100–1,000 ng/L tier. Attributing this magnitude of elevation to non-specific viral effects and deferring investigation would risk missing a diagnosis with important implications for activity restriction, arrhythmia surveillance, and long-term cardiac monitoring.`,
+        `This answer correctly synthesises all elements: the troponin is in the moderate-to-high tier (22–28× URL) where the JACC (2019) identifies myocarditis as overlapping substantially with Type 1 MI; the ECG pattern is characteristic of myopericarditis, not a coronary territory; the clinical phenotype — young male, post-viral prodrome, pleuropericarditic pain — is the canonical myocarditis presentation; and the dynamic rise confirms active myocardial injury rather than a static background. This has direct implications for management: physical activity restriction, anti-inflammatory therapy, and cardiac MRI for characterisation and prognostication.`,
+        `This misapplies the JACC concentration framework. The 1,000 ng/L threshold marks the boundary above which the differential narrows to very large MI or fulminant myocarditis. Values in the 100–1,000 ng/L range do narrow the differential meaningfully — the JACC (2019) framework lists myocarditis, Takotsubo, and acute decompensated heart failure as dominant entities at this level. The moderate tier is clinically informative, not diagnostically neutral.`,
+        `The delta of 160 ng/L does confirm an acute dynamic process. However, the claim that the magnitude is 'insufficient to characterise the diagnosis or guide management' is incorrect. The concentration tier — combined with the clinical context and ECG pattern — does inform the differential (myopericarditis strongly favoured over Type 1 MI). The JACC (2019) makes clear that values in this range carry specific diagnostic and prognostic implications that should directly guide investigation strategy.`
+      ]
+    },
+    {
+      vignette: `A 58-year-old woman with hypertension and hyperlipidaemia presents with a 90-minute history of central chest discomfort radiating to the left arm. Her ECG shows sinus rhythm with non-specific T-wave flattening in the lateral leads.\n\nhs-cTnI (Abbott ARCHITECT, URL 26 ng/L) results:\n0h (presentation): 34 ng/L\n1h: 38 ng/L\n3h: 42 ng/L\n\nThe emergency physician notes the troponin is above the 99th percentile on all three samples and requests your advice on interpretation.`,
+      lo: 'Section B MCQ Q4 — Serial sampling and delta interpretation',
+      question: 'Which of the following statements best describes the interpretation of this troponin trajectory?',
+      options: [
+        `The troponin exceeds the 99th percentile on all three samples. The delta of 8 ng/L over 3 hours represents a 24% relative change, which exceeds the Fourth Universal Definition threshold of >20% for values above the URL, confirming acute myocardial infarction.`,
+        `The absolute delta of 4 ng/L from 0h to 1h does not meet the ESC 0/1-hour algorithm rule-in threshold (≥5 ng/L for Abbott hs-cTnI), and the patient should be classified in the observe zone requiring further clinical assessment.`,
+        `The troponin trajectory shows minimal change over 3 hours (34 → 38 → 42 ng/L) in a patient presenting 90 minutes from symptom onset. This flat pattern in the mild elevation tier is most consistent with chronic myocardial injury or demand-related elevation rather than acute Type 1 MI, though the early presentation time limits interpretation and clinical correlation is essential.`,
+        `The patient presented within 2 hours of symptom onset, placing her in the pre-release window. A repeat sample at 6 hours from presentation is mandatory before any diagnostic conclusion can be drawn.`,
+        `The ESC 0/1-hour algorithm is not applicable because the baseline troponin (34 ng/L) is above the rule-out threshold. The delta of 8 ng/L over 3 hours meets the absolute delta threshold for acute MI on the Abbott assay.`
+      ],
+      correct: 2,
+      explanations: [
+        `This answer misapplies the Fourth Universal Definition delta criteria. The Fourth Universal Definition explicitly states that the demonstration of a rising and/or falling pattern is needed to distinguish acute injury from chronic conditions. A change from 34 → 38 → 42 ng/L over 3 hours is a gradual, minimally dynamic pattern far more consistent with chronic elevation than with acute Type 1 MI. The JACC Scientific Expert Panel (2019) emphasises that absolute delta thresholds are superior to relative percentage changes with high-sensitivity troponin assays. Meeting a mathematical delta threshold does not automatically confirm acute MI.`,
+        `This answer correctly identifies that the 0h-to-1h delta (4 ng/L) does not meet the ESC 0/1-hour algorithm rule-in threshold, and correctly classifies the patient in the observe zone. However, the answer is incomplete because it stops at algorithmic classification without integrating the full 3-hour trajectory. The ESC algorithms are triage tools, not diagnostic endpoints — the full kinetic pattern should be integrated with clinical context.`,
+        `This is the correct interpretation. It integrates four critical elements: the flat kinetic pattern (total delta 8 ng/L over 3 hours, characteristic of chronic or demand elevation); the mild elevation tier (just above URL to ~1.6× URL, with the broadest differential); the timing caveat (90 minutes from symptom onset is at the tail end of the pre-release window — kinetics may still be evolving); and the requirement for clinical correlation. The Fourth Universal Definition requires clinical evidence of acute myocardial ischaemia in addition to troponin elevation and dynamic change. This is the zone where algorithmic approaches fail and clinical reasoning is essential.`,
+        `This misapplies the concept of the pre-release window. The pre-release window refers to the period <1–2 hours from symptom onset. At 90 minutes, the patient is at the tail end of the window, not firmly within it. Furthermore, three serial samples over 3 hours provide meaningful kinetic data that should be integrated with clinical context.`,
+        `Three errors: (1) The ESC 0/1-hour algorithm applies to all patients and has three zones — rule-out, observe, and rule-in. A baseline above the rule-out threshold classifies the patient in the observe or rule-in zone, but the algorithm remains applicable. (2) The 0/3-hour algorithm has lower sensitivity than 0/1-hour and should only be used when 0/1-hour sampling is not feasible. (3) There is no universally validated absolute delta threshold of 8 ng/L for a 0/3-hour protocol on the Abbott assay.`
+      ]
+    },
+    {
+      vignette: `A 42-year-old man with no cardiovascular risk factors presents with a 6-hour history of sharp left-sided chest pain, worse with deep inspiration. He describes the pain as starting suddenly while playing tennis. He has no family history of premature coronary disease. His vital signs are normal. His ECG shows sinus rhythm with no acute ischaemic changes. His hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) at presentation is 3 ng/L.\n\nThe emergency physician asks whether this single troponin result is sufficient to rule out myocardial infarction and allow discharge.`,
+      lo: 'Section B MCQ Q5 — Pre-test probability and single-sample rule-out',
+      question: 'Which of the following statements best describes the appropriate interpretation and management?',
+      options: [
+        `A single hs-cTnI of 3 ng/L is below the 99th percentile and effectively rules out myocardial infarction. The patient can be discharged without further troponin sampling, as the NPV of a normal troponin at 6 hours exceeds 99% regardless of clinical context.`,
+        `A single hs-cTnI of 3 ng/L at 6 hours from symptom onset, in a low-risk patient with a non-ischaemic ECG and atypical symptoms, achieves a negative predictive value exceeding 99.5% for acute MI or cardiac death at 30 days. Single-sample rule-out is appropriate in this context, though it does not exclude other causes of chest pain.`,
+        `Single-sample rule-out strategies should not be used in patients presenting within 6 hours of symptom onset due to the pre-release window. A repeat troponin at 3 hours from presentation (9 hours from symptom onset) is required before myocardial infarction can be excluded.`,
+        `The troponin of 3 ng/L is detectable and therefore indicates some degree of myocardial injury. Serial sampling is required to confirm stability before discharge can be considered.`,
+        `A single hs-cTnI of 3 ng/L does not meet the validated single-sample rule-out threshold of <5 ng/L used in the ESC 0/1-hour algorithm. A repeat sample at 1 hour is required to apply the ESC rapid rule-out pathway.`
+      ],
+      correct: 1,
+      explanations: [
+        `This answer makes a critical error by stating that NPV 'exceeds 99% regardless of clinical context.' NPV is highly dependent on pre-test probability. A troponin of 3 ng/L in a low-risk patient achieves NPV >99.5%, but the same value in a high-risk patient (known coronary disease, typical anginal symptoms, ischaemic ECG changes) would have a substantially lower NPV. Single-sample rule-out requires both an appropriate troponin threshold and a minimum time from symptom onset (≥3 hours), combined with clinical assessment.`,
+        `This is the correct answer. It integrates all critical elements: (1) hs-cTnI of 3 ng/L is well below the validated single-sample rule-out threshold of <5 ng/L; (2) the patient presented 6 hours from symptom onset, which is ≥3 hours and outside the pre-release window; (3) the patient is low-risk (young, no risk factors, no family history, atypical pleuritic symptoms, non-ischaemic ECG); (4) single-sample rule-out rules out acute MI — not all pathology. Evidence: hs-cTnI <5 ng/L at presentation (≥3 hours from onset) achieves sensitivity 98.8%, NPV 99.7% for acute MI or death at 30 days. The HiSTORIC randomised trial (n=31,492) confirmed 30-day MI or cardiac death rate of 0.3% in the rule-out group.`,
+        `This misapplies the timing restriction. The restriction is that single-sample rule-out should not be used in patients presenting <2–3 hours from symptom onset, not <6 hours. At 6 hours from symptom onset, the patient is well outside the pre-release window. By 6 hours, if significant acute myocardial injury were occurring, troponin would be elevated above the rule-out threshold.`,
+        `This reflects a fundamental misunderstanding of the limit of detection. The LoD for Abbott ARCHITECT hs-cTnI is approximately 1.1–1.9 ng/L — well below 3 ng/L. The 99th percentile URL (26 ng/L) is the threshold that defines myocardial injury, not the LoD. Approximately 50–60% of healthy individuals have detectable hs-cTn — this is expected biology, not pathology.`,
+        `This misapplies the ESC 0/1-hour algorithm to a single-sample rule-out scenario. These are different strategies. Furthermore, the statement that '3 ng/L does not meet the threshold of <5 ng/L' is mathematically incorrect: 3 ng/L is less than 5 ng/L, so it does meet the threshold.`
       ]
     }
   ]
 });
 
-
 SECTIONS.push({
   id: '2C',
   theme: 2,
   title: 'Troponin Kinetics',
-  subtitle: 'Serial sampling, the clock from symptom onset, and delta interpretation',
-  icon: '\u23F1',
-  iconClass: 'teal',
-  summary: `<div class="sum-hero"><div class="sum-tag">Executive Summary &middot; Theme 2 Section C</div><h2>Troponin Kinetics</h2><p>Consultant-Level Clinical Reasoning</p></div>
-<div class="sum-purpose"><strong>The consultant’s reframe: the curve is the information, not the number.</strong> A single troponin is a snapshot. The trajectory across serial measurements — referenced to the time of symptom onset — is where the diagnostic signal lies. Every clinical decision about troponin should be anchored to where the patient sits on the kinetic curve at the time of sampling.</div>
-<div class="sum-card"><h3>Step 1 — Understand the Biology</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Cytosolic pool — 4–5%</th><th>Sarcomeric pool — 95–96%</th></tr></thead><tbody><tr><td>Free in cytoplasm. Released within 1–3h of ischaemia by passive diffusion through disrupted membrane. → Responsible for early detectable rise. Underpins rapid rule-out algorithms.</td><td>Bound to contractile apparatus. Released slowly over hours–days as necrotic myocytes degrade. → Drives sustained rise and peak at 12–24h. Peak magnitude = infarct size surrogate.</td></tr></tbody></table></div><div class="callout-warn"><strong>Reperfusion washout:</strong> Successful reperfusion produces an earlier, higher peak (6–12h vs 12–24h without reperfusion). This is expected biology, not procedural injury. Type 4a MI requires a new rise from a normal pre-procedural baseline.</div></div>
-<div class="sum-card"><h3>Step 2 — Set the Clock Correctly</h3><h4>The sampling interval runs from symptom onset, not from arrival</h4><div class="sum-text"><p>The single most common implementation error in serial troponin is measuring the delta from the time of blood draw rather than from the time of symptom onset.</p></div><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Time from symptom onset at first sample</th><th>What the result means</th><th>Appropriate strategy</th></tr></thead><tbody><tr><td>&lt;1h</td><td>Pre-release window — uninformative regardless of value</td><td>Serial sampling mandatory; 0/3h minimum</td></tr><tr><td>1–3h</td><td>Early release — some cytosolic troponin detectable if significant injury</td><td>0/1h or 0/2h delta algorithms; 0/3h if unavailable</td></tr><tr><td>≥3h</td><td>Post-release — cytosolic pool equilibrated; high NPV for rule-out if below threshold</td><td>Single-sample rule-out applicable in low–intermediate risk</td></tr><tr><td>Uncertain onset</td><td>Treat as ≤2h</td><td>Serial sampling with ≥0/3h interval; do not apply single-sample rule-out</td></tr></tbody></table></div><div class="callout-danger"><strong>The late presenter trap:</strong> A patient presenting at 6h from onset has their 6h sample on arrival. A repeat 1h later is a 7h sample on a descending curve. A small or absent delta at this point does not rule out MI — it reflects where you are on the kinetics, not the absence of injury.</div></div>
-<div class="sum-card"><h3>Step 3 — Interpret the Delta Correctly</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Initial value</th><th>Required change</th><th>Preferred method</th><th>Clinical implication</th></tr></thead><tbody><tr><td>≤ URL (normal)</td><td>Relative ≥50–60%</td><td>Percentage delta</td><td>Large relative change needed — small absolute changes at low baseline are likely noise</td></tr><tr><td>&gt; URL (elevated)</td><td>&gt;20% relative OR assay-specific absolute delta</td><td>Absolute delta may be superior</td><td>Lower relative threshold acceptable — absolute delta better validated in this range</td></tr><tr><td>Markedly elevated (&gt;5× URL)</td><td>Any further rise = ongoing acute; fall &gt;20% from peak = resolving</td><td>Both usable</td><td>At this level, the dynamic pattern is itself diagnostic; magnitude indicates injury burden</td></tr></tbody></table></div><div class="callout-warn"><strong>Crossing the threshold tells you the process is dynamic.</strong> The magnitude tells you how large and how acute. When the two diverge, examine the raw values and clinical context — do not resolve the tension mechanically.</div></div>
-<div class="sum-card"><h3>Step 4 — Know When to Stop</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Objective</th><th>Stopping criterion</th><th>Common mistake</th></tr></thead><tbody><tr><td><strong>Rule-out (diagnostic)</strong></td><td>Stop when two below-threshold samples have been obtained at appropriate intervals with low–intermediate pre-test probability.</td><td>Continuing to sample beyond the diagnostic window, adding cost without clinical benefit.</td></tr><tr><td><strong>Characterisation (prognostic)</strong></td><td>Stop when the peak is identified (value stops rising and begins to fall). Typically 18–24h post-onset without reperfusion; earlier with reperfusion.</td><td>Waiting for the peak before making management decisions in a clearly established, markedly elevated MI.</td></tr></tbody></table></div><div class="callout-navy"><strong>Local institutional practice:</strong> Single-sample rule-out is not implemented at this institution. A minimum of two serial hs-troponin samples is required, with the second sample drawn at least 3 hours after the first (0/3h protocol). This aligns with ACC/AHA recommendations.</div></div>`,
+  subtitle: 'Serial sampling, kinetic awareness, and institutional practice',
+  icon: '\uD83D\uDCC8',
+  iconClass: 'orange',
+  summary: `
+<div class="sum-hero">
+  <div class="sum-tag">Executive Summary &middot; Theme 2 Section C</div>
+  <h2>Troponin Kinetics</h2>
+  <p>Consultant-Level Clinical Reasoning</p>
+</div>
+<div class="sum-purpose">
+  <strong>The consultant&#8217;s reframe: the curve is the information, not the number.</strong> A single troponin is a snapshot. The trajectory across serial measurements &#8212; referenced to the time of symptom onset &#8212; is where the diagnostic signal lies.
+</div>
+<div class="sum-card">
+  <h3>Step 1 &#8212; Understand the Biology</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Cytosolic pool (~4&#8211;5%)</th><th>Sarcomeric pool (~95&#8211;96%)</th></tr></thead>
+    <tbody>
+      <tr><td>Free in cytoplasm. Released within <strong>1&#8211;3h</strong> of ischaemia. Responsible for early detectable rise. Underpins rapid rule-out algorithms.</td><td>Bound to contractile apparatus. Released slowly over hours&#8211;days as necrotic myocytes degrade. Drives sustained rise and peak at 12&#8211;24h. Peak magnitude correlates with infarct size.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy"><strong>Reperfusion washout:</strong> Successful reperfusion produces an earlier, higher peak (6&#8211;12h vs 12&#8211;24h without reperfusion). This is expected biology, not procedural injury. Type 4a MI (procedural injury) requires a troponin rise above 5&#215; URL from a normal pre-procedural baseline &#8212; or, if baseline is already elevated and stable, a post-procedure rise &gt;20% to an absolute value &gt;5&#215; URL plus evidence of new myocardial ischaemia.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 2 &#8212; Set the Clock Correctly</h3>
+  <div class="callout-warn">The single most common implementation error in serial troponin is measuring the delta from the time of blood draw rather than from the time of symptom onset. The kinetic algorithms are designed around onset-to-sample time, not door-to-sample time.</div>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Time from symptom onset at first sample</th><th>What the result means</th><th>Appropriate strategy</th></tr></thead>
+    <tbody>
+      <tr><td><strong>&lt;2h</strong></td><td>Pre-release window &#8212; may be uninformative if below detection threshold</td><td>Serial sampling mandatory; 0/1h or 0/2h if hs-cTn available</td></tr>
+      <tr><td><strong>2&#8211;3h</strong></td><td>Early release &#8212; cytosolic troponin detectable if significant injury</td><td>0/1h or 0/2h delta algorithms; 1&#8211;2h interval for hs-cTn</td></tr>
+      <tr><td><strong>&#8805;3h</strong></td><td>Post-release &#8212; high NPV for rule-out if below threshold</td><td>Single-sample rule-out applicable in low&#8211;intermediate risk with normal ECG</td></tr>
+      <tr><td><strong>Uncertain onset</strong></td><td>Treat as &lt;2h &#8212; cannot rely on timing assumptions</td><td>Serial sampling; do not apply single-sample rule-out</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy"><strong>Late presenter example:</strong> A patient presenting at 6h from onset: their admission troponin is already their 6h sample. A repeat 1 hour later is a 7h sample on a descending curve. A small or absent delta at this point does not rule out MI &#8212; it reflects where you are on the kinetics, not the absence of injury.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 3 &#8212; Interpret the Delta Correctly</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Initial value</th><th>Required change</th><th>Clinical implication</th></tr></thead>
+    <tbody>
+      <tr><td><strong>&#8804; URL (normal)</strong></td><td>Relative &#8805;50&#8211;60%</td><td>Large relative change needed &#8212; small absolute changes at low baseline are likely noise</td></tr>
+      <tr><td><strong>&gt; URL (elevated)</strong></td><td>&gt;20% relative OR assay-specific absolute delta (absolute delta preferred for hs-cTn)</td><td>Lower relative threshold acceptable; absolute delta better validated per Fourth Universal Definition</td></tr>
+      <tr><td><strong>Markedly elevated (&gt;5&#215; URL)</strong></td><td>Any further rise = ongoing acute; fall &gt;20% from peak = resolving</td><td>At this level, the dynamic pattern is itself diagnostic; magnitude indicates injury burden</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy">Crossing the threshold tells you the process is dynamic. The magnitude tells you how large and how acute. Use absolute delta for guideline compliance; use percentage delta when sampling intervals are imprecise or baseline is near-normal.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 4 &#8212; Know When to Stop</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Objective</th><th>Stopping criterion</th><th>Common mistake</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rule-out (diagnostic)</strong></td><td>Stop when the clinical question is safely answered &#8212; typically when two below-threshold samples have been obtained at appropriate intervals with low&#8211;intermediate pre-test probability.</td><td>Continuing to sample beyond the diagnostic window, adding cost and confusion without clinical benefit.</td></tr>
+      <tr><td><strong>Characterisation (prognostic)</strong></td><td>Stop when the peak is identified if prognostic information is needed. Typically 12&#8211;24h from onset without reperfusion; 6&#8211;12h with reperfusion.</td><td>Waiting for the peak before making management decisions in a clearly established, markedly elevated MI.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-warn"><strong>Local institutional practice:</strong> Single-sample rule-out is not implemented at this institution. A minimum of two serial hs-troponin samples is required, with the second sample drawn at least 3 hours after the first (0/3h protocol). This aligns with ACC/AHA recommendations. The sampling interval is referenced to symptom onset, not to arrival time.</div>
+</div>
+  `,
   questions: [
     {
-      vignette: `A 58-year-old man with known hypertension and hyperlipidaemia wakes at 06:00 with central chest pressure. He takes antacids and waits, hoping it will settle. He calls an ambulance at 11:30 and arrives in the ED at 12:00 — six hours after symptom onset. On arrival, his ECG shows sinus rhythm with no new ischaemic changes. His hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) is 38 ng/L. A junior registrar requests a repeat troponin at 1 hour. The result returns at 42 ng/L. The registrar says: “The delta is only 4 ng/L — that’s less than 20%. It’s not a significant rise, so we can probably exclude an acute MI.”
-
-Time from onset: 06:00 (symptom onset) — 12:00 (38 ng/L on arrival, effectively 6h sample) — 13:00 (42 ng/L, effectively 7h sample)`,
-      lo: `Question 1 of 2 — Late presenter: where are we on the kinetic curve?`,
-      question: `What is the most appropriate response to the registrar’s conclusion?`,
+      vignette: `A 58-year-old man with known hypertension and hyperlipidaemia wakes at 06:00 with central chest pressure. He takes antacids and waits, hoping it will settle. He calls an ambulance at 11:30 and arrives in the ED at 12:00 — six hours after symptom onset. On arrival, his ECG shows sinus rhythm with no new ischaemic changes. His hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) is 38 ng/L.\n\nA junior registrar requests a repeat troponin 1 hour after the first sample. The result returns at 42 ng/L.\n\nTimeline:\n- 06:00 (symptom onset): Central chest pressure begins\n- 12:00 (6h from onset — ED presentation): 38 ng/L\n- 13:00 (7h from onset — 1h repeat): 42 ng/L\n\nThe registrar says: "The delta is only 4 ng/L — that's less than 20%. It's not a significant rise, so we can probably exclude an acute MI."`,
+      lo: 'Section C MCQ Q1 — Late presenter — where are we on the kinetic curve?',
+      question: `What is the most appropriate response to the registrar's conclusion?`,
       options: [
         `Agree. A delta of 4 ng/L over 1 hour does not meet the absolute or relative threshold for a significant dynamic change on the Abbott assay, making NSTEMI unlikely.`,
-        `Disagree. The 1-hour repeat was taken at 7 hours from symptom onset. On the descending phase of the kinetic curve, a small delta does not reflect the absence of a prior rise — it reflects where we are in time. A further sample and clinical review are required before excluding acute MI.`,
+        `Disagree. The 1-hour repeat was taken at 7 hours from symptom onset. Patients presenting 6 hours after symptom onset are likely on the descending or plateau phase of the kinetic curve. A small delta at this point does not reflect the absence of a prior rise — it reflects where we are in time. The 0/1h delta algorithm is validated for patients sampled near symptom onset, not for late presenters. Further clinical review and appropriately timed sampling are required before excluding acute MI.`,
         `Agree, provided the clinical history is not compelling. A mildly elevated but non-dynamic troponin in the mild tier is most consistent with a non-ischaemic cause and does not require further sampling.`,
         `Disagree. The absolute delta threshold for the Abbott assay at 1 hour is 6 ng/L. A delta of 4 ng/L is below this, but the percentage change of approximately 10% approaches the 20% relative threshold. A third sample at a further 1 hour should be taken to see if the percentage continues to rise.`,
         `Disagree. Both troponin values exceed the URL and this pattern confirms acute myocardial injury consistent with NSTEMI. The patient should be referred for urgent coronary evaluation without waiting for a further sample.`
       ],
       correct: 1,
       explanations: [
-        `This answer applies the delta threshold correctly but to the wrong clinical situation. The 0/1h absolute delta algorithm (threshold of 6 ng/L for the Abbott assay) was validated for patients sampled at 0 and 1 hour from presentation, where presentation is close to symptom onset. In this patient, the two samples were taken at 6 and 7 hours from symptom onset — both on the descending or plateau phase of the kinetic curve. A small delta at this point does not mean there was no prior rise; it means we are measuring troponin as it is falling or plateauing.`,
-        `This answer correctly identifies the fundamental error: the delta framework presupposes samples taken at or near symptom onset. The troponin clock runs from symptom onset, not from arrival. A patient presenting 6 hours after onset has effectively already provided their 6-hour troponin on arrival. A repeat 1 hour later is a 7-hour sample taken on the descending or plateau phase of the curve, where the delta will inevitably be small regardless of whether an acute MI occurred. Applying a 1-hour delta rule to this pair of samples is a methodological error. Per local institutional practice (aligned with ACC/AHA recommendations), at least two serial samples are required, and the sampling interval must be interpreted in the context of the time from symptom onset. A further clinical review and appropriately timed repeat sample is the correct next step.`,
-        `A troponin of 38–42 ng/L represents approximately 1.5× the URL on Abbott hs-cTnI. The clinical context here is a 58-year-old with cardiovascular risk factors presenting with a 6-hour history of central chest pressure. Dismissing the result as likely non-ischaemic without further characterisation is premature and potentially unsafe. The flat delta does not indicate a stable chronic process — it indicates late presentation on a descending curve.`,
-        `This answer recognises the registrar’s error but proposes the wrong solution. Taking a third 1-hour sample at 8 hours from onset would produce another delta on the descending curve — likely equally small and equally uninterpretable within a short-interval delta framework. The problem is not insufficient samples; it is that the short-interval delta algorithm is being applied to a late-presenting patient where it was never validated.`,
-        `While the troponin values exceed the URL on both samples, a single pattern of two mildly elevated values does not in isolation confirm NSTEMI. The Fourth Universal Definition requires both myocardial injury and evidence of an acute ischaemic aetiology — which requires either a dynamic rise/fall pattern, ischaemic symptoms, ischaemic ECG changes, or imaging evidence. The ECG is non-diagnostic and the kinetic pattern at 6–7 hours from onset is not interpretable using standard algorithms. Escalating to urgent coronary evaluation without completing the clinical and biochemical assessment is premature. However, this patient does require continued careful evaluation and should not be discharged.`
+        `This reasoning applies correctly to an isolated first sample where the delta framework might apply — but critically misunderstands the timing context. The 0/1h absolute delta algorithm was validated for patients sampled at 0 and 1 hour from presentation, where presentation is close to symptom onset. In this patient, the two samples were taken at 6 and 7 hours from symptom onset — both on the descending or plateau phase of the kinetic curve. A small delta at this point does not mean there was no prior rise; it means we are measuring troponin as it is falling or plateauing. The absence of a large delta now tells us nothing about what happened between hours 1 and 6.`,
+        `This is the correct answer. It identifies the fundamental error: the delta framework presupposes samples taken at or near symptom onset. The troponin clock runs from symptom onset, not from arrival. A patient presenting 6 hours after onset has effectively already provided their 6-hour troponin on arrival. A repeat 1 hour later is a 7-hour sample taken on the descending or plateau phase of the curve, where the delta will inevitably be small regardless of whether an acute MI occurred. The ESC 0/1h algorithm is validated for patients sampled near symptom onset, not for late presenters on the downslope. Per local institutional practice (aligned with ACC/AHA), the sampling interval must be interpreted in the context of the time from symptom onset.`,
+        `A troponin of 38–42 ng/L represents approximately 1.5× the URL. While the differential is broad at this level, the clinical context is a 58-year-old with cardiovascular risk factors and a 6-hour history of central chest pressure. Dismissing the result as likely non-ischaemic without further characterisation is premature and potentially unsafe. The flat delta does not indicate a stable chronic process — it indicates late presentation on a descending curve.`,
+        `This recognises the registrar's error but proposes the wrong solution. Taking a third 1-hour sample at 8 hours from onset would produce another delta on the descending curve — likely equally small and equally uninterpretable. The problem is not insufficient samples; it is that the short-interval delta algorithm is being applied to a late-presenting patient where it was never validated.`,
+        `While the troponin values exceed the URL on both samples, a single pattern of two mildly elevated values does not in isolation confirm NSTEMI. The Fourth Universal Definition requires both myocardial injury and evidence of an acute ischaemic aetiology — requiring a dynamic rise/fall pattern, ischaemic symptoms, ischaemic ECG changes, or imaging evidence. Escalating to urgent coronary evaluation without completing the clinical and biochemical assessment is premature.`
       ]
     },
     {
-      vignette: `A 45-year-old woman with no prior cardiac history presents to the ED at 08:15 with a 45-minute history of central chest tightness and diaphoresis. She is haemodynamically stable. Her ECG shows sinus rhythm with no ischaemic changes. Her hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) is drawn at 08:20, returning at <2 ng/L (below the limit of detection). A nurse asks: “The troponin is completely undetectable — can we reassure her and begin the discharge process?”`,
-      lo: `Question 2 of 2 — Early presenter: the pre-release window and serial sampling`,
-      question: `What is the most appropriate response?`,
+      vignette: `A 45-year-old woman with no prior cardiac history presents to the ED at 08:15 with a 45-minute history of central chest tightness and diaphoresis. She is haemodynamically stable. Her ECG shows sinus rhythm with no ischaemic changes. Her hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) is drawn at 08:20, returning at <2 ng/L (below the limit of detection).\n\nA nurse asks: "The troponin is completely undetectable — can we reassure her and begin the discharge process?"\n\nNote: There may be more than one correct answer. Select all that apply.`,
+      lo: 'Section C MCQ Q2 — Early presenter — the pre-release window and serial sampling',
+      question: `Which of the following responses are correct? (Select all that apply)`,
       options: [
         `Yes. A troponin below the limit of detection has a negative predictive value exceeding 99% for NSTEMI and the patient can be reassured. Discharge with primary care follow-up is appropriate.`,
-        `No. The sample was taken only 45 minutes from symptom onset, which is within the pre-release window. Cytosolic troponin has had insufficient time to reach detectable concentrations even if significant myocardial injury is occurring. A single below-LoD result at this time point cannot be used to exclude acute MI. Additionally, local institutional practice requires a minimum of two serial hs-troponin samples at a 0/3h interval — a repeat sample at approximately 11:20 is required before any disposition decision.`,
+        `No. The sample was taken only 45 minutes from symptom onset, which is well within the pre-release window (<2 hours from onset). Cytosolic troponin has had insufficient time to reach detectable concentrations even if significant myocardial injury is occurring. A single below-LoD result at this time point cannot be used to exclude acute MI — the result is uninformative, not reassuring.`,
         `No. The result is below the LoD but the ECG has not shown dynamic changes. A repeat ECG at 30 minutes is the priority and should be performed before any troponin decision is made.`,
         `Yes, provided the clinical story is atypical enough and the HEART score is low. In a 45-year-old with no cardiac history, a single below-LoD troponin with a low-risk profile is sufficient for discharge under local protocols.`,
-        `No. A single troponin sample is insufficient regardless of the result. Local institutional practice requires a minimum of two serial hs-troponin samples, with the second drawn at least 3 hours after the first (0/3h protocol). A repeat sample at approximately 11:20 is required before any disposition decision.`
+        `No. A single troponin sample is insufficient regardless of the result. Local institutional practice requires a minimum of two serial hs-troponin samples, with the second drawn at least 3 hours after the first (0/3h protocol). A repeat sample at approximately 11:20 (3 hours 45 minutes from symptom onset) is required before any disposition decision.`
       ],
       correct: 1,
       explanations: [
-        `The NPV of a below-LoD troponin result exceeding 99% applies specifically to patients presenting 3 or more hours after symptom onset. This patient presented 45 minutes from onset — well within the pre-release window. At this early time point, cytosolic troponin is still being released into the bloodstream and concentrations may not yet have reached the assay’s limit of detection. A below-LoD result here is physiologically uninformative, not reassuring. Applying the 99%+ NPV figure to this scenario is a direct misapplication of the validation cohort data.`,
-        `This is the most complete answer. It addresses both the biological reason why the single result cannot be acted upon (pre-release window at 45 minutes from onset: cytosolic troponin has not yet had time to reach detectable concentrations) and the institutional policy reason (minimum 2 serial samples, 0/3h framework). The cytosolic pool of troponin — approximately 4–5% of total cellular troponin — begins diffusing out of the injured myocyte within the first 1–3 hours of ischaemia. At 45 minutes from onset, this process is still in its very early phase. Even in a patient experiencing a significant acute MI, hs-cTnI concentrations may still be below the LoD. The below-LoD result is a ‘too early to tell’ result, not a ‘safe to discharge’ result. The repeat sample should be drawn at approximately 11:20.`,
+        `The NPV of a below-LoD troponin result exceeding 99% applies specifically to patients presenting 3 or more hours after symptom onset. This patient presented 45 minutes from onset — well within the pre-release window. At this early time point, cytosolic troponin is still being released and concentrations may not yet have reached the assay's limit of detection even in a patient experiencing a significant acute MI. A below-LoD result here is physiologically uninformative, not reassuring.`,
+        `Correct. The cytosolic pool of troponin (~4–5% of total cellular troponin) begins diffusing out of the injured myocyte within the first 1–3 hours of ischaemia. At 45 minutes from onset, this process is still in its very early phase. The below-LoD result is a 'too early to tell' result, not a 'safe to discharge' result. The pre-release window threshold is <2 hours from symptom onset per the Fourth Universal Definition and the 2025 ACC/AHA guideline.`,
         `Repeat ECG assessment is a reasonable component of the overall evaluation and should continue alongside troponin sampling — but it does not replace or precede the troponin decision. The troponin sampling plan should be established immediately regardless of ECG findings. The ECG is a parallel investigation, not a prerequisite for the troponin plan.`,
-        `Single-sample rule-out strategies are not endorsed by local institutional practice. This institution follows a protocol aligned with ACC/AHA recommendations, requiring a minimum of two serial hs-troponin samples with the second drawn at least 3 hours after the first. This is independent of the clinical risk profile or HEART score. The HEART score informs disposition after adequate serial sampling, not as a substitute for it.`,
-        `This answer correctly states the institutional requirement but does not address the biological reason why the below-LoD result cannot be acted upon in this specific case. Option B is the more complete answer as it explains both the kinetic/biological rationale (pre-release window) and the institutional protocol requirement.`
+        `Single-sample rule-out strategies are not endorsed by local institutional practice regardless of clinical risk profile or HEART score. This institution follows a protocol aligned with ACC/AHA recommendations, requiring a minimum of two serial hs-troponin samples with the second drawn at least 3 hours after the first. Furthermore, the 2021 ACC/AHA Chest Pain Guideline states that single-sample rule-out using below-LoD hs-cTn is reasonable only for patients with symptoms that began at least 3 hours before ED arrival (Class IIa, LOE B-NR) — this patient presented at 45 minutes.`,
+        `Correct. This answer states the institutional requirement: a minimum of two serial hs-troponin samples with the second taken at least 3 hours after the first (0/3h framework), aligned with ACC/AHA recommendations. The first sample was drawn at 08:20 (45 minutes from onset). The second sample should be drawn at approximately 11:20, corresponding to approximately 3 hours 45 minutes from symptom onset — well into the window where a meaningful rise would be expected if significant myocardial injury has occurred. The below-LoD first sample makes the second sample more, not less, important.`
       ]
     }
   ]
 });
 
-
 SECTIONS.push({
   id: '2D',
   theme: 2,
   title: 'Pre-Test Probability & NPV',
-  subtitle: 'Why the same negative troponin means different things in different patients',
+  subtitle: 'A negative troponin is not the same statement in every patient',
   icon: '\uD83C\uDFAF',
-  iconClass: 'rose',
-  summary: `<div class="sum-hero"><div class="sum-tag">Executive Summary &middot; Theme 2 Section D</div><h2>Pre-Test Probability &amp; NPV</h2><p>Consultant-Level Clinical Reasoning</p></div>
-<div class="sum-purpose"><strong>The consultant’s reframe: a negative troponin is not the same statement in every patient.</strong> The NPV of serial hs-troponin is not a property of the test. It is a function of the pre-test probability of the patient being tested.</div>
-<div class="sum-card"><h3>Step 1 — What the result can and cannot exclude</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Serial negative hs-Tn EXCLUDES</th><th>Serial negative hs-Tn does NOT exclude</th></tr></thead><tbody><tr><td>NSTEMI — requires troponin elevation by definition</td><td>Unstable angina — produces no troponin rise by definition (~4% of hs-Tn rule-outs are ultimately diagnosed with UA)</td></tr><tr><td>MI or cardiac death at 30 days (in low–intermediate risk, NPV 99.5–99.9%)</td><td>NSTEMI in high-risk patients — miss rate up to 3.4% even with serial negative results</td></tr></tbody></table></div><div class="callout-warn"><strong>Unstable angina persists in the hs-Tn era.</strong> Approximately 4% of patients ruled out by hs-troponin algorithms are ultimately diagnosed with ACS, predominantly UA. This is not an assay failure — UA does not cause troponin elevation by definition. The clinical assessment must identify this group.</div></div>
-<div class="sum-card"><h3>Step 2 — NPV by pre-test risk stratum</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Patient population</th><th>NPV</th><th>Miss rate</th><th>Clinical action on negative result</th></tr></thead><tbody><tr><td>Low risk — no CAD, few risk factors</td><td>99.5–99.9%</td><td>0.1–0.5%</td><td>Discharge with safety netting appropriate</td></tr><tr><td>Intermediate risk — risk factors, no known CAD</td><td>98.5–99.5%</td><td>0.5–1.5%</td><td>Risk score + ECG govern disposition</td></tr><tr><td>High risk — known CAD, prior MI, severe stenosis</td><td>96.6%</td><td>3.4%</td><td>Negative troponin insufficient — further evaluation required</td></tr></tbody></table></div></div>
-<div class="sum-card"><h3>Three Cognitive Traps to Avoid</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Applying population NPV to a high-risk individual</th><th>Conflating rule-out of NSTEMI with rule-out of ACS</th><th>Using troponin as the sole arbiter of discharge</th></tr></thead><tbody><tr><td>Quoting ‘99.5% NPV’ to a patient with known three-vessel CAD and prior MI. That NPV does not apply — theirs is 96.6%.</td><td>A negative troponin definitively rules out NSTEMI. It does not rule out unstable angina, obstructive CAD, or future events.</td><td>Typical symptoms + new ECG changes + high-risk profile demands further evaluation even when serial troponin is negative.</td></tr></tbody></table></div></div>
-<div class="sum-card"><h3>The HEART Score — Quick Reference</h3><div class="sum-text"><p>In patients with serial negative troponin, the risk score — not the troponin result — governs the next clinical decision.</p></div><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>HEART score</th><th>Risk category</th><th>30-day MACE rate</th><th>Recommended action</th></tr></thead><tbody><tr><td>0–3</td><td>Low</td><td>&lt;2%</td><td>Discharge with outpatient follow-up. CTCA within 4–6 weeks reasonable.</td></tr><tr><td>4–6</td><td>Intermediate</td><td>12–16%</td><td>Observation and further evaluation. Inpatient or early outpatient stress testing or CTCA.</td></tr><tr><td>7–10</td><td>High</td><td>50–65%</td><td>Urgent cardiac evaluation. Inpatient management warranted. Cardiology review and expedited coronary assessment.</td></tr></tbody></table></div></div>`,
+  iconClass: 'purple',
+  summary: `
+<div class="sum-hero">
+  <div class="sum-tag">Executive Summary &middot; Theme 2 Section D</div>
+  <h2>Pre-Test Probability &amp; NPV</h2>
+  <p>Consultant-Level Clinical Reasoning</p>
+</div>
+<div class="sum-purpose">
+  <strong>The consultant&#8217;s reframe:</strong> The NPV of serial hs-troponin is not a property of the test. It is a function of the pre-test probability of the patient being tested. The clinical question is not &#8220;is the troponin negative?&#8221; but &#8220;what does a negative troponin mean in this specific patient?&#8221;
+</div>
+<div class="sum-card">
+  <h3>Step 1 &#8212; Establish What the Result Can and Cannot Exclude</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Serial negative hs-Tn EXCLUDES</th><th>Serial negative hs-Tn does NOT exclude</th></tr></thead>
+    <tbody>
+      <tr><td>NSTEMI &#8212; requires troponin elevation above the 99th percentile URL by definition</td><td>Unstable angina &#8212; produces no troponin rise by definition. Prevalence among hs-Tn rule-outs is 0.2% when strict criteria applied (RACE-IT, n=32,608).</td></tr>
+      <tr><td>MI or cardiac death at 30 days (in low&#8211;intermediate risk, NPV 99.5&#8211;99.9%)</td><td>NSTEMI in high-risk patients with known CAD &#8212; miss rate up to 3.4% even with serial negative results (NPV 96.6%), falling below the accepted 99% safe-discharge threshold</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+<div class="sum-card">
+  <h3>Step 2 &#8212; Apply the Correct NPV to the Correct Patient</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Patient population</th><th>NPV</th><th>Miss rate</th><th>Clinical action on negative result</th></tr></thead>
+    <tbody>
+      <tr><td>Low risk &#8212; no CAD, few risk factors</td><td>99.5&#8211;99.9%</td><td>0.1&#8211;0.5%</td><td>Discharge with safety netting appropriate</td></tr>
+      <tr><td>Intermediate risk &#8212; risk factors, no known CAD</td><td>98.5&#8211;99.5%</td><td>0.5&#8211;1.5%</td><td>Risk score + ECG govern disposition</td></tr>
+      <tr><td><strong>High risk &#8212; known CAD</strong> (prior MI, prior revascularisation, or &#8805;70% stenosis)</td><td><strong>96.6%</strong></td><td><strong>3.4%</strong></td><td>Negative troponin insufficient for safe discharge using troponin-only algorithms. Falls below the 99% NPV safe-discharge threshold. (STOP-CP, JAMA Cardiology 2023)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+<div class="sum-card">
+  <h3>The HEART Score &#8212; Risk Stratification Tool</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Letter</th><th>Component</th><th>Scoring criteria</th></tr></thead>
+    <tbody>
+      <tr><td><strong>H</strong></td><td>History</td><td>2 = Highly suspicious (typical) | 1 = Moderately suspicious | 0 = Slightly suspicious</td></tr>
+      <tr><td><strong>E</strong></td><td>ECG</td><td>2 = Significant ST deviation | 1 = LBBB, LVH, non-specific repolarisation | 0 = Normal</td></tr>
+      <tr><td><strong>A</strong></td><td>Age</td><td>2 = &#8805;65 | 1 = 45&#8211;64 | 0 = &lt;45</td></tr>
+      <tr><td><strong>R</strong></td><td>Risk factors</td><td>2 = &#8805;3 risk factors OR known atherosclerotic disease | 1 = 1&#8211;2 risk factors | 0 = None</td></tr>
+      <tr><td><strong>T</strong></td><td>Troponin</td><td>2 = &gt;3&#215; URL | 1 = 1&#8211;3&#215; URL | 0 = &#8804; URL</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>HEART score</th><th>Risk</th><th>30-day MACE</th><th>Recommended action</th></tr></thead>
+    <tbody>
+      <tr><td><strong>0&#8211;3</strong></td><td>Low</td><td>&lt;2%</td><td>Discharge with outpatient follow-up. CTCA within 4&#8211;6 weeks reasonable.</td></tr>
+      <tr><td><strong>4&#8211;6</strong></td><td>Intermediate</td><td>12&#8211;16%</td><td>Further evaluation. Inpatient or early outpatient stress testing or CTCA.</td></tr>
+      <tr><td><strong>7&#8211;10</strong></td><td>High</td><td>50&#8211;65%</td><td>Urgent cardiac evaluation. Inpatient management warranted.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy"><strong>Three cognitive traps to avoid:</strong> (1) Applying population NPV to a high-risk individual &#8212; quoting &#8220;99.5% NPV&#8221; to a patient with known three-vessel CAD. (2) Conflating rule-out of NSTEMI with rule-out of ACS &#8212; a negative troponin does not exclude unstable angina or significant obstructive CAD. (3) Using troponin as the sole arbiter of discharge &#8212; typical symptoms + new ECG changes + high-risk profile demands further evaluation even with serial negative troponin.</div>
+</div>
+  `,
   questions: [
     {
-      vignette: `Two patients present to the ED with chest pain. Both have serial hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) below the limit of detection (<2 ng/L) on two samples taken 3 hours apart. Neither has new ischaemic changes on ECG.
-
-Patient A: 68-year-old male. Central pressure, radiation to left arm, diaphoresis, onset at rest. Known 3-vessel CAD, prior CABG 6 years ago, hypertension, type 2 diabetes, hyperlipidaemia. ECG: sinus rhythm, old inferior Q waves unchanged from prior. HEART score: 8/10 (High).
-
-Patient B: 34-year-old female. Sharp, left-sided, 2-day history, positional, no radiation. No known cardiac disease, no cardiovascular risk factors, no regular medications. ECG: sinus rhythm, normal, no ischaemic changes. HEART score: 1/10 (Low).`,
-      lo: `Question 1 of 2 — Pre-test probability: same troponin, different patients`,
-      question: `Which of the following best describes the most appropriate management approach?`,
+      vignette: `Two patients are seen simultaneously. Their troponin results are identical.\n\nPatient A: 68-year-old male. Central pressure, radiation to left arm, diaphoresis, onset at rest. Known 3-vessel CAD, prior CABG 6 years ago, hypertension, type 2 diabetes, hyperlipidaemia. ECG: sinus rhythm, old inferior Q waves (unchanged), no new ischaemic changes. hs-cTnI 0h: <2 ng/L (below LoD). hs-cTnI 3h: <2 ng/L (below LoD). HEART score: 8/10.\n\nPatient B: 34-year-old female. Sharp, left-sided, 2-day history, positional, no radiation. No known cardiac disease, no cardiovascular risk factors, no regular medications. ECG: sinus rhythm, normal, no ischaemic changes. hs-cTnI 0h: <2 ng/L (below LoD). hs-cTnI 3h: <2 ng/L (below LoD). HEART score: 1/10.`,
+      lo: 'Section D MCQ Q1 — Pre-test probability — same troponin, different patients',
+      question: 'Which of the following best describes the most appropriate management approach?',
       options: [
         `Both patients can be discharged with the same safety-netting advice, since serial troponin below the limit of detection effectively excludes ACS in both cases regardless of their clinical profile.`,
         `Patient A should be admitted for urgent inpatient cardiac evaluation given his HEART score of 8, while Patient B can be discharged with outpatient follow-up including elective coronary imaging within 4–6 weeks.`,
@@ -1132,109 +1317,153 @@ Patient B: 34-year-old female. Sharp, left-sided, 2-day history, positional, no 
       ],
       correct: 1,
       explanations: [
-        `This is the most dangerous answer and represents a fundamental misapplication of NPV data. The NPV of serial hs-troponin below the LoD is approximately 99.5–99.9% in low-to-intermediate risk populations — it is not a population-independent guarantee. In Patient A, with a HEART score of 8 and known multi-vessel CAD with prior CABG, the residual miss rate is approximately 3.4%: 1 in 29 high-risk patients with serial negative troponin will experience a 30-day MACE event. Serial negative troponin in Patient A rules out NSTEMI; it does not rule out unstable angina or obstructive disease requiring urgent evaluation.`,
-        `This answer correctly differentiates management on the basis of pre-test probability rather than troponin result alone. Patient A’s HEART score of 8 places him in the high-risk category (30-day MACE rate 50–65%), where a serial negative troponin reduces but does not eliminate the probability of a significant ischaemic event. His clinical profile — known 3-vessel CAD, prior CABG, typical ischaemic symptom character, and cardiovascular risk factors — demands inpatient evaluation and urgent cardiology input regardless of the negative troponin. Patient B’s HEART score of 1 places her in the low-risk category (<2% 30-day MACE rate), where serial negative troponin is highly reassuring and outpatient evaluation with elective CTCA within 4–6 weeks is an appropriate and safe disposition. The same troponin result carries a different clinical meaning in these two patients.`,
-        `The claim that an NPV exceeding 99% provides clinically sufficient reassurance in high-risk patients fundamentally misunderstands the relationship between NPV and pre-test probability. An NPV of 96.6% in high-risk patients means that 3.4% of patients with serial negative troponin will still have a 30-day event. Unstable angina, by definition, will not be detected by troponin regardless of the assay’s sensitivity.`,
-        `Patient B has a HEART score of 1, placing her in the low-risk category. Her chest pain is sharp, positional, and non-radiating — a non-ischaemic character — with no cardiovascular risk factors, normal ECG, and serial troponin below the LoD. Urgent coronary imaging is not warranted. The HEART score was specifically developed and validated to identify patients who can be safely discharged with low-risk follow-up.`,
-        `The HEART score is explicitly designed to be applied in the context of serial troponin results, including patients with normal or undetectable troponin values. Its validation cohorts include patients across the full troponin spectrum. A below-LoD troponin contributes to the T component of the HEART score (scoring 0 for troponin ≤ URL) and is factored into the overall risk stratification, not a reason to abandon the score.`
+        `This is the most dangerous answer and represents a fundamental misapplication of NPV data. The NPV of serial hs-troponin below the LoD is approximately 99.5–99.9% in low-to-intermediate risk populations — it is not a population-independent guarantee. In Patient A, with a HEART score of 8 and known multi-vessel CAD with prior CABG, the residual miss rate is approximately 3.4%: 1 in 29 high-risk patients with serial negative troponin will experience a 30-day MACE event. Applying a population-level NPV to a high-risk individual and discharging them on that basis is a well-documented source of adverse outcomes.`,
+        `Correct. This answer correctly differentiates management on the basis of pre-test probability rather than troponin result alone. Patient A's HEART score of 8 places him in the high-risk category (30-day MACE rate 50–65%). In patients with known CAD, the ESC 0/1-hour algorithm achieves only a 96.6% NPV for 30-day cardiac death or MI — falling below the 99% threshold required for safe discharge (STOP-CP, JAMA Cardiology 2023). His clinical profile demands inpatient evaluation and urgent cardiology input regardless of the negative troponin. Patient B's HEART score of 1 places her in the low-risk category (<2% 30-day MACE rate), where serial negative troponin is highly reassuring and outpatient evaluation with elective CTCA within 4–6 weeks is appropriate and safe. The same troponin result carries a different clinical meaning in these two patients.`,
+        `The claim that an NPV exceeding 99% provides clinically sufficient reassurance in high-risk patients fundamentally misunderstands the relationship between NPV and pre-test probability. In patients with known CAD, the ESC 0/1-hour algorithm achieves only 96.6% NPV — meaning 3.4% of patients with serial negative troponin will still have a 30-day event. In a patient with a HEART score of 8 and known 3-vessel CAD presenting with typical ischaemic chest pain, this residual risk is clinically unacceptable.`,
+        `Patient B has a HEART score of 1, placing her in the low-risk category. Her chest pain is sharp, positional, and non-radiating — a non-ischaemic character — with no cardiovascular risk factors, normal ECG, and serial troponin below the LoD. In this context, urgent coronary imaging is not warranted. Mandating urgent coronary evaluation for all patients presenting to the ED with chest pain is not supported by evidence.`,
+        `The HEART score is explicitly designed to be applied in the context of serial troponin results, including patients with normal or undetectable troponin values. A below-LoD troponin contributes to the T component of the HEART score (scoring 0 for troponin ≤ URL) and is factored into the overall risk stratification. Applying the HEART score uniformly and acting on its risk stratum is precisely the correct approach for patients with serial negative troponin.`
       ]
     },
     {
-      vignette: `A 72-year-old woman with known coronary artery disease, a prior inferior MI managed medically 3 years ago, hypertension, and hyperlipidaemia presents with a 90-minute history of exertional chest tightness that resolved with rest prior to arrival. On examination she is haemodynamically stable. Her ECG shows sinus rhythm with old inferior Q waves, unchanged from her prior tracing. Her HEART score is calculated at 7. Serial hs-cTnI (Abbott ARCHITECT, URL 26 ng/L) results:
-
-0h: <2 ng/L (below LoD)
-3h: <2 ng/L (below LoD)
-
-A colleague suggests the patient can be discharged safely as the serial troponin is negative and there are no new ECG changes.`,
-      lo: `Question 2 of 2 — High pre-test probability: limits of a negative result`,
-      question: `What is the most appropriate response?`,
+      vignette: `A 72-year-old woman with known coronary artery disease, a prior inferior MI managed medically 3 years ago, hypertension, and hyperlipidaemia presents with a 90-minute history of exertional chest tightness that resolved with rest prior to arrival. She is haemodynamically stable. Her ECG shows sinus rhythm with old inferior Q waves, unchanged from her prior tracing. Her HEART score is calculated at 7.\n\nSerial hs-cTnI (Abbott ARCHITECT, URL 26 ng/L):\n0h: <2 ng/L (below LoD)\n3h: <2 ng/L (below LoD)\n\nA colleague suggests the patient can be discharged safely as the serial troponin is negative and there are no new ECG changes.`,
+      lo: 'Section D MCQ Q2 — High pre-test probability — limits of a negative result',
+      question: 'What is the most appropriate response?',
       options: [
         `Agree with your colleague. Serial troponin below the LoD with a non-diagnostic ECG effectively excludes an acute cardiac event and discharge is appropriate with primary care follow-up.`,
-        `Disagree. While serial negative troponin excludes NSTEMI, it does not exclude unstable angina. In a patient with a HEART score of 7 and known CAD, the residual miss rate for 30-day MACE remains approximately 3.4% and further evaluation is required before discharge.`,
+        `Disagree. While serial negative troponin excludes NSTEMI, it does not exclude unstable angina. In a patient with a HEART score of 7 and known CAD, the ESC 0/1-hour algorithm achieves only a 96.6% NPV (95% CI 92.8–98.8) for 30-day cardiac death or MI — a 3.4% miss rate that falls below the 99% threshold required for safe discharge. Furthermore, very low hs-troponin concentrations cannot reliably exclude inducible myocardial ischaemia in patients with established CAD. Further evaluation is required before discharge.`,
         `Disagree. The ECG showing old Q waves in the context of a negative troponin raises the possibility of a completed MI with troponin already returned to baseline, and the patient requires repeat sampling at 6 and 12 hours before discharge.`,
         `Partially agree. The patient can be discharged, but should be referred for urgent stress testing within 24–48 hours, as serial negative troponin in a high-risk patient requires functional evaluation before the workup is considered complete.`,
         `Disagree. The negative troponin result is not interpretable in a patient with prior MI as the damaged myocardium may have reduced capacity to release troponin, resulting in a falsely negative result.`
       ],
       correct: 1,
       explanations: [
-        `This answer repeats the error that serial negative troponin below the LoD is a universal green light for discharge. In a patient with known CAD, prior MI, and a HEART score of 7, the NPV of serial hs-troponin is approximately 96.6%, not 99.9%. The 3.4% residual miss rate translates to approximately 1 in 29 high-risk patients with serial negative troponin having a 30-day MACE event. Furthermore, the presenting history — exertional chest tightness relieved by rest in a patient with prior MI — is a classical description of effort angina or unstable angina, neither of which causes troponin elevation.`,
-        `This answer correctly articulates the two key principles. First, serial negative hs-troponin definitively excludes NSTEMI but does not exclude unstable angina, which by pathophysiological definition causes no myocyte necrosis and therefore no troponin release. The presenting history — exertional chest tightness relieved by rest — is highly consistent with unstable angina. Second, the NPV of serial hs-troponin in this patient’s risk stratum (HEART 7, known CAD, prior MI) is 96.6%, not 99.9%. The risk score should determine the appropriate level of further evaluation — inpatient cardiology review and expedited coronary assessment are appropriate in a patient with a HEART score of 7.`,
-        `This distractor is tempting because the clinical reasoning sounds plausible. However, it is physiologically incorrect. After a completed MI, troponin returns to normal over 5–14 days. A patient 3 years post-MI presenting acutely will have troponin at their new, post-infarct baseline (typically within or near the normal range). A new acute MI or unstable angina would be expected to produce a new dynamic rise. Extending serial sampling to 6 and 12 hours is not indicated and conflates the kinetics of prior with current infarction.`,
-        `Outpatient stress testing within 24–48 hours is not equivalent to the inpatient evaluation warranted in a patient with a HEART score of 7. The HEART score risk stratification specifically recommends urgent inpatient evaluation for scores of 7–10, with a 30-day MACE rate of 50–65% in this group. Stress testing as an outpatient exposes the patient to the risk of an event during the unmonitored interval. Furthermore, the presenting symptom may represent a dynamic, unstable process best evaluated with inpatient monitoring and cardiology input.`,
-        `This option describes a physiologically inaccurate mechanism. Prior myocardial infarction results in scar formation in the infarcted territory, but the surviving myocardium retains its normal capacity to release troponin in response to injury. A new ischaemic event would be expected to produce troponin release from viable myocytes. The false negative rate of hs-troponin assays is not higher in patients with prior MI than in the general population.`
+        `This repeats the error that serial negative troponin below the LoD is a universal green light for discharge. In a patient with known CAD, prior MI, and a HEART score of 7, the NPV of serial hs-troponin is approximately 96.6%, not 99.9%. The 3.4% residual miss rate translates to approximately 1 in 29 high-risk patients having a 30-day MACE event. Furthermore, the presenting history — exertional chest tightness relieved by rest in a patient with prior MI — is a classical description of effort angina or unstable angina, neither of which causes troponin elevation.`,
+        `Correct. This answer articulates two key principles. First, serial negative hs-troponin definitively excludes NSTEMI but does not exclude unstable angina, which by pathophysiological definition causes no myocyte necrosis and therefore no troponin release. The presenting history is highly consistent with unstable angina. Second, the NPV of serial hs-troponin in this patient's risk stratum (HEART 7, known CAD, prior MI) is 96.6% (95% CI 92.8–98.8) — derived from the STOP-CP study (JAMA Cardiology 2023), which found that among 178 patients with known CAD ruled out by the ESC 0/1-hour algorithm, 6 (3.4%) experienced 30-day cardiac death or MI. This NPV falls below the 99% threshold generally considered acceptable for safe discharge. HEART score ≥7 warrants inpatient evaluation regardless of the troponin result.`,
+        `After a completed MI, troponin returns to normal over 5–14 days depending on infarct size. A patient 3 years post-MI will have troponin at their post-infarct baseline (typically within or near the normal range). A new acute MI or unstable angina would be expected to produce a new dynamic rise — it would not be masked by the prior infarction. Extending serial sampling to 6 and 12 hours is not indicated and conflates the kinetics of prior with current infarction.`,
+        `Outpatient stress testing within 24–48 hours is not equivalent to the inpatient evaluation warranted in a patient with a HEART score of 7. The HEART score specifically recommends urgent inpatient evaluation for scores of 7–10, with a 30-day MACE rate of 50–65% in this group. The presenting symptom — exertional chest tightness relieved by rest — may represent a dynamic, unstable process best evaluated with inpatient monitoring.`,
+        `This describes a physiologically inaccurate mechanism. Prior MI results in scar formation, but the surviving myocardium retains its normal capacity to release troponin in response to injury. A new ischaemic event would produce troponin release from viable myocytes. The false-negative rate of hs-troponin assays is not higher in patients with prior MI than in the general population. This misconception would lead to systematic under-investigation of patients with ischaemic heart disease — precisely the population at highest risk.`
       ]
     }
   ]
 });
 
-
 SECTIONS.push({
   id: '2E',
   theme: 2,
   title: 'The Concept of Myocardial Injury',
-  subtitle: 'Ischaemic vs non-ischaemic, acute vs chronic, and the five clinical patterns',
+  subtitle: 'Ischaemic vs non-ischaemic, acute vs chronic',
   icon: '\uD83E\uDEC0',
-  iconClass: 'gray',
-  summary: `<div class="sum-hero"><div class="sum-tag">Executive Summary &middot; Theme 2 Section E</div><h2>The Concept of Myocardial Injury</h2><p>Consultant-Level Clinical Reasoning</p></div>
-<div class="sum-purpose"><strong>Troponin elevation opens a question, it does not close one.</strong> A troponin above the URL establishes one fact: myocardial injury has occurred. Everything else — the cause, the mechanism, the urgency — requires three further questions answered in sequence. Skipping any question produces diagnostic error.</div>
-<div class="sum-card"><h3>Step 1 — Three Questions in Order</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>#</th><th>Question</th><th>Tool</th><th>Consultant action</th></tr></thead><tbody><tr><td>1</td><td>Is there myocardial injury?</td><td>Troponin vs URL</td><td>Above URL = injury confirmed. Tier indicates magnitude. Now start the next question — do not stop here.</td></tr><tr><td>2</td><td>Is the mechanism ischaemic or non-ischaemic?</td><td>Symptoms + ECG</td><td>Ischaemic features present → ischaemic cause. Absent + systemic illness → non-ischaemic cause. Cannot be determined by the troponin number alone.</td></tr><tr><td>3</td><td>Is the injury acute or chronic?</td><td>Serial kinetics</td><td>Dynamic rise/fall → acute. Stable flat elevation → chronic. Same absolute value, completely different clinical meaning.</td></tr></tbody></table></div></div>
-<div class="sum-card"><h3>Step 2 — Ischaemic vs Non-ischaemic</h3><div class="sum-text"><p>The troponin number cannot make this distinction. The same value arises from a ruptured plaque and from septic shock. Only the clinical assessment separates them.</p></div><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Ischaemic myocardial injury</th><th>Non-ischaemic myocardial injury</th></tr></thead><tbody><tr><td>Ischaemic symptoms: chest pain (typical or atypical), dyspnoea, diaphoresis</td><td>No ischaemic symptoms, or symptoms fully explained by the presenting illness</td></tr><tr><td>Ischaemic ECG: ST elevation/depression, dynamic T-wave changes, new LBBB</td><td>ECG: normal, non-specific, or pattern of underlying illness (e.g. RV strain in PE)</td></tr><tr><td>Mechanism: coronary supply reduction or supply-demand mismatch</td><td>Mechanism: direct myocyte injury without a coronary mechanism</td></tr><tr><td>Examples: Type 1 MI, Type 2 MI, SCAD, vasospasm</td><td>Examples: myocarditis, sepsis, massive PE, Takotsubo, cardiac contusion</td></tr><tr><td>Management: ACS pathway, antithrombotics, coronary evaluation</td><td>Management: treat the underlying cause; ACS pathway not automatically indicated</td></tr></tbody></table></div><div class="callout-navy"><strong>Same troponin, different diagnosis:</strong> 120 ng/L + chest pain + inferior ST depression = ischaemic until proven otherwise. 120 ng/L + septic shock + no chest pain + sinus tachycardia = non-ischaemic injury. The mechanism — not the number — determines management.</div></div>
-<div class="sum-card"><h3>Step 3 — Acute vs Chronic</h3><div style="overflow-x:auto;margin-top:8px"><table class="sum-table"><thead><tr><th>Acute myocardial injury</th><th>Chronic myocardial injury</th></tr></thead><tbody><tr><td><strong>Kinetic pattern:</strong> significant rise and/or fall on serial sampling</td><td><strong>Kinetic pattern:</strong> stable flat elevation — no significant delta</td></tr><tr><td><strong>Reflects:</strong> active myocyte necrosis with ongoing troponin release</td><td><strong>Reflects:</strong> low-level chronic myocyte loss from a structural process</td></tr><tr><td><strong>Clinical urgency:</strong> requires immediate evaluation</td><td><strong>Clinical urgency:</strong> investigate underlying cause; not an acute emergency</td></tr><tr><td><strong>Examples:</strong> NSTEMI, STEMI, acute myocarditis, PE with RV injury</td><td><strong>Examples:</strong> heart failure, CKD, LVH, HCM, infiltrative cardiomyopathy</td></tr></tbody></table></div><div class="callout-warn"><strong>Same value, different urgency:</strong> Troponin 58 ng/L → 58 ng/L (delta 0 ng/L) in a known heart failure patient = chronic background injury. Troponin 58 ng/L → 180 ng/L (delta 122 ng/L) in a patient with chest pain = acute event requiring urgent evaluation. The kinetics make all the difference.</div></div>
-<div class="sum-card"><h3>The Five Patterns — Summary</h3><ul class="bullet-list"><li><strong>Acute ischaemic MI:</strong> Large dynamic rise + ischaemic symptoms + ischaemic ECG = Type 1 MI. Troponin magnitude confirms the diagnosis and quantifies injury burden.</li><li><strong>Acute non-ischaemic:</strong> Dynamic rise + non-territory ECG + post-viral prodrome + no risk factors = myopericarditis. Clinical context separates this from MI despite identical troponin dynamics.</li><li><strong>Type 2 MI:</strong> Dynamic rise + haemodynamic compromise + no ischaemic symptoms/ECG + intercurrent illness = supply-demand mismatch. Treat the precipitant, not the coronary anatomy.</li><li><strong>Chronic stable:</strong> Stable elevation + no symptoms + structural disease (CKD, LVH) + minimal delta = chronic injury, not acute event. Kinetics determine acuity, not absolute values.</li><li><strong>Acute-on-chronic:</strong> Documented stable baseline + new large dynamic rise + new symptoms + new ECG = acute ischaemic event superimposed on chronic injury. The prior baseline is the reference that makes the acute rise visible.</li></ul><div class="callout-navy" style="margin-top:12px"><strong>Four things a consultant holds simultaneously:</strong> The troponin establishes injury — it does not establish a diagnosis. The mechanism (ischaemic vs non-ischaemic) belongs to the clinical assessment and ECG, not to the number. The acuity (acute vs chronic) belongs to the kinetics, not to the absolute value. The diagnosis sits at the end of the reasoning chain — not at the start.</div></div>`,
+  iconClass: 'red',
+  summary: `
+<div class="sum-hero">
+  <div class="sum-tag">Executive Summary &middot; Theme 2 Section E</div>
+  <h2>The Concept of Myocardial Injury</h2>
+  <p>Consultant-Level Clinical Reasoning</p>
+</div>
+<div class="sum-purpose">
+  <strong>The consultant&#8217;s reframe: troponin elevation opens a question, it does not close one.</strong> A troponin above the URL establishes one fact: myocardial injury has occurred. Everything else &#8212; the cause, the mechanism, the urgency &#8212; requires three further questions answered in sequence. Skipping any question produces diagnostic error.
+</div>
+<div class="sum-card">
+  <h3>Step 1 &#8212; Work Through the Three Questions in Order</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>#</th><th>Question</th><th>Tool</th><th>Consultant action</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Is there myocardial injury?</strong></td><td>Troponin vs URL</td><td>Above URL = injury confirmed. Tier indicates magnitude. Now start the next question &#8212; do not stop here.</td></tr>
+      <tr><td>2</td><td><strong>Is the mechanism ischaemic or non-ischaemic?</strong></td><td>Symptoms + ECG</td><td>Ischaemic features present &#8594; ischaemic cause. Absent + systemic illness &#8594; non-ischaemic cause. Cannot be determined by the troponin number alone.</td></tr>
+      <tr><td>3</td><td><strong>Is the injury acute or chronic?</strong></td><td>Serial kinetics</td><td>Dynamic rise/fall &#8594; acute. Stable flat elevation &#8594; chronic. Same absolute value, completely different clinical meaning.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+<div class="sum-card">
+  <h3>Step 2 &#8212; Determine the Mechanism</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Ischaemic myocardial injury</th><th>Non-ischaemic myocardial injury</th></tr></thead>
+    <tbody>
+      <tr><td>Ischaemic symptoms: chest pain (typical or atypical), dyspnoea, diaphoresis</td><td>No ischaemic symptoms, or symptoms fully explained by the presenting illness</td></tr>
+      <tr><td>Ischaemic ECG: ST elevation/depression, dynamic T-wave changes, new LBBB</td><td>ECG: normal, non-specific, or pattern of underlying illness (e.g. RV strain in PE)</td></tr>
+      <tr><td>Mechanism: coronary supply reduction or supply-demand mismatch</td><td>Mechanism: direct myocyte injury without a coronary mechanism</td></tr>
+      <tr><td>Examples: Type 1 MI, Type 2 MI</td><td>Examples: myocarditis, sepsis, massive PE, Takotsubo, cardiac contusion</td></tr>
+      <tr><td>Management: ACS pathway, antithrombotics, coronary evaluation</td><td>Management: treat the underlying cause; ACS pathway not automatically indicated</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy"><strong>Same troponin, different diagnosis:</strong> 120 ng/L + chest pain + inferior ST depression = ischaemic until proven otherwise. 120 ng/L + septic shock + no chest pain + sinus tachycardia = non-ischaemic injury. The mechanism &#8212; not the number &#8212; determines management.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 3 &#8212; Determine the Time Course</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Acute myocardial injury</th><th>Chronic myocardial injury</th></tr></thead>
+    <tbody>
+      <tr><td>Kinetics: rise and/or fall exceeding biological and analytical variation. For values &gt;URL: relative change &gt;20% recommended.</td><td>Kinetics: stable flat elevation &#8212; no significant delta</td></tr>
+      <tr><td>Reflects: active myocyte necrosis with ongoing troponin release. Clinical urgency: immediate evaluation required.</td><td>Reflects: low-level chronic myocyte loss from a structural process. Clinical urgency: investigate underlying cause; not an acute emergency.</td></tr>
+      <tr><td>Examples: NSTEMI, STEMI, acute myocarditis, PE with RV injury</td><td>Examples: heart failure, CKD, LVH, HCM, infiltrative cardiomyopathy</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-warn"><strong>Same value, different urgency:</strong> Troponin 58 &#8594; 58 ng/L (delta 0) in a known heart failure patient = chronic background injury. Troponin 58 &#8594; 180 ng/L (delta 122) in a patient with chest pain = acute event requiring urgent evaluation. The kinetics make all the difference.</div>
+</div>
+<div class="sum-card">
+  <h3>Step 4 &#8212; Common Causes at a Glance</h3>
+  <div style="overflow-x:auto;margin-top:8px">
+  <table class="sum-table">
+    <thead><tr><th>Type 2 MI &#8212; supply-demand</th><th>Acute non-ischaemic injury</th><th>Chronic myocardial injury</th></tr></thead>
+    <tbody>
+      <tr><td>Tachyarrhythmia, hypotension/shock, severe anaemia, hypertensive emergency, respiratory failure. <em>Note: Type 2 MI requires evidence of ischaemia (symptoms, ECG, or imaging) in addition to supply-demand mismatch and dynamic troponin rise.</em></td><td>Myocarditis, Takotsubo cardiomyopathy, acute decompensated HF, massive PE, cardiac contusion/toxins</td><td>Heart failure, CKD (uraemic injury, not reduced clearance), LVH/HCM, chronic pulmonary HTN, infiltrative cardiomyopathy</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-navy"><strong>Four things a consultant holds simultaneously:</strong> (1) The troponin establishes injury &#8212; it does not establish a diagnosis. (2) The mechanism (ischaemic vs non-ischaemic) belongs to the clinical assessment and ECG, not to the number. (3) The acuity (acute vs chronic) belongs to the kinetics, not to the absolute value. (4) The diagnosis sits at the end of the reasoning chain &#8212; not at the start, and not at the level of the troponin number.</div>
+</div>
+  `,
   questions: [
     {
-      vignette: `A 61-year-old man with hypertension, hyperlipidaemia, and a 40-pack-year smoking history presents with a 90-minute history of central chest pressure radiating to the left arm. He is diaphoretic. ECG shows 2 mm ST depression in leads V4–V6 with T-wave inversion in the same territory.
-
-0h: 68 ng/L (ST depression + T-wave inversion V4–V6; ongoing chest pain)
-3h: 1,240 ng/L (ECG changes persist; patient remains symptomatic)`,
-      lo: `Question 1 of 5 — Dynamic rise: acute ischaemic myocardial injury`,
-      question: `What is the most accurate interpretation of this troponin trajectory and what is the appropriate next step?`,
+      vignette: `A 61-year-old man with hypertension, hyperlipidaemia, and a 40-pack-year smoking history presents with a 90-minute history of central chest pressure radiating to the left arm. He is diaphoretic. ECG shows 2 mm ST depression in leads V4-V6 with T-wave inversion in the same territory.\n\nhs-cTnI results:\n0h (presentation): 68 ng/L — ST depression + T-wave inversion V4-V6; ongoing chest pain\n3h: 1,240 ng/L — ECG changes persist; patient remains symptomatic`,
+      lo: 'Section E MCQ Q1 — Dynamic rise — acute ischaemic myocardial injury',
+      question: 'What is the most accurate interpretation of this troponin trajectory and what is the appropriate next step?',
       options: [
         `The initial troponin of 68 ng/L places this patient in the mild elevation tier where the differential is broad. Until the trajectory is better established, it is premature to commit to an ACS pathway.`,
         `The dynamic rise from 68 to 1,240 ng/L (18-fold over 3 hours), combined with ischaemic symptoms and ischaemic ECG changes, confirms acute ischaemic myocardial injury. This is a Type 1 NSTEMI and urgent coronary evaluation is indicated.`,
         `The troponin has not yet peaked. Serial sampling should continue until the peak is documented before a management decision is made, as the peak value is required to determine the severity of the infarct.`,
-        `A troponin of 1,240 ng/L in a 61-year-old with multiple cardiovascular risk factors and an intercurrent presentation is consistent with a Type 2 MI from demand ischaemia. The ECG changes do not add diagnostic clarity. Coronary angiography is not immediately required.`,
+        `A troponin of 1,240 ng/L in a 61-year-old with multiple cardiovascular risk factors is consistent with a Type 2 MI from demand ischaemia. The ECG changes do not add diagnostic clarity. Coronary angiography is not immediately required.`,
         `The troponin trajectory confirms a large infarct. A troponin exceeding 1,000 ng/L meets criteria for a STEMI-equivalent and the patient should be managed on a primary PCI pathway.`
       ],
       correct: 1,
       explanations: [
-        `This reasoning applies correctly to an isolated first sample at 68 ng/L, where the differential is indeed broad. However, the 3-hour sample transforms the picture entirely. A dynamic rise of 18-fold (68 to 1,240 ng/L) is not consistent with a flat or minimally dynamic pattern. The kinetics are now unambiguous. Continuing to apply the ‘broad differential’ framework of the mild elevation tier after a confirmed large dynamic rise is anchoring on the initial result at the expense of the complete clinical picture.`,
-        `This answer correctly applies all three layers of the interpretive framework. The biochemistry confirms dynamic acute myocardial injury: the initial value is 2.6× URL, rising to 48× URL over 3 hours. The clinical context establishes an ischaemic mechanism: typical chest pressure with radiation, diaphoresis, and cardiovascular risk factors. The ECG independently confirms ischaemia: ST depression and T-wave inversion in V4–V6. Together these establish the diagnosis of Type 1 NSTEMI without requiring further information. Urgent coronary evaluation is the appropriate and time-sensitive next step.`,
-        `Serial sampling to document the peak serves a prognostic function — peak troponin correlates with infarct size. This is useful information, but it is not required before making the clinical management decision. In a patient with a clearly dynamic rise, ischaemic symptoms, and ischaemic ECG changes, the diagnosis is established. Waiting for the peak before initiating treatment delays appropriate care.`,
-        `Type 2 MI is caused by supply-demand mismatch in the absence of acute atherothrombosis. In this patient there is no identifiable precipitating cause of demand excess — no tachyarrhythmia, no hypotension, no severe systemic illness, no anaemia. The patient has typical ischaemic symptoms that preceded any haemodynamic derangement. The ECG shows territory-specific ischaemic changes in V4–V6. This is the clinical phenotype of Type 1 MI, not Type 2.`,
-        `Troponin magnitude does not determine whether a patient is managed on a STEMI or NSTEMI pathway. STEMI requires ST elevation in two or more contiguous leads meeting voltage criteria or new left bundle branch block. This patient has ST depression and T-wave inversion — the ECG signature of NSTEMI. A troponin above 1,000 ng/L narrows the differential and implies a large injury burden, but it does not reclassify the ECG diagnosis.`
+        `This reasoning applies correctly to an isolated first sample at 68 ng/L where the differential is broad. However, the 3-hour sample transforms the picture entirely. A dynamic rise of 18-fold is not consistent with a flat or minimally dynamic pattern. The kinetics are now unambiguous. Continuing to apply the 'broad differential' framework of the mild elevation tier after a confirmed large dynamic rise is anchoring on the initial result at the expense of the complete clinical picture. The trajectory, not the first value, governs the interpretation.`,
+        `This answer correctly applies all three layers of the interpretive framework. The biochemistry confirms dynamic acute myocardial injury: the initial value is 2.6× URL, rising to 48× URL over 3 hours. The clinical context establishes an ischaemic mechanism: typical chest pressure with radiation, diaphoresis, and cardiovascular risk factors. The ECG independently confirms ischaemia: ST depression and T-wave inversion in V4-V6 in the same territory as the symptoms. Together these establish the diagnosis of Type 1 NSTEMI without requiring further information. Urgent coronary evaluation is the appropriate and time-sensitive next step.`,
+        `Serial sampling to document the peak serves a prognostic function — peak troponin correlates with infarct size. However, it is not required before making the clinical management decision. In a patient with a clearly dynamic rise, ischaemic symptoms, and ischaemic ECG changes, the diagnosis is established. Waiting for the peak before initiating treatment delays appropriate care. The clinical decision precedes the kinetic peak; peak documentation happens concurrently with, not before, management.`,
+        `Type 2 MI is caused by supply-demand mismatch in the absence of acute atherothrombosis. In this patient there is no identifiable precipitating cause of demand excess — no tachyarrhythmia, no hypotension, no severe systemic illness, no anaemia. The patient has typical ischaemic symptoms that preceded any haemodynamic derangement. The ECG shows territory-specific ischaemic changes in V4-V6. This is the clinical phenotype of Type 1 MI, not Type 2. Invoking Type 2 MI without an identifiable precipitant, in the presence of a typical ischaemic presentation, represents misclassification of the mechanism.`,
+        `Troponin magnitude does not determine whether a patient is managed on a STEMI or NSTEMI pathway. STEMI requires ST elevation in two or more contiguous leads meeting voltage criteria (typically ≥2 mm in chest leads, ≥1 mm in limb leads) or new LBBB. This patient has ST depression and T-wave inversion — the ECG signature of NSTEMI (subendocardial ischaemia). A troponin above 1,000 ng/L implies a large injury burden, but it does not reclassify the ECG diagnosis.`
       ]
     },
     {
-      vignette: `A 24-year-old male athlete presents with a 4-day history of sharp left-sided chest pain, worse on inspiration and on lying flat. He had a febrile illness with sore throat and myalgia 12 days ago. He has no cardiovascular risk factors. He is haemodynamically stable, afebrile. ECG shows diffuse concave (saddle-shaped) ST elevation across multiple territories with PR depression in lead II.
-
-0h: 540 ng/L (diffuse ST elevation, PR depression; no territory-specific pattern)
-3h: 710 ng/L (ECG unchanged; patient reports pain is unchanged)`,
-      lo: `Question 2 of 5 — Dynamic rise: acute non-ischaemic myocardial injury`,
-      question: `What is the most accurate interpretation of this clinical picture and troponin trajectory?`,
+      vignette: `A 24-year-old male athlete presents with a 4-day history of sharp left-sided chest pain, worse on inspiration and on lying flat. He had a febrile illness with sore throat and myalgia 12 days ago. He has no cardiovascular risk factors. He is haemodynamically stable, afebrile. ECG shows diffuse concave (saddle-shaped) ST elevation across multiple territories with PR depression in lead II.\n\nhs-cTnI results:\n0h (presentation): 540 ng/L — Diffuse ST elevation, PR depression; no territory-specific pattern\n3h: 710 ng/L — ECG unchanged; patient reports pain is unchanged`,
+      lo: 'Section E MCQ Q2 — Dynamic rise — acute non-ischaemic myocardial injury',
+      question: 'What is the most accurate interpretation of this clinical picture and troponin trajectory?',
       options: [
         `The dynamic troponin rise from 540 to 710 ng/L, combined with ECG changes, confirms Type 1 NSTEMI. The patient should be assessed for urgent coronary evaluation.`,
         `The troponin rise is dynamic but the ECG pattern (diffuse saddle-shaped ST elevation with PR depression), the post-viral prodrome, pleuritic/positional pain, and young age without risk factors are inconsistent with a coronary territory ischaemic event. The clinical picture is most consistent with acute myopericarditis with significant myocardial involvement.`,
         `A troponin of 710 ng/L in a 24-year-old without risk factors is most likely a laboratory error or specimen contamination. Repeat sampling with a fresh specimen is the first step before any clinical interpretation.`,
         `The diffuse ST elevation in multiple territories indicates a multi-vessel ischaemic event. This pattern suggests massive coronary artery disease and the patient requires urgent intervention.`,
-        `Pericarditis does not cause troponin elevation. The troponin rise in this case indicates a concurrent acute MI unrelated to the pericarditis presentation.`
+        `Pericarditis in isolation does not cause significant troponin elevation. The troponin elevation and pericarditis represent two independent concurrent diagnoses that must be investigated separately.`
       ],
       correct: 1,
       explanations: [
-        `This is the most consequential wrong answer and represents the failure to apply clinical context to the troponin interpretation. The troponin is dynamic and elevated in the moderate-to-high tier, which correctly raises the probability of significant myocardial injury. However, the clinical context decisively argues against a coronary mechanism: the patient is 24 years old with no cardiovascular risk factors; the pain is pleuritic and positional; the ECG shows diffuse, non-territory-specific saddle-shaped ST elevation with PR depression — the classic ECG of myopericarditis, not a culprit coronary territory; and there is a recent viral prodrome. Initiating an ACS pathway on the basis of troponin alone would be inappropriate and potentially harmful.`,
-        `This answer correctly applies all three interpretive layers. The troponin establishes significant myocardial injury (21–27× URL, dynamic). The clinical context establishes a non-ischaemic mechanism: no coronary risk factors, viral prodrome, pleuritic/positional pain character, and a diffuse, non-territory-specific ECG pattern with PR depression characteristic of myopericarditis rather than coronary ischaemia. The kinetics confirm an acute rather than chronic process. The diagnosis is myopericarditis. Cardiac MRI is the next investigation of choice, with important implications for physical activity restriction and prognosis.`,
-        `A troponin of 710 ng/L is well above the analytical range where contamination or laboratory error should be the primary concern. This is a plausible-sounding but clinically inappropriate response that would delay diagnosis in a patient with genuine myocardial injury.`,
-        `Diffuse ST elevation in multiple territories does not indicate multi-vessel ischaemia in this context. The diffuse, uniform, saddle-shaped ST elevation with PR depression seen here is the ECG signature of pericardial inflammation, not coronary ischaemia. Applying a coronary angiographic framework to a non-coronary ECG pattern is a category error.`,
-        `Pericarditis does not cause significant troponin elevation in isolation — this is correct. However, the corollary is not that any troponin elevation in a patient with pericarditis-pattern ECG must represent a separate MI. The correct entity is myopericarditis: co-occurrence of pericardial and myocardial inflammation. This is a well-established clinical entity.`
+        `This is the most consequential wrong answer. The troponin is dynamic and elevated in the moderate-to-high tier, correctly raising the probability of significant myocardial injury. However, the clinical context decisively argues against a coronary mechanism: the patient is 24 years old with no cardiovascular risk factors; the pain is pleuritic and positional; the ECG shows diffuse, non-territory-specific saddle-shaped ST elevation with PR depression — the classic ECG of myopericarditis; and there is a recent viral prodrome. Initiating an ACS pathway without incorporating these clinical features would be inappropriate and potentially harmful.`,
+        `Correct. This answer correctly applies all three interpretive layers. The troponin establishes significant myocardial injury (21–27× URL, dynamic). The clinical context establishes a non-ischaemic mechanism: no coronary risk factors, viral prodrome, pleuritic/positional pain, and a diffuse, non-territory-specific ECG pattern with PR depression characteristic of pericarditis/myopericarditis rather than coronary ischaemia. The kinetics confirm an acute rather than chronic process. The diagnosis is myopericarditis. Cardiac MRI is the next investigation of choice to characterise the extent and pattern of myocardial involvement.`,
+        `A troponin of 710 ng/L is well above the analytical range where contamination or laboratory error should be the primary concern. Laboratory errors that produce spuriously elevated results are typically flagged by the laboratory as outliers. This response would delay diagnosis in a patient with genuine myocardial injury.`,
+        `Diffuse ST elevation in multiple territories does not indicate multi-vessel ischaemia in this context. Multi-vessel ischaemic ST elevation would produce territory-specific changes in multiple coronary distributions, typically with reciprocal ST depression in opposite territories. The diffuse, uniform, saddle-shaped ST elevation with PR depression seen here is the ECG signature of pericardial inflammation, not coronary ischaemia.`,
+        `Myopericarditis (concomitant myocardial and pericardial inflammation) is a well-established clinical entity affecting approximately 15% of patients with pericarditis. The myocardial component is evidenced by the troponin elevation and its magnitude. The single unifying diagnosis is myopericarditis — not pericarditis plus MI as independent concurrent diagnoses.`
       ]
     },
     {
-      vignette: `A 74-year-old woman with known stable angina and moderate three-vessel coronary artery disease is admitted with a 3-day history of worsening dyspnoea, productive cough, and fever. She is diagnosed with community-acquired pneumonia requiring IV antibiotics. On admission her heart rate is 118 bpm (sinus tachycardia), SpO2 84% on air, blood pressure 106/68 mmHg. ECG shows sinus tachycardia with no new ST changes beyond previously documented inferior T-wave flattening. She denies chest pain.
-
-0h: 92 ng/L (HR 118, BP 106/68, SpO2 84% on air; no chest pain)
-3h: 148 ng/L (after 2L IV fluid; HR 104, BP 112/70; SpO2 90% on 4L O2)`,
-      lo: `Question 3 of 5 — Dynamic rise: Type 2 MI from intercurrent illness`,
-      question: `What is the most accurate interpretation of this troponin trajectory and what is the most appropriate management approach?`,
+      vignette: `A 74-year-old woman with known stable angina and moderate three-vessel coronary artery disease is admitted with a 3-day history of worsening dyspnoea, productive cough, and fever. She is diagnosed with community-acquired pneumonia. On admission: heart rate 118 bpm (sinus tachycardia), SpO2 84% on air, blood pressure 106/68 mmHg. ECG shows sinus tachycardia with no new ST changes beyond previously documented inferior T-wave flattening. She denies chest pain.\n\nhs-cTnI results:\n0h: 92 ng/L — HR 118, BP 106/68, SpO2 84% on air; no chest pain\n3h: 148 ng/L — After 2L IV fluid; HR 104, BP 112/70; SpO2 90% on 4L O2`,
+      lo: 'Section E MCQ Q3 — Dynamic rise — Type 2 MI from intercurrent illness',
+      question: 'What is the most accurate interpretation of this troponin trajectory and the most appropriate management approach?',
       options: [
         `The dynamic rise confirms acute myocardial injury. Given her known three-vessel CAD, this represents a Type 1 MI with a culprit lesion that requires urgent coronary angiography.`,
         `The troponin values are in the mild-to-moderate tier and the delta is below the threshold for significance. The result can be treated as a non-dynamic elevation attributable to her underlying coronary disease.`,
@@ -1244,64 +1473,56 @@ SECTIONS.push({
       ],
       correct: 2,
       explanations: [
-        `This answer correctly identifies a dynamic troponin rise but incorrectly defaults to Type 1 MI. The Fourth Universal Definition requires a Type 1 MI to be caused by atherothrombotic plaque disruption. In this patient, the mechanism is clearly identified: severe hypoxaemia (SpO2 84%), tachycardia (HR 118 bpm), and relative hypotension in the context of sepsis from pneumonia. This is a textbook supply-demand mismatch producing Type 2 MI. Urgent coronary angiography in this haemodynamically unstable, septic patient would be inappropriate and potentially harmful.`,
-        `A delta of 56 ng/L from 92 to 148 ng/L represents a 61% relative increase. For a baseline above the URL, a relative change exceeding 20% is considered significant. This is a genuinely dynamic pattern. Dismissing it as non-dynamic misapplies the delta criteria.`,
-        `This answer correctly identifies all components. The biochemistry establishes dynamic acute myocardial injury (61% rise over 3 hours). The clinical context identifies a clear non-ischaemic mechanism: severe hypoxaemia (SpO2 84%), tachycardia (HR 118 bpm) causing increased myocardial oxygen demand with reduced oxygen delivery, relative hypotension, and an intercurrent septic illness — all in a patient with pre-existing coronary disease with limited reserve. No new ischaemic symptoms, no new ECG changes. This is Type 2 MI by the Fourth Universal Definition. Management is directed at the precipitating cause: treat the pneumonia aggressively, support haemodynamics, correct hypoxaemia, and control the heart rate.`,
-        `Pneumonia-related troponin elevation does represent a genuine form of myocardial injury — Type 2 MI caused by supply-demand mismatch. Dismissing it as an expected and irrelevant finding ignores its clinical significance as a marker of haemodynamic severity and a prognostic indicator. The appropriate response is to recognise the mechanism, treat the precipitant, and monitor cardiac function.`,
-        `This represents the reflexive error of treating all dynamic troponin elevations in a patient with known CAD as Type 1 MI requiring antithrombotic therapy. Type 2 MI is not caused by thrombus formation, and dual antiplatelet therapy is not indicated for its treatment. Administering antiplatelet agents in a haemodynamically compromised septic patient without a specific indication for coronary thrombus would add bleeding risk without therapeutic benefit.`
+        `This answer correctly identifies a dynamic troponin rise but incorrectly defaults to Type 1 MI. The Fourth Universal Definition requires a Type 1 MI to be caused by atherothrombotic plaque disruption. In this patient, the mechanism is clearly identified: severe hypoxaemia (SpO2 84%), tachycardia (HR 118 bpm), and relative hypotension in the context of sepsis from pneumonia. This is textbook supply-demand mismatch producing Type 2 MI. There are no ischaemic symptoms and no new ECG changes. Urgent coronary angiography in this haemodynamically unstable, septic patient would be inappropriate and potentially harmful.`,
+        `A delta of 56 ng/L from 92 to 148 ng/L represents a 61% relative increase. For a baseline above the URL, a relative change exceeding 20% is considered significant per expert consensus in the Fourth Universal Definition. This is a genuinely dynamic pattern. Dismissing it as non-dynamic misapplies the delta criteria and would prevent appropriate recognition of a clinically significant acute event.`,
+        `Correct. The biochemistry establishes dynamic acute myocardial injury (61% rise over 3 hours). The clinical context identifies a clear non-ischaemic mechanism: severe hypoxaemia (SpO2 84%), tachycardia (HR 118 bpm) causing increased myocardial oxygen demand with reduced oxygen delivery, relative hypotension, and an intercurrent septic illness — all in a patient with pre-existing coronary disease with limited reserve. No new ischaemic symptoms, no new ECG changes. This is Type 2 MI by the Fourth Universal Definition. Management is directed at the precipitating cause: treat the pneumonia aggressively, support haemodynamics, correct hypoxaemia, and control the heart rate. Note: dyspnoea in a patient with known CAD and limited coronary reserve represents an ischaemic equivalent that satisfies the ischaemic evidence requirement for Type 2 MI.`,
+        `Pneumonia-related troponin elevation does represent a genuine form of myocardial injury — Type 2 MI caused by supply-demand mismatch. Dismissing it as an expected and irrelevant finding ignores its clinical significance as a marker of haemodynamic severity and as a prognostic indicator. Studies consistently show that troponin elevation in the context of pneumonia is associated with worse outcomes. The appropriate response is to recognise the mechanism, treat the precipitant, and monitor cardiac function.`,
+        `This represents the reflexive error of treating all dynamic troponin elevations in a patient with known CAD as Type 1 MI requiring antithrombotic therapy. Type 2 MI is not caused by thrombus formation, and dual antiplatelet therapy is not indicated for its treatment. Administering antiplatelet agents in a haemodynamically compromised septic patient would add bleeding risk without therapeutic benefit.`
       ]
     },
     {
-      vignette: `A 68-year-old man with stage 4 chronic kidney disease (eGFR 22 mL/min/1.73m²), hypertensive heart disease, and moderate left ventricular hypertrophy on echocardiogram is admitted with a fractured neck of femur following a mechanical fall. He reports no chest pain, dyspnoea, or palpitations. He is cognitively intact. ECG shows sinus rhythm with voltage criteria for LVH and lateral T-wave flattening, identical to an ECG from 14 months ago.
-
-0h: 88 ng/L (HR 78, haemodynamically stable; no ischaemic symptoms)
-3h: 91 ng/L (clinically unchanged)
-
-A junior doctor requests a cardiology review citing an elevated troponin in a patient with a traumatic admission.`,
-      lo: `Question 4 of 5 — Stable elevation: chronic myocardial injury`,
-      question: `What is the most appropriate interpretation?`,
+      vignette: `A 68-year-old man with stage 4 chronic kidney disease (eGFR 22 mL/min/1.73m²), hypertensive heart disease, and moderate left ventricular hypertrophy on echocardiogram is admitted with a fractured neck of femur following a mechanical fall. He reports no chest pain, dyspnoea, or palpitations. He is cognitively intact. ECG shows sinus rhythm with voltage criteria for LVH and lateral T-wave flattening, identical to an ECG from 14 months ago.\n\nhs-cTnI results:\n0h: 88 ng/L — HR 78, haemodynamically stable; no ischaemic symptoms\n3h: 91 ng/L — Clinically unchanged\n\nA junior doctor requests a cardiology review citing an elevated troponin in a patient with a traumatic admission.`,
+      lo: 'Section E MCQ Q4 — Stable elevation — chronic myocardial injury',
+      question: 'What is the most appropriate interpretation?',
       options: [
         `The troponin is above the URL on both samples and this constitutes biochemical evidence of myocardial injury. In a patient with known CAD risk factors, this represents a possible NSTEMI and cardiology review is appropriate.`,
         `The troponin elevation is explained by CKD causing reduced renal clearance of troponin. No myocardial injury has occurred and the result should be disregarded.`,
         `The minimally dynamic, stable elevation (delta of 3 ng/L, approximately 3%) in a patient with CKD stage 4, LVH, and hypertensive heart disease is most consistent with chronic myocardial injury from his underlying structural disease. This is not an acute event. No ACS pathway is indicated.`,
         `The troponin may be elevated from the trauma of the fall itself. A repeat sample at 24 hours after fluid resuscitation is required to distinguish trauma-related from cardiac troponin release.`,
-        `The result is uninterpretable without a prior baseline troponin from this patient. Cardiology review should be requested to establish whether this represents a change from the patient’s individual baseline.`
+        `The result is uninterpretable without a prior baseline troponin from this patient. Cardiology review should be requested to establish whether this represents a change from the patient's individual baseline.`
       ],
       correct: 2,
       explanations: [
-        `This answer correctly identifies myocardial injury (troponin above URL) but incorrectly proceeds to invoke a possible NSTEMI without applying the kinetic layer of interpretation. A delta of 3 ng/L over 3 hours (approximately 3% relative change) is far below any threshold for significant dynamic change. This is not an acute pattern. Furthermore, this patient has established structural disease — CKD stage 4, LVH, hypertensive heart disease — each of which is independently capable of producing a chronically elevated troponin. Calling this a possible NSTEMI would initiate an unnecessary investigation cascade and potentially result in a diagnostic label that follows this patient for life.`,
-        `Troponin is not cleared renally. The reason CKD produces chronically elevated troponin is increased release from myocyte injury (uraemic toxicity, microvascular disease, pressure overload, wall stress) — not reduced clearance. Disregarding the result on this incorrect physiological assumption would also be wrong, because chronically elevated troponin in CKD is a genuine marker of ongoing myocardial injury with prognostic significance.`,
-        `This answer correctly applies the three-layer framework. The troponin establishes myocardial injury (3.4× URL on both samples). The clinical context establishes a non-ischaemic mechanism: no ischaemic symptoms, stable ECG unchanged from 14 months ago, and a clinical presentation (mechanical fall) with no cardiac precipitant. The kinetics establish chronicity: a delta of 3 ng/L (~3%) is stable by any threshold. The most appropriate interpretation is chronic myocardial injury from his established structural disease — CKD, LVH, and hypertensive cardiomyopathy. No ACS pathway is indicated.`,
-        `Skeletal muscle troponin (from the fall or fracture) is not detected by cardiac-specific hs-cTnI or hs-cTnT assays, which are designed to be highly specific for cardiac isoforms. A fractured neck of femur does not cause cardiac troponin elevation through direct skeletal muscle release.`,
-        `While a prior baseline troponin would be useful additional information, its absence does not render the current result uninterpretable. The clinical picture — the patient’s structural disease, the absence of ischaemic symptoms, the unchanged ECG, and the stable serial kinetics with a 3% delta — provides sufficient information to conclude that this is a chronic background elevation.`
+        `This answer correctly identifies myocardial injury (troponin above URL) but incorrectly proceeds to invoke a possible NSTEMI without applying the kinetic layer of interpretation. A delta of 3 ng/L over 3 hours (approximately 3% relative change) is far below any threshold for significant dynamic change. This is not an acute pattern. Furthermore, this patient has established structural disease — CKD stage 4, LVH, hypertensive heart disease — each independently capable of producing a chronically elevated troponin. Calling this a possible NSTEMI would initiate an unnecessary investigation cascade and potentially result in a diagnostic label that follows this patient for life.`,
+        `Troponin is predominantly not cleared renally. The reason CKD produces chronically elevated troponin is increased release from myocyte injury through multiple mechanisms: uraemic toxicity, microvascular disease, coronary atherosclerosis, LVH, pressure overload, and direct toxic effects on the myocardium. Disregarding the result would also be wrong: chronically elevated troponin in CKD is a genuine marker of ongoing myocardial injury with significant prognostic implications.`,
+        `Correct. This answer applies the three-layer framework. The troponin establishes myocardial injury (3.4× URL on both samples). The clinical context establishes a non-ischaemic mechanism: no ischaemic symptoms, stable ECG unchanged from 14 months ago, and a clinical presentation (mechanical fall) with no cardiac precipitant. The kinetics establish chronicity: a delta of 3 ng/L (~3%) is stable by any threshold. The most appropriate interpretation is chronic myocardial injury from his established structural disease — CKD, LVH, and hypertensive cardiomyopathy. No ACS pathway is indicated.`,
+        `Skeletal muscle troponin (from the fall or fracture) is not detected by cardiac-specific hs-cTnI assays, which are designed to be highly specific for cardiac isoforms. A fractured neck of femur does not cause cardiac troponin elevation through direct skeletal muscle release. If the fracture had produced haemodynamic compromise causing demand ischaemia, this would be a Type 2 MI scenario — but this patient is haemodynamically stable and asymptomatic.`,
+        `While a prior baseline troponin would be useful, its absence does not render the current result uninterpretable. The clinical picture — the patient's structural disease, the absence of ischaemic symptoms, the unchanged ECG, and the stable serial kinetics with a 3% delta — provides sufficient information to conclude that this is a chronic background elevation.`
       ]
     },
     {
-      vignette: `The same 68-year-old man from Question 4 (CKD stage 4, LVH, hypertensive heart disease) is reviewed the following morning. The nursing staff report he became acutely short of breath and complained of chest tightness at 06:00. A repeat ECG shows new T-wave inversions in leads V4–V6.
-
-Previous evening (baseline): 90 ng/L (established chronic baseline from yesterday)
-06:30 (new symptoms): 220 ng/L (new chest tightness; new T-wave inversions V4–V6)
-09:30 (3h repeat): 480 ng/L (symptoms ongoing; ECG changes persist)`,
-      lo: `Question 5 of 5 — Acute-on-chronic: superimposed ACS on chronic injury`,
-      question: `How should this new troponin trajectory be interpreted in the context of this patient’s known chronic elevation?`,
+      vignette: `The same 68-year-old man from the previous question (CKD stage 4, LVH, hypertensive heart disease) is reviewed the following morning. The nursing staff report he became acutely short of breath and complained of chest tightness at 06:00. A repeat ECG shows new T-wave inversions in leads V4-V6.\n\nhs-cTnI results overnight:\nPrevious evening (established chronic baseline): 90 ng/L\n06:30 (new symptoms): 220 ng/L — New chest tightness; new T-wave inversions V4-V6\n09:30 (3h repeat): 480 ng/L — Symptoms ongoing; ECG changes persist`,
+      lo: 'Section E MCQ Q5 — Acute-on-chronic — superimposed ACS on chronic injury',
+      question: `How should this new troponin trajectory be interpreted in the context of this patient's known chronic elevation?`,
       options: [
         `The troponin values (220–480 ng/L) are within the same general range as a patient with chronic cardiac disease and this likely represents day-to-day analytical variability in a patient with a chronically elevated baseline. Clinical observation is appropriate.`,
         `The patient has known CKD and LVH which produce elevated troponin. The new symptoms and ECG changes are more likely related to his orthopaedic admission than to a new cardiac event. A pulmonary embolism should be excluded before considering ACS.`,
-        `A rise from a documented baseline of 90 ng/L to 220 ng/L (144% increase) and then 480 ng/L (433% increase from baseline) represents a clearly dynamic acute process superimposed on a chronically elevated background. Combined with new ischaemic symptoms and new T-wave inversions, this is most consistent with an acute ischaemic event (NSTEMI) on a background of chronic myocardial injury.`,
+        `A rise from a documented baseline of 90 ng/L to 220 ng/L (144% increase) and then 480 ng/L (433% increase from baseline) represents a clearly dynamic acute process that far exceeds the >20% relative change threshold recommended for detecting acute changes when baseline troponin is above the 99th percentile. Combined with new ischaemic symptoms and new T-wave inversions, this is most consistent with an acute ischaemic event (NSTEMI) superimposed on chronic myocardial injury.`,
         `The troponin trajectory is dynamic but the absolute values (220–480 ng/L) are in the moderate tier where both MI and non-ischaemic causes are possible. Without excluding non-ischaemic causes, an ACS pathway cannot be initiated.`,
         `The baseline troponin from yesterday was already elevated, so a comparison cannot be made and the kinetic assessment is invalid. The absolute value of 480 ng/L should be interpreted in isolation as the relevant result.`
       ],
       correct: 2,
       explanations: [
-        `This is the error that costs lives in patients with chronically elevated troponin. The claim of ‘analytical variability’ requires that the observed change falls within the expected imprecision of the assay. A rise from 90 to 480 ng/L is a 433% increase from the documented baseline. The coefficient of variation of hs-cTnI assays at values above the URL is consistently below 10%. A 433% change cannot be attributed to analytical variability by any reasonable standard. Furthermore, new symptoms and new ECG changes provide independent clinical evidence of an acute event.`,
-        `Pulmonary embolism should be considered in a postoperative patient who becomes acutely short of breath — this is reasonable clinical thinking. However, PE produces an acute troponin rise through RV pressure overload and typically does not produce lateral T-wave inversions in V4–V6, which are more characteristic of anterior or anterolateral ischaemia. Furthermore, the new symptoms of chest tightness combined with lateral T-wave inversions in a patient with known three-vessel CAD make an ischaemic mechanism substantially more likely than PE. PE should be considered in the differential, but the leading diagnosis here is NSTEMI.`,
-        `This answer demonstrates the most sophisticated interpretive skill in this question set: the ability to detect an acute dynamic rise against a chronically elevated background. The key is to use the documented prior baseline as the comparator. From a stable baseline of 90 ng/L, the troponin rose to 220 ng/L (144% increase) and then 480 ng/L (433% increase). Both changes far exceed the 20% relative threshold for a significant dynamic change above the URL. Combined with new ischaemic symptoms (chest tightness, onset correlating with the rise) and new ischaemic ECG changes (T-wave inversions V4–V6), the three-layer diagnosis is clear: acute ischaemic myocardial injury (NSTEMI) superimposed on chronic myocardial injury from his established structural disease.`,
-        `This answer creates an artificial barrier by requiring exclusion of non-ischaemic causes before initiating the ACS pathway. The clinical context here — new chest tightness, new lateral T-wave inversions, and a large dynamic rise from a documented stable baseline in a patient with known three-vessel CAD — constitutes a compelling ischaemic picture. Delaying ACS assessment in a patient with ongoing ischaemic symptoms and dynamic ECG changes is clinically inappropriate.`,
-        `This answer reaches the opposite of the correct conclusion: it asserts that having a prior baseline makes kinetic assessment invalid, when in fact the prior baseline is what makes kinetic assessment possible and powerful. The entire value of having a documented baseline troponin in a patient with chronic elevation is precisely that it allows the clinician to detect a superimposed acute rise.`
+        `This is the most dangerous error in this scenario. The claim of 'analytical variability' requires that the observed change falls within the expected imprecision of the assay. A rise from 90 to 480 ng/L is a 433% increase from the documented baseline. The coefficient of variation of hs-cTnI assays at values above the URL is consistently below 10%. A 433% change cannot be attributed to analytical variability by any reasonable standard. Furthermore, new symptoms and new ECG changes provide independent clinical evidence of an acute event.`,
+        `Pulmonary embolism should be considered in a postoperative patient who becomes acutely short of breath. However, PE produces an acute troponin rise through RV pressure overload and typically does not produce lateral T-wave inversions in V4-V6, which are more characteristic of anterior or anterolateral ischaemia. The new symptoms of chest tightness combined with lateral T-wave inversions in a patient with known three-vessel CAD make an ischaemic mechanism substantially more likely than PE.`,
+        `Correct. This answer demonstrates the most sophisticated interpretive skill in this question set: detecting an acute dynamic rise against a chronically elevated background. The key is to use the documented prior baseline as the comparator. From a stable baseline of 90 ng/L, the troponin rose to 220 ng/L (144% increase) and then 480 ng/L (433% increase). Both changes far exceed the 20% relative threshold for a significant dynamic change above the URL. Combined with new ischaemic symptoms (chest tightness) and new ischaemic ECG changes (T-wave inversions V4-V6), the three-layer diagnosis is clear: acute ischaemic myocardial injury (NSTEMI) superimposed on chronic myocardial injury from his established structural disease.`,
+        `This creates an artificial barrier by requiring exclusion of non-ischaemic causes before initiating the ACS pathway. The clinical context — new chest tightness, new lateral T-wave inversions, and a large dynamic rise from a documented stable baseline in a patient with known three-vessel CAD — constitutes a compelling ischaemic picture. Delaying ACS assessment in a patient with ongoing ischaemic symptoms and dynamic ECG changes is clinically inappropriate.`,
+        `This reaches the opposite of the correct conclusion. The prior baseline is what makes kinetic assessment possible and powerful. The entire value of having a documented baseline troponin in a patient with chronic elevation is precisely that it allows the clinician to detect a superimposed acute rise. Without the baseline, the absolute value of 480 ng/L could be misattributed to chronic disease. With the baseline of 90 ng/L documented the previous evening, the acute rise to 480 ng/L is unambiguously dynamic and the interpretation is straightforward.`
       ]
     }
   ]
 });
+
 
 
 
