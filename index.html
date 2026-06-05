@@ -2250,17 +2250,16 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 });
 
 // ── PROGRESS ──────────────────────────────────────────────────────────────────
+// Progress is session-only: resets to 0% on every page refresh,
+// but persists in memory while the user navigates within the session.
 var progress = {};
 
 function loadProgress() {
-  try {
-    var s = localStorage.getItem('cpeu_progress_v2');
-    if (s) progress = JSON.parse(s);
-  } catch(e) {}
+  // No-op: progress lives in memory only (resets on refresh by design).
 }
 
 function saveProgress() {
-  try { localStorage.setItem('cpeu_progress_v2', JSON.stringify(progress)); } catch(e) {}
+  // No-op: progress is in-memory only; no localStorage persistence.
 }
 
 function getSP(id) {
